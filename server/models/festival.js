@@ -8,6 +8,10 @@ const festivalSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  adress: {
+    type: String,
+    required: true,
+  },
   ticketLink: {
     type: String,
     required: true,
