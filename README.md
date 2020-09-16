@@ -1,24 +1,10 @@
 # meetup_festivals_mh
 
-## Project setup
+## Schoolproject
 ```
-npm install
+Making a simpler clone of Meetup.com
+
+TDD with Jest, push to heroku with docker
 ```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your unit tests
-```
-npm run test:unit
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
