@@ -5,12 +5,12 @@ const express = require('express'),
   path = require('path'),
   cors = require('cors'),
   app = express(),
-  test = require('./routes/test');
+  user = require('./routes/user');
 
 app.use(express.json());
 app.use(cors());
 app.use('/', serveStatic(path.join(__dirname, '../dist')));
-app.use('/newUser', test);
+app.use('/user', user);
 
 const port = process.env.PORT || 8080;
 

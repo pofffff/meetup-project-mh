@@ -9,11 +9,11 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  festivals: {
+  password: {
     type: String,
     required: true,
   },
-  password: {
+  numberOfEvents: {
     type: String,
     required: true,
   },

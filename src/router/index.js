@@ -1,10 +1,9 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
-import Login from '../views/Login.vue';
 import User from '../views/User.vue';
-import AddFestival from '../views/AddFestival.vue';
-import FestivalDetails from '../views/FestivalDetails.vue';
+import AddEvent from '../views/AddEvent.vue';
+import EventDetails from '../views/EventDetails.vue';
 
 Vue.use(VueRouter);
 
@@ -15,24 +14,19 @@ const routes = [
     component: Home,
   },
   {
-    path: '/Login',
-    name: 'Login',
-    component: Login,
-  },
-  {
-    path: '/User',
+    path: '/user',
     name: 'User',
     component: User,
   },
   {
-    path: '/AddFestival',
-    name: 'AddFestival',
-    component: AddFestival,
+    path: '/addfestival',
+    name: 'AddEvent',
+    component: AddEvent,
   },
   {
-    path: '/festival',
-    name: 'FestivalDetails',
-    component: FestivalDetails,
+    path: '/event',
+    name: 'EventDetails',
+    component: EventDetails,
   },
 ];
 

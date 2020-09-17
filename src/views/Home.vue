@@ -1,10 +1,16 @@
 <template>
-  <div class="home"></div>
+  <div class="home">
+    <LoginForm />
+    <NewUserForm />
+  </div>
 </template>
 
 <script>
+import LoginForm from "@/components/LoginForm";
+import NewUserForm from "@/components/NewUserForm";
+
 export default {
   name: "Home",
-  components: {},
+  components: { LoginForm, NewUserForm },
 };
 </script>

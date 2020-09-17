@@ -12,10 +12,6 @@ const festivalSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  ticketLink: {
-    type: String,
-    required: true,
-  },
   date: {
     type: String,
     required: true,
@@ -26,6 +22,10 @@ const festivalSchema = new mongoose.Schema({
   },
   registred: {
     type: Number,
+  },
+  image: {
+    type: String,
+    required: true,
   },
 });
 

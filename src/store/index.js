@@ -1,29 +1,15 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-
+//import state from '@/store/modules/state.js';
+import mutations from '@/store/modules/mutations.js';
+import actions from '@/store/modules/actions.js';
+//import getters from '@/store/modules/getters.js';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {},
-  mutations: {},
-  actions: {
-    async test(ctx) {
-      const url = 'http://localhost:8080/newUser/user';
-      fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          if (data) {
-            console.log(data);
-            //ctx.commit('renderCategories', data);
-          }
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-        });
-    },
-  },
+  //state,
+  mutations,
+  actions,
+  //getters,
   modules: {},
 });

@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     <Nav />
-    <button @click="getData">GET DATA</button>
     <router-view />
   </div>
 </template>
@@ -12,11 +11,7 @@ export default {
   components: {
     Nav,
   },
-  methods: {
-    getData() {
-      this.$store.dispatch("test");
-    },
-  },
+  methods: {},
 };
 </script>
 
