@@ -20,6 +20,7 @@ const getUser = async (email) => {
 const BCRYPT_SALT_ROUNDS = 12;
 
 exports.registerUser = async (req, res) => {
+  console.log(req.headers);
   const name = req.headers.name,
     email = req.headers.email,
     password = req.headers.password,
