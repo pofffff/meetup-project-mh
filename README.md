@@ -1,4 +1,4 @@
-# meetup-festivals-mh
+# meetup-project-mh
 
 ## Schoolproject
 

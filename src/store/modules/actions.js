@@ -1,12 +1,16 @@
 export default {
   async registerUser(ctx, user) {
-    console.log('action before fetch');
-
-    const url = 'http://localhost:8080/user/register';
+    const url = 'http://localhost:8080/user';
     fetch(url, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(user),
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        name: user.name,
+        email: user.email,
+        password: user - password,
+      },
+      // body: JSON.stringify(user),
     })
       .then((response) => response.json())
       .then((data) => {
@@ -20,4 +24,5 @@ export default {
         console.error('Error:', error);
       });
   },
+  async login(ctx, credentials) {},
 };
