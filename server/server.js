@@ -6,7 +6,8 @@ const express = require('express'),
   path = require('path'),
   cors = require('cors'),
   app = express(),
-  user = require('./routes/user');
+  user = require('./routes/user'),
+  auth = require('./routes/auth');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use(cors());
 app.use('/', serveStatic(path.join(__dirname, '../dist')));
 app.use('/user', user);
+app.use('/authenticate', auth);
 
 const port = process.env.PORT || 8080;
 

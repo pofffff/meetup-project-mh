@@ -1,3 +1,4 @@
 export default {
-  example(state) {},
+  isAuthenticated: (state) => !!state.token,
+  authStatus: (state) => state.status,
 };
