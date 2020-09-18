@@ -66,7 +66,6 @@ export default {
         Object.keys(this.isValid).some((k) => !this.isValid[k]) === false &&
         Object.keys(input).some((key) => input[key] === "") === false
       ) {
-        console.log("before dispatch");
         this.$store.dispatch("registerUser", input);
       }
     },
