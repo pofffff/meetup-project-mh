@@ -89,9 +89,9 @@ export default {
 
 .form__wrapper {
   background: $color_dark;
-  width: 300px;
+  width: 330px;
   height: 370px;
-  border-radius: 15px;
+  border-radius: 20px;
   padding: 2.5em 1.5em 3em 1.5em;
   display: flex;
   flex-direction: column;
@@ -135,8 +135,6 @@ export default {
     .switch-side__button {
       text-align: left;
       background: none;
-      color: $white;
-      opacity: 0.7;
       border: none;
       cursor: pointer;
     }
@@ -154,5 +152,12 @@ export default {
       padding: 6px 18px;
     }
   }
+}
+
+aside {
+  font-size: 13px;
+  opacity: 0.5;
+  cursor: pointer;
+  color: $white;
 }
 </style>

@@ -9,7 +9,7 @@ exports.registerUser = async (req, res) => {
     password = req.headers.password,
     numberOfEvents = 0;
 
-  const userExists = await getUser(email);
+  const userExists = await getUser.getUser(email);
   if (userExists === false) {
     bcrypt
       .hash(password, BCRYPT_SALT_ROUNDS)

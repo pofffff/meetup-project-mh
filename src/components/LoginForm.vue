@@ -8,6 +8,7 @@
       <li>
         <input placeholder="password" type="password" v-model="password" />
       </li>
+      <aside>Forgot password?</aside>
     </ul>
     <section class="buttons__wrapper">
       <button @click="switchComponent" class="switch-side__button">
@@ -44,10 +45,10 @@ export default {
 
 .form__wrapper {
   background: $color_dark;
-  width: 300px;
+  width: 330px;
   height: 370px;
-  border-radius: 15px;
-  padding: 4em 1.5em 3em 1.5em;
+  border-radius: 20px;
+  padding: 3em 1.5em 3em 1.5em;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -61,6 +62,7 @@ export default {
 
   ul {
     width: 100%;
+    margin-bottom: 2em;
     li {
       list-style: none;
       margin: 1em 0;
@@ -91,7 +93,6 @@ export default {
       text-align: left;
       background: none;
       color: $white;
-      opacity: 0.7;
       border: none;
       cursor: pointer;
     }
@@ -109,5 +110,12 @@ export default {
       padding: 6px 18px;
     }
   }
+}
+
+aside {
+  font-size: 13px;
+  opacity: 0.5;
+  cursor: pointer;
+  color: $white;
 }
 </style>
