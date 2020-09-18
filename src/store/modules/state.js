@@ -1,5 +1,6 @@
 export default {
   ifLogin: false,
-  showMain: true,
+  showMain: false,
+  emailExists: false,
   token: localStorage.getItem('token') || '',
 };

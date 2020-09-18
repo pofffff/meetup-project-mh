@@ -2,6 +2,10 @@
   <div class="form__wrapper">
     <h4>Sign up</h4>
     <ul>
+      <aside
+        @click="switchComponent"
+        v-if="this.$store.state.emailExists"
+      >Email already exists... Login</aside>
       <label v-show="!isValid.name" for="name">Must be a valid name</label>
       <li>
         <input id="name" type="text" v-model="name" placeholder="firstname lastname" />
@@ -139,7 +143,7 @@ export default {
       cursor: pointer;
     }
 
-    .switch-side__button:hover {
+    .switch-side__button:hover aside {
       text-decoration: underline;
     }
 
@@ -159,5 +163,11 @@ aside {
   opacity: 0.5;
   cursor: pointer;
   color: $white;
+  font-family: $font;
+  line-height: 1;
+}
+
+aside:hover {
+  text-decoration: underline;
 }
 </style>

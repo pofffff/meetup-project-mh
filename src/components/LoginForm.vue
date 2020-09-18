@@ -117,5 +117,7 @@ aside {
   opacity: 0.5;
   cursor: pointer;
   color: $white;
+  font-family: $font;
+  line-height: 1;
 }
 </style>
