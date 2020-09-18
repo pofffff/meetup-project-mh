@@ -2,9 +2,10 @@
   <div class="nav__wrapper">
     <ul>
       <li @click="goTo('/')">Home</li>
-      <li @click="goTo('/profile')">Profile</li>
+      <li v-if="this.$store.state.isAuthenticated" @click="goTo('/profile')">Profile</li>
       <li>Events</li>
-      <li @click="logout">Logout</li>
+      <li v-if="!this.$store.state.isAuthenticated" @click="login">Login</li>
+      <li v-if="this.$store.state.isAuthenticated" @click="logout">Logout</li>
     </ul>
   </div>
 </template>
@@ -16,17 +17,24 @@ export default {
   },
   methods: {
     goTo(path) {
-      if (this.$route.path !== path) {
+            if (this.$route.path !== path) {
         this.$router.push(path);
-        console.log("here")
+        
       }
     },
     logout() {
       //if logout success, promise will resolve router.push
       this.$store.dispatch("logoutUser").then(() => {
+        this.$store.state.showMain = true;
+        location.reload();
         this.$router.push("/")
       })
     },
+    login() {
+
+        this.$store.state.showMain = false;
+        this.$store.state.redirectPath = "/"
+    }
   },
 };
 </script>

@@ -31,7 +31,10 @@ export default {
   methods: {
     login() {
       const credentials = { email: this.email, password: this.password };
-      this.$store.dispatch("authRequest", credentials);
+      this.$store.dispatch("authRequest", credentials).then(() => {
+        location.reload();
+        this.$router.push(this.$store.state.currentPath)
+      })
     },
     switchComponent() {
       this.$store.state.ifLogin = !this.$store.state.ifLogin;
