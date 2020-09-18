@@ -1,29 +1,13 @@
 import axios from "axios";
-
 const auth = {
   state: {
     API: {
       authRequest: "http://localhost:8080/authenticate",
-      requestUser: "http://localhost:8080/requestUser",
+      requestUser: "http://localhost:8080/authenticate/requestUser",
     },
-  },
-  mutations: {
-    authRequestError(state, error) {
-      console.log("Error: " + error);
-    },
-    requestUserSuccess(state, user) {
-      console.log(user);
-    },
-    requestUserError(state, error) {
-      console.log("Error: " + error);
-    },
-    logoutUser(state) {
-      delete axios.defaults.headers.common['Authorization']
-      localStorage.removeItem("token");
-    }
   },
   actions: {
-    async authRequest({ commit, dispatch, state }, credentials) {
+    async authRequest({ ctx, dispatch, state }, credentials) {
       await axios
         .post(
           state.API.authRequest,
@@ -36,36 +20,42 @@ const auth = {
           }
         )
         .then((response) => {
-          // Set default headers on all axios calls
-          axios.defaults.headers.common['Authorization'] = token
           const token = response.data.token;
+          const email = response.data.email
+          // Set default headers on all axios calls
+          axios.defaults.headers.common['authorization'] = token;
+          axios.defaults.headers.common['email'] = email;
+
           localStorage.setItem("token", token);
-          commit("authSuccess", token);
-          dispatch("userRequest", token);
+          dispatch("userRequest", email);
         })
         .catch((error) => {
           localStorage.removeItem("token");
-          commit("authRequestError", error);
         });
     },
-    async authRequest({ commit, state }, token) {
+    async userRequest({ ctx, state }, email) {
       await axios
         .get(
           state.API.requestUser,
           {},
           {
             headers: {
-              token: token,
+              email: email,
             },
           }
         )
         .then((response) => {
-          commit("requestUserSuccess", response.data.user);
+          ctx("requestUserSuccess", response.data.user);
         })
         .catch((error) => {
-          commit("requestUserError", error);
+          ctx("requestUserError", error);
         });
     },
+    logoutUser(ctx) {
+        delete axios.defaults.headers.common['Authorization']
+        localStorage.removeItem("token");
+        ctx.commit("logoutSuccess")
+    }
   },
 };
 export default auth;

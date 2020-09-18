@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
-import User from '../views/User.vue';
+import Profile from '../views/Profile.vue';
 import AddEvent from '../views/AddEvent.vue';
 import EventDetails from '../views/EventDetails.vue';
 
@@ -14,23 +14,30 @@ const routes = [
     component: Home,
   },
   {
-    path: '/user',
-    name: 'User',
-    component: User,
+    path: '/profile',
+    name: 'Profile',
+    component: Profile,
     beforeEnter: (to, from, next) => {
-      if (localStorage.getItem("user_id")) {
+      if (localStorage.getItem("token")) {
+        console.log("here111")
         next();
-      } 
+      } else {
+        next('/');
+      }
     }
   },
   {
-    path: '/addfestival',
+    path: '/addevent',
     name: 'AddEvent',
     component: AddEvent,
     beforeEnter: (to, from, next) => {
-      if (localStorage.getItem("user_id")) {
+      if (localStorage.getItem("token")) {
+        console.log("here222")
+
         next();
-      } 
+      } else {
+        next('/');
+      }
     }
   },
   {
@@ -41,6 +48,7 @@ const routes = [
 ];
 
 const router = new VueRouter({
+  mode: 'history',
   routes,
 });
 
