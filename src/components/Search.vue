@@ -3,16 +3,19 @@
     <section class="search-field__section">
       <ul>
         <li>
-          <input type="text" placeholder="By name" />
+          <input type="text" placeholder="Name" />
         </li>
+        <span class="divider"></span>
         <li>
-          <input type="text" placeholder="By city" />
+          <input type="text" placeholder="City" />
         </li>
+        <span class="divider"></span>
+
         <li>
-          <input type="text" placeholder="By country" />
+          <input type="text" placeholder="Country" />
         </li>
-        <button>GO</button>
       </ul>
+      <button>GO</button>
     </section>
   </div>
 </template>
@@ -28,48 +31,60 @@
   height: 26em;
 
   .search-field__section {
+    display: flex;
     ul {
       width: auto;
       display: flex;
       background: $color_dark;
-      padding: 0.3em;
+      padding: 0.2em;
       border-radius: 8px;
+
+      .divider {
+        border-right: 2px solid $white;
+        height: 2em;
+        margin: 0 10px;
+        align-self: center;
+      }
+
       li {
         list-style: none;
-        padding-right: 0.3em;
+        padding-right: 0.2em;
+        outline: none;
 
         input {
           outline: none;
           height: 50px;
           padding: 0 10px;
-          border: 0.5px solid $white;
           border-radius: 4px;
+          border: none;
           font-weight: 500;
           background: none;
           color: $white;
-          font-size: 0.8em;
-          width: 22em;
+          font-size: 20px;
+          width: 15em;
           letter-spacing: 1.5px;
-          opacity: 0.5;
         }
 
         input::placeholder {
           color: $white;
           letter-spacing: 2px;
           font-family: $font;
+          font-size: 16px;
         }
       }
-      button {
-        align-self: center;
-        border: none;
-        background: $color_light;
-        color: #0000009b;
-        padding: 0 18px;
-        height: 50px;
-        border-radius: 4px;
-        font-weight: 900;
-        font-size: 1em;
-      }
+    }
+    button {
+      align-self: center;
+      border: none;
+      background: $color_light;
+      color: #0000009b;
+      color: $color_dark;
+      padding: 0 30px;
+      margin: 0 5px;
+      height: 55px;
+      border-radius: 4px;
+      font-weight: 900;
+      font-size: 1.2em;
     }
   }
 }
