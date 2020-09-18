@@ -1,6 +1,6 @@
 export default {
-  ifLogin: false,
-  showMain: false,
+  ifLogin: true,
+  showMain: true,
   emailExists: false,
   errorSavingUser: false,
   isAuthenticated: false,
