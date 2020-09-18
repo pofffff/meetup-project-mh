@@ -1,9 +1,8 @@
 <template>
   <div class="nav__wrapper">
     <ul>
-      <li><h1>JellyfishMeets</h1></li>
-      <li @click="goTo('/user')">Profile</li>
-      <li @click="goTo('/addevent')">NewEvent</li>
+      <li @click="goTo('/')">Home</li>
+      <li @click="goTo('/profile')">Profile</li>
       <li>Events</li>
       <li @click="logout">Logout</li>
     </ul>
@@ -13,20 +12,55 @@
 <script>
 export default {
   data: () => {
-    return {
-
-    }
+    return {};
   },
   methods: {
     goTo(path) {
-      if(this.$route.path !== path) {
-        this.$router.push(path)
+      if (this.$route.path !== path) {
+        this.$router.push(path);
+        console.log("here")
       }
-    }
-  }
-}
+    },
+    logout() {
+      this.$store.dispatch("logoutUser");
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
+@import "@/assets/scss/variables";
 
+.nav__wrapper {
+  position: fixed;
+  padding: 1.5em 1em;
+
+  ul {
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+    color: $white;
+
+    li {
+      margin: 0 1.5em;
+      font-size: 0.8em;
+      letter-spacing: 2px;
+      cursor: pointer;
+    }
+
+    li:hover {
+      color: $color_light;
+      animation-name: pop;
+      transform: perspective(1px) translateZ(0);
+      animation-iteration-count: 1;
+      animation-duration: 0.2s;
+    }
+  }
+}
+
+@keyframes pop {
+  50% {
+    transform: scale(1.1);
+  }
+}
 </style>

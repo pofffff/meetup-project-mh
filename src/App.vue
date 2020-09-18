@@ -16,7 +16,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600;800;900&display=swap&family=Kumbh+Sans:wght@300");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600;800;900&display=swap&family=Ranchers");
 @import "@/assets/scss/variables";
 
 * {

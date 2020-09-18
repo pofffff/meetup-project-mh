@@ -1,14 +1,10 @@
 import axios from "axios";
-
 const auth = {
   state: {
     API: {
       authRequest: "http://localhost:8080/authenticate",
       requestUser: "http://localhost:8080/authenticate/requestUser",
     },
-  },
-  mutations: {
- 
   },
   actions: {
     async authRequest({ ctx, dispatch, state }, credentials) {
@@ -37,7 +33,7 @@ const auth = {
           localStorage.removeItem("token");
         });
     },
-    async userRequest({ commit, state }, email) {
+    async userRequest({ ctx, state }, email) {
       await axios
         .get(
           state.API.requestUser,
@@ -49,10 +45,10 @@ const auth = {
           }
         )
         .then((response) => {
-          commit("requestUserSuccess", response.data.user);
+          ctx("requestUserSuccess", response.data.user);
         })
         .catch((error) => {
-          commit("requestUserError", error);
+          ctx("requestUserError", error);
         });
     },
     logoutUser(ctx) {

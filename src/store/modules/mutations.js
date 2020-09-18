@@ -19,5 +19,8 @@ export default {
   requestUserError(state, error) {
     console.log("Error: " + error);
   },
+  logoutSuccess() {
+    console.log("logout success")
+  }
 
 };
