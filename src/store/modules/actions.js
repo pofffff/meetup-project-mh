@@ -25,6 +25,7 @@ export default {
       })
       .catch((error) => {
         console.log("Error: " + error);
+        ctx.commit("registerError")
         throw Error("API Error");
       });
   },

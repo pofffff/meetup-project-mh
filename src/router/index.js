@@ -17,11 +17,21 @@ const routes = [
     path: '/user',
     name: 'User',
     component: User,
+    beforeEnter: (to, from, next) => {
+      if (localStorage.getItem("user_id")) {
+        next();
+      } 
+    }
   },
   {
     path: '/addfestival',
     name: 'AddEvent',
     component: AddEvent,
+    beforeEnter: (to, from, next) => {
+      if (localStorage.getItem("user_id")) {
+        next();
+      } 
+    }
   },
   {
     path: '/event',

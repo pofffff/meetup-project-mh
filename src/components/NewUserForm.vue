@@ -6,6 +6,10 @@
         @click="switchComponent"
         v-if="this.$store.state.emailExists"
       >Email already exists... Login</aside>
+      <aside
+        @click="support"
+        v-if="this.$store.state.errorSavingUser"
+      >Error register user. Contact support here</aside>
       <label v-show="!isValid.name" for="name">Must be a valid name</label>
       <li>
         <input id="name" type="text" v-model="name" placeholder="firstname lastname" />
