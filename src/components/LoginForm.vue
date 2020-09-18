@@ -24,7 +24,7 @@ export default {
   methods: {
     login() {
       const credentials = { email: this.email, password: this.password };
-      this.$store.dispatch("login", credentials);
+      this.$store.dispatch("authRequest", credentials);
     },
   },
 };

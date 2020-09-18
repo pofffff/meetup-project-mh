@@ -23,26 +23,4 @@ export default {
         throw Error('API Error');
       });
   },
-
-  async login(ctx, credentials) {
-    const url = 'http://localhost:8080/user';
-    await axios
-      .post(
-        url,
-        {},
-        {
-          headers: {
-            email: credentials.email,
-            password: credentials.password,
-          },
-        }
-      )
-      .then((response) => {
-        ctx.commit('handleRegisterUser', response.data);
-      })
-      .catch((error) => {
-        console.log('Error: ' + error);
-        throw Error('API Error');
-      });
-  },
 };
