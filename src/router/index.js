@@ -18,9 +18,12 @@ const routes = [
     name: 'User',
     component: User,
     beforeEnter: (to, from, next) => {
-      if (localStorage.getItem("user_id")) {
+      if (localStorage.getItem("token")) {
         next();
-      } 
+        console.log("here")
+      } else {
+        next('/');
+      }
     }
   },
   {
@@ -28,9 +31,11 @@ const routes = [
     name: 'AddEvent',
     component: AddEvent,
     beforeEnter: (to, from, next) => {
-      if (localStorage.getItem("user_id")) {
+      if (localStorage.getItem("token")) {
         next();
-      } 
+      } else {
+        next('/');
+      }
     }
   },
   {
@@ -41,6 +46,8 @@ const routes = [
 ];
 
 const router = new VueRouter({
+  mode: "hash",
+
   routes,
 });
 

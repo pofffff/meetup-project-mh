@@ -7,7 +7,6 @@ module.exports.getUser = async (email) => {
     .model('User', userSchema)
     .findOne({ email: email })
     .exec();
-  console.log(user);
   if (user) return user;
   if (!user) return false;
 };
