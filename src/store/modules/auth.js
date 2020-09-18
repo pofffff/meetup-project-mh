@@ -21,10 +21,10 @@ const auth = {
         )
         .then((response) => {
           const token = response.data.token;
-          const email = response.data.email
+          const email = response.data.email;
           // Set default headers on all axios calls
-          axios.defaults.headers.common['authorization'] = token;
-          axios.defaults.headers.common['email'] = email;
+          axios.defaults.headers.common["authorization"] = token;
+          axios.defaults.headers.common["email"] = email;
 
           localStorage.setItem("token", token);
           dispatch("userRequest", email);
@@ -52,10 +52,15 @@ const auth = {
         });
     },
     logoutUser(ctx) {
-        delete axios.defaults.headers.common['Authorization']
+      return new Promise((resolve, reject) => {
+        delete axios.defaults.headers.common["Authorization"];
         localStorage.removeItem("token");
-        ctx.commit("logoutSuccess")
-    }
+        ctx.commit("logoutSuccess");
+        resolve();
+      }).catch((error) => {
+        reject(error);
+      });
+    },
   },
 };
 export default auth;
