@@ -1,4 +1,4 @@
 export default {
-  ifLogin: true,
+  ifLogin: false,
   token: localStorage.getItem('token') || '',
 };

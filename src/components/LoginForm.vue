@@ -1,10 +1,16 @@
 <template>
   <div class="form__wrapper">
     <h4>Login</h4>
-    <input placeholder="email" type="email" v-model="email" />
-    <input placeholder="password" type="password" v-model="password" />
+    <ul>
+      <li>
+        <input placeholder="email" type="email" v-model="email" />
+      </li>
+      <li>
+        <input placeholder="password" type="password" v-model="password" />
+      </li>
+    </ul>
     <section class="buttons__wrapper">
-      <button class="switch-side__button">
+      <button @click="switchComponent" class="switch-side__button">
         <aside>Don't have an account?</aside>
         <aside>Sign Up!</aside>
       </button>
@@ -26,9 +32,82 @@ export default {
       const credentials = { email: this.email, password: this.password };
       this.$store.dispatch("authRequest", credentials);
     },
+    switchComponent() {
+      this.$store.state.ifLogin = !this.$store.state.ifLogin;
+    },
   },
 };
 </script>
 
 <style scoped lang="scss">
+@import "@/assets/scss/variables";
+
+.form__wrapper {
+  background: $color_dark;
+  width: 300px;
+  height: 370px;
+  border-radius: 15px;
+  padding: 4em 1.5em 3em 1.5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  h4 {
+    color: $white;
+    align-self: flex-start;
+    font-size: 1.5em;
+  }
+
+  ul {
+    width: 100%;
+    li {
+      list-style: none;
+      margin: 1em 0;
+
+      input {
+        outline: none;
+        height: 3em;
+        padding: 0 10px;
+        border: 0.5px solid $white;
+        border-radius: 4px;
+        font-weight: 500;
+        background: none;
+        color: $white;
+        font-size: 0.8em;
+        width: 100%;
+        letter-spacing: 1.5px;
+        opacity: 0.5;
+      }
+    }
+  }
+
+  .buttons__wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    .switch-side__button {
+      text-align: left;
+      background: none;
+      color: $white;
+      opacity: 0.7;
+      border: none;
+      cursor: pointer;
+    }
+
+    .switch-side__button:hover {
+      text-decoration: underline;
+    }
+
+    .action__button {
+      background: $color_light;
+      color: $white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      padding: 6px 18px;
+    }
+  }
+}
 </style>

@@ -1,18 +1,26 @@
 <template>
   <div class="form__wrapper">
     <h4>Sign up</h4>
-    <label v-show="!isValid.name" for="name">Must be a valid name</label>
-    <input id="name" type="text" v-model="name" />
-    <label v-show="!isValid.email" for="email">Must be a valid email</label>
-    <input id="email" type="email" v-model="email" />
-    <label v-show="!isValid.password" for="password">Must be at least 6 characters</label>
-    <input id="password" type="password" v-model="password" />
+    <ul>
+      <label v-show="!isValid.name" for="name">Must be a valid name</label>
+      <li>
+        <input id="name" type="text" v-model="name" placeholder="firstname lastname" />
+      </li>
+      <label v-show="!isValid.email" for="email">Must be a valid email</label>
+      <li>
+        <input id="email" type="email" v-model="email" placeholder="email" />
+      </li>
+      <label v-show="!isValid.password" for="password">Must be at least 6 characters</label>
+      <li>
+        <input id="password" type="password" v-model="password" placeholder="password" />
+      </li>
+    </ul>
     <section class="buttons__wrapper">
-      <button class="switch-side__button">
+      <button @click="switchComponent" class="switch-side__button">
         <aside>Already have account?</aside>
         <aside>Login</aside>
       </button>
-      <button @click="validate" class="action__button">Login</button>
+      <button @click="validate" class="action__button">Sign Up!</button>
     </section>
   </div>
 </template>
@@ -25,7 +33,7 @@ export default {
       name: "",
       email: "",
       password: "",
-      isValid: { name: false, email: false, password: false },
+      isValid: { name: true, email: true, password: true },
     };
   },
   methods: {
@@ -69,9 +77,82 @@ export default {
         this.$store.dispatch("registerUser", input);
       }
     },
+    switchComponent() {
+      this.$store.state.ifLogin = !this.$store.state.ifLogin;
+    },
   },
 };
 </script>
 
 <style scoped lang="scss">
+@import "@/assets/scss/variables";
+
+.form__wrapper {
+  background: $color_dark;
+  width: 300px;
+  height: 370px;
+  border-radius: 15px;
+  padding: 2.5em 1.5em 3em 1.5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  h4 {
+    color: $white;
+    align-self: flex-start;
+    font-size: 1.5em;
+  }
+
+  ul {
+    width: 100%;
+    li {
+      list-style: none;
+      margin: 1em 0;
+
+      input {
+        outline: none;
+        height: 3em;
+        padding: 0 10px;
+        border: 0.5px solid $white;
+        border-radius: 4px;
+        font-weight: 500;
+        background: none;
+        color: $white;
+        font-size: 0.8em;
+        width: 100%;
+        letter-spacing: 1.5px;
+        opacity: 0.5;
+      }
+    }
+  }
+
+  .buttons__wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-content: flex-end;
+    .switch-side__button {
+      text-align: left;
+      background: none;
+      color: $white;
+      opacity: 0.7;
+      border: none;
+      cursor: pointer;
+    }
+
+    .switch-side__button:hover {
+      text-decoration: underline;
+    }
+
+    .action__button {
+      background: $color_light;
+      color: $white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      padding: 6px 18px;
+    }
+  }
+}
 </style>
