@@ -1,17 +1,17 @@
 <template>
-  <div class="home__wrapper">
-    <Main />
+  <div class="login__wrapper">
+    <LoginForm v-show="this.$store.state.ifLogin" />
+    <NewUserForm v-show="!this.$store.state.ifLogin" />
   </div>
 </template>
 
 <script>
 import LoginForm from "@/components/LoginForm";
 import NewUserForm from "@/components/NewUserForm";
-import Main from "@/components/Main";
 
 export default {
-  name: "Home",
-  components: { Main, LoginForm, NewUserForm },
+  name: "Login",
+  components: { LoginForm, NewUserForm },
   methods: {},
 };
 </script>
@@ -19,7 +19,7 @@ export default {
 <style lang="scss" scoped>
 @import "@/assets/scss/variables";
 
-.home__wrapper {
+.login__wrapper {
   display: flex;
   justify-content: center;
   align-items: center;

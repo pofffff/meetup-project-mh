@@ -6,7 +6,7 @@
         Profile
       </li>
       <li>Events</li>
-      <li v-if="!this.$store.state.isAuthenticated" @click="login">Login</li>
+      <li v-if="!this.$store.state.isAuthenticated" @click="goTo('/login')" >Login</li>
       <li v-if="this.$store.state.isAuthenticated" @click="logout">Logout</li>
     </ul>
   </div>
@@ -26,14 +26,8 @@ export default {
     logout() {
       //if logout success, promise will resolve router.push
       this.$store.dispatch("logoutUser").then(() => {
-        this.$store.state.showMain = true;
         location.reload();
-        this.$router.push("/");
       });
-    },
-    login() {
-      this.$store.state.showMain = false;
-      this.$store.state.redirectPath = "/";
     },
   },
 };
