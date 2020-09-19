@@ -5,6 +5,7 @@
       <aside
         @click="switchComponent"
         v-if="this.$store.state.emailExists"
+        id="email_exists"
       >Email already exists... Login</aside>
       <aside
         @click="support"
