@@ -26,7 +26,7 @@ export default {
     logout() {
       //if logout success, promise will resolve router.push
       this.$store.dispatch("logoutUser").then(() => {
-        location.reload();
+        this.$router.push("/")
       });
     },
   },

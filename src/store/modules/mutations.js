@@ -13,15 +13,14 @@ export default {
     console.log("Error: " + error);
   },
   requestUserSuccess(state, user) {
-    //localStorage.setItem("email", user.email)
-    state.isAuthenticated
+    state.isAuthenticated = true
     console.log(user);
   },
   requestUserError(state, error) {
     console.log("Error: " + error);
   },
-  logoutSuccess() {
-    console.log("logout success")
+  logoutSuccess(state) {
+    state.isAuthenticated = false
   }
 
 };
