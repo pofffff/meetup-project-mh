@@ -2,7 +2,9 @@
   <div class="nav__wrapper">
     <ul>
       <li @click="goTo('/')">Home</li>
-      <li v-if="this.$store.state.isAuthenticated" @click="goTo('/profile')">Profile</li>
+      <li v-if="this.$store.state.isAuthenticated" @click="goTo('/profile')">
+        Profile
+      </li>
       <li>Events</li>
       <li v-if="!this.$store.state.isAuthenticated" @click="login">Login</li>
       <li v-if="this.$store.state.isAuthenticated" @click="logout">Logout</li>
@@ -17,9 +19,8 @@ export default {
   },
   methods: {
     goTo(path) {
-            if (this.$route.path !== path) {
+      if (this.$route.path !== path) {
         this.$router.push(path);
-        
       }
     },
     logout() {
@@ -27,14 +28,13 @@ export default {
       this.$store.dispatch("logoutUser").then(() => {
         this.$store.state.showMain = true;
         location.reload();
-        this.$router.push("/")
-      })
+        this.$router.push("/");
+      });
     },
     login() {
-
-        this.$store.state.showMain = false;
-        this.$store.state.redirectPath = "/"
-    }
+      this.$store.state.showMain = false;
+      this.$store.state.redirectPath = "/";
+    },
   },
 };
 </script>

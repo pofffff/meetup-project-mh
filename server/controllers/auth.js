@@ -1,6 +1,5 @@
 const bcrypt = require('bcrypt'),
   jwt = require('jsonwebtoken'),
-  randtoken = require('rand-token'),
   auth = require('../middleware/auth'),
   requestUser = require('./modules/getUser');
 
@@ -15,9 +14,7 @@ exports.authenticate = (req, res) => {
   }
 };
 
-const refreshTokens = {};
 exports.authenticateUser = async (req, res) => {
-  console.log(" HERE 1")
   const email = req.headers.email;
   const password = req.headers.password;
 
@@ -45,6 +42,14 @@ exports.authenticateUser = async (req, res) => {
     });
 };
 
-exports.requestUser = async (req, res) => {
-  await requestUser.getUser(req.headers.email)
+exports.userRequest = async (req, res) => {
+  let message;
+  await requestUser.getUser(req.headers.email).then(() => {
+    message = {success: true};
+    res.send(message)
+  }).catch((error) => {
+    console.log(error)
+    res.send(error)
+  })
+
 }
