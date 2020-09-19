@@ -5,15 +5,14 @@ const bcrypt = require("bcrypt"),
   requestUser = require("./modules/getUser");
 
 exports.authMiddleware = auth;
-exports.authenticate = (req, res) => {
-  console.log(req);
+/* exports.authenticate = (req, res) => {
   try {
     res.json({ success: true, user: req.user });
     // req.user is getting fetched from authMiddleware after token authentication
   } catch (error) {
     res.send({ message: "Error in Fetching user: " + error });
   }
-};
+}; */
 
 exports.authenticateUser = async (req, res) => {
   const email = req.headers.email;
@@ -29,7 +28,6 @@ exports.authenticateUser = async (req, res) => {
         const token = jwt.sign({ email }, `${process.env.SECRET}`, {
           expiresIn: "15m",
         });
-        console.log(token);
         res.json({
           success: true,
           email: email,
