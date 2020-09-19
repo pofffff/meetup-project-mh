@@ -3,20 +3,26 @@
     <h1>Add Event</h1>
     <section class="form__wrapper">
       <ul class="form-left__ul">
-        <li><input type="text" placeholder="Name of event" /></li>
+        <li>
+          <input type="text" placeholder="Name of event" v-model="name" />
+        </li>
 
-        <li><input type="text" placeholder="Country" /></li>
-        <li><input type="text" placeholder="City" /></li>
-        <li><input type="date" placeholder="Date of" /></li>
+        <li><input type="text" placeholder="Country" v-model="country" /></li>
+        <li><input type="text" placeholder="City" v-model="city" /></li>
+        <li><input type="date" placeholder="Date of" v-model="date" /></li>
         <li><input type="text" placeholder="image (url-link)" /></li>
       </ul>
       <ul class="form-right__ul">
         <li>
-          <textarea name="" maxlength="200" placeholder="Description"></textarea>
+          <textarea
+            maxlength="200"
+            placeholder="Description"
+            v-model="description"
+          ></textarea>
         </li>
         <div class="">
-          <li><input type="time" /></li>
-          <button>Add Event</button>
+          <li><input type="time" v-model="time" /></li>
+          <button @click="addEvent">Add Event</button>
         </div>
       </ul>
     </section>
@@ -24,7 +30,37 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data: () => {
+    return {
+      name: "",
+      country: "",
+      city: "",
+      date: "",
+      image: "",
+      description: "",
+      time: "",
+    };
+  },
+  methods: {
+    addEvent() {
+      const event = {
+        name: this.name,
+        country: this.country,
+        city: this.city,
+        date: this.date,
+        image: this.image,
+        description: this.description,
+        time: this.time,
+      };
+
+      if (Object.keys(event).some((k) => !event[k]) === false) {
+        this.$store.dispatch("addEvent", event);
+      }
+      console.log(event);
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -70,7 +106,7 @@ export default {};
           height: 2.5em;
           background: none;
           border: none;
-          border-bottom: 1px solid $white;
+          border-bottom: 1px solid $whiteOP;
           color: $white;
           font-size: 1em;
         }

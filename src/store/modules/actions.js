@@ -29,4 +29,24 @@ export default {
         throw Error("API Error");
       });
   },
+  async addEvent(ctx, event) {
+    const url = "http://localhost:8080/event";
+    await axios
+      .post(
+        url,
+        event,
+      )
+      .then((response) => {
+        if (response.data === true) {
+          ctx.commit("addEventSuccess");
+        }
+        if (response.data.error === true) {
+          ctx.commit("addEventError");
+        }
+      })
+      .catch((error) => {
+        ctx.commit("addEventError", error)
+        throw Error("API Error");
+      });
+  }
 };

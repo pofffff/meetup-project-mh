@@ -5,10 +5,10 @@ const authenticateController = require("../controllers/auth");
 router.route("/").post(authenticateController.authenticateUser);
 
 router
-  .route("/requestUser")
+  .route("/userRequest")
   .get(
     authenticateController.authMiddleware,
-    authenticateController.requestUser
+    authenticateController.userRequest
   );
 
 module.exports = router;

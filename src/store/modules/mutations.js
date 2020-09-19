@@ -13,6 +13,7 @@ export default {
     console.log("Error: " + error);
   },
   requestUserSuccess(state, user) {
+    //localStorage.setItem("email", user.email)
     state.isAuthenticated
     console.log(user);
   },
