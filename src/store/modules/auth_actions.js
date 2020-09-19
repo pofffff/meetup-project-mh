@@ -18,7 +18,7 @@ const auth = {
           const email = response.data.email;
           // Set default headers on all axios calls
           axios.defaults.headers.common["Authorization"] = token;
-          axios.defaults.headers.common["email"] = email;
+          axios.defaults.headers.common["Email"] = email;
 
           localStorage.setItem("token", token);
           dispatch("userRequest");
@@ -41,7 +41,7 @@ const auth = {
           .catch((error) => {
             delete axios.defaults.headers.common[("authorization", "email")];
             localStorage.removeItem("token");
-            reject(error);
+            resolve();
           });
       });
     },
