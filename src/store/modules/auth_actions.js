@@ -1,7 +1,7 @@
 import axios from "axios";
 const auth = {
   actions: {
-    async authRequest({ ctx, dispatch}, credentials) {
+    async authRequest({ ctx, dispatch }, credentials) {
       await axios
         .post(
           "http://localhost:8080/authenticate",
@@ -16,30 +16,32 @@ const auth = {
         .then((response) => {
           const token = response.data.token;
           const email = response.data.email;
-          // Set default headers on all axios calls
-          axios.defaults.headers.common["Authorization"] = token;
-          axios.defaults.headers.common["Email"] = email;
-
           localStorage.setItem("token", token);
-          dispatch("userRequest");
+          axios.defaults.headers.common["Authorization"] = token;
+
+          dispatch("userRequest", email);
         })
         .catch((error) => {
-          console.log(error)
+          console.log(error);
         });
     },
-    userRequest({ ctx, state }) {
+    userRequest({ ctx, state }, email) {
       return new Promise((resolve, reject) => {
-        console.log("here");
         axios
-          .get("http://localhost:8080/authenticate/userRequest",)
+          .get(
+            "http://localhost:8080/authenticate/userRequest",
+            {},
+            { headers: { email: email } }
+          )
           .then((response) => {
-            console.log(response);
             if (response.data.success === true) {
+              localStorage.setItem("token", response.data.token);
+              axios.defaults.headers.common["Authorization"] = response.data.token;
               resolve();
             }
           })
           .catch((error) => {
-            delete axios.defaults.headers.common[("authorization", "email")];
+            delete axios.defaults.headers.common["Authorization"];
             localStorage.removeItem("token");
             resolve();
           });
@@ -48,9 +50,8 @@ const auth = {
     // Kanske flytta till component
     logoutUser(ctx) {
       return new Promise((resolve, reject) => {
-        delete axios.defaults.headers.common[("authorization", "email")];
+        delete axios.defaults.headers.common["Authorization"];
         localStorage.removeItem("token");
-        localStorage.removeItem("email");
         ctx.commit("logoutSuccess");
         resolve();
       }).catch((error) => {
