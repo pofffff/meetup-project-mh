@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default {
-  async registerUser(ctx, user) {
+  async registerUser({commit}, user) {
     const url = "http://localhost:8080/user";
     await axios
       .post(
@@ -17,16 +17,16 @@ export default {
       )
       .then((response) => {
         if (response.data.success === true) {
-          ctx.commit("registerSuccess");
+          commit("registerSuccess");
         }
         if (response.data.emailExists === true) {
-          ctx.commit("registerFailed");
+          commit("registerFailed");
         }
       })
       .catch((error) => {
         console.log("Error: " + error);
-        ctx.commit("registerError")
-        throw Error("API Error");
+        commit("registerError")
+        throw Error("An error occurred when trying to register user");
       });
   },
   async addEvent(ctx, event) {
