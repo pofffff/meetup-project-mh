@@ -1,9 +1,7 @@
-import { mount, shallowMount } from "@vue/test-utils";
+import { shallowMount } from "@vue/test-utils";
 import Vuex from "vuex";
 import Vue from "vue";
 import state from "@/store/modules/state.js";
-import mutations from "@/store/modules/mutations.js";
-import actions from "@/store/modules/actions.js";
 import NewUserForm from "@/components/NewUserForm.vue";
 
 Vue.use(Vuex);
@@ -25,7 +23,6 @@ describe("NewUserForm input validation", () => {
   });
 
   it("Should dispatch action 'registerUser' if inputs are valid", async () => {
-    const headline = wrapper.find("h4");
     const name = wrapper.find("#name"),
       email = wrapper.find("#email"),
       password = wrapper.find("#password"),
