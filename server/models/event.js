@@ -29,7 +29,11 @@ const eventSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  added_by: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  added_by: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
   registred: [
     {
       type: mongoose.Schema.Types.ObjectId,

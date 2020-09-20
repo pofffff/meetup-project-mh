@@ -1,18 +1,20 @@
 const mongoose = require('mongoose'),
-  festivalSchema = new mongoose.Schema({
+  commentSchema = new mongoose.Schema({
     author: {
-      type: String,
-      required: true,
+      type: mongoose.Types.Schema.ObjectId,
+      ref: "User",
+      required: true
     },
-    festival: {
-      type: String,
-      required: true,
+    event: {
+      type: mongoose.Types.Schema.ObjectId,
+      ref: "Event",
+      required: true
     },
-    description: {
+    comment: {
       type: String,
       required: true,
     },
     Timestamps: true,
   });
 
-module.exports = mongoose.model('Festival', festivalSchema);
+module.exports = mongoose.model('Comment', commentSchema);
