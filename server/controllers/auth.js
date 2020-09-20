@@ -2,7 +2,7 @@ require("dotenv").config();
 const bcrypt = require("bcrypt"),
   jwt = require("jsonwebtoken"),
   auth = require("../middleware/auth"),
-  requestUser = require("./modules/getUser");
+  { getUser } = require("./modules/getUser");
 
 exports.authMiddleware = auth;
 exports.authenticate = async (req, res) => {
@@ -13,7 +13,7 @@ exports.authenticate = async (req, res) => {
   res.json({
     success: true,
     email: email,
-    token: token
+    token: token,
   });
 };
 
@@ -21,8 +21,7 @@ exports.loginRequest = async (req, res) => {
   const email = req.headers.email;
   const password = req.headers.password;
 
-  requestUser
-    .getUser(email)
+  await getUser(email)
     .then((user) => {
       const samePwd = bcrypt.compare(password, user.password);
       if (!samePwd) {
@@ -44,8 +43,7 @@ exports.loginRequest = async (req, res) => {
 };
 
 exports.userRequest = async (req, res) => {
-  await requestUser
-    .getUser(req.decoded.email)
+  await getUser(req.decoded.email)
     .then((user) => {
       const email = user.email;
       const token = jwt.sign({ email }, `${process.env.SECRET}`, {
