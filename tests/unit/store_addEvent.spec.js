@@ -50,7 +50,7 @@ describe("store - addEvent", () => {
     });
   });
 
-  it("Should throw error, commit and change state if error during registerUser", async () => {
+  it("Should throw error if there is an error during addEvent", async () => {
     const commit = jest.fn();
     mockError = true;
 
