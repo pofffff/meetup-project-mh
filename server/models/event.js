@@ -1,10 +1,11 @@
-const mongoose = require('mongoose');
-const festivalSchema = new mongoose.Schema({
+const mongoose = require("mongoose");
+
+const eventSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
   },
-  location: {
+  city: {
     type: String,
     required: true,
   },
@@ -16,17 +17,25 @@ const festivalSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  description: {
+  time: {
     type: String,
     required: true,
   },
-  registred: {
-    type: Number,
+  description: {
+    type: String,
+    required: true,
   },
   image: {
     type: String,
     required: true,
   },
+  added_by: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  registred: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
 });
 
-module.exports = mongoose.model('Festival', festivalSchema);
+module.exports = mongoose.model("Event", eventSchema);

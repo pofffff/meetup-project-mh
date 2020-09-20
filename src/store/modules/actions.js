@@ -30,13 +30,15 @@ export default {
       });
   },
   async addEvent(ctx, event) {
-    const url = "http://localhost:8080/event";
+    const url = "http://localhost:8080/event/";
+    console.log("here")
     await axios
       .post(
         url,
         event,
       )
       .then((response) => {
+        console.log(response)
         if (response.data === true) {
           ctx.commit("addEventSuccess");
         }

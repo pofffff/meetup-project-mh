@@ -4,6 +4,7 @@ import router from './router'
 import store from './store'
 import axios from "axios"
 
+// möjligtvis ta bort default headers i alla calls eftersom den sätts här
 const token = localStorage.getItem('token')
 if (token) {
   axios.defaults.headers.common['Authorization'] = token

@@ -6,8 +6,7 @@ const User = require('../models/user'),
 exports.registerUser = async (req, res) => {
   const name = req.headers.name,
     email = req.headers.email,
-    password = req.headers.password,
-    numberOfEvents = 0;
+    password = req.headers.password;
 
   const userExists = await getUser.getUser(email);
   if (userExists === false) {
@@ -18,13 +17,12 @@ exports.registerUser = async (req, res) => {
           name: name,
           email: email,
           password: hashedPassword,
-          numberOfEvents: numberOfEvents,
         });
         return user;
       })
       .then((user) => {
-        res.send({ success: true });
         user.save();
+        res.send({ success: true });
       })
       .catch((error) => {
         console.log('Error saving user:', error);

@@ -7,10 +7,10 @@
           <input type="text" placeholder="Name of event" v-model="name" />
         </li>
 
-        <li><input type="text" placeholder="Country" v-model="country" /></li>
         <li><input type="text" placeholder="City" v-model="city" /></li>
+        <li><input type="text" placeholder="Adress" v-model="adress" /></li>
         <li><input type="date" v-model="date" /></li>
-        <li><input type="text" placeholder="image (url-link)" /></li>
+        <li><input type="text" placeholder="image (url-link)" v-model="image" /></li>
       </ul>
       <ul class="form-right__ul">
         <li>
@@ -34,8 +34,8 @@ export default {
   data: () => {
     return {
       name: "",
-      country: "",
       city: "",
+      adress: "",
       date: "",
       image: "",
       description: "",
@@ -46,18 +46,17 @@ export default {
     addEvent() {
       const event = {
         name: this.name,
-        country: this.country,
         city: this.city,
+        adress: this.adress,
         date: this.date,
         image: this.image,
         description: this.description,
         time: this.time,
       };
 
-      if (Object.keys(event).some((k) => !event[k]) === false) {
+      if (Object.keys(event).some((key) => event[key] === "") === false) {
         this.$store.dispatch("addEvent", event);
       }
-      console.log(event);
     },
   },
 };
