@@ -30,25 +30,16 @@ export default {
       });
   },
   async addEvent(ctx, event) {
-    const url = "http://localhost:8080/event/";
-    console.log("here")
+    const url = "http://localhost:8080/event";
     await axios
       .post(
         url,
         event,
       )
       .then((response) => {
-        console.log(response)
-        if (response.data === true) {
-          ctx.commit("addEventSuccess");
-        }
-        if (response.data.error === true) {
-          ctx.commit("addEventError");
-        }
-      })
+console.log(response.data.success)      })
       .catch((error) => {
-        ctx.commit("addEventError", error)
-        throw Error("API Error");
+        throw Error("Error adding event");
       });
   }
 };

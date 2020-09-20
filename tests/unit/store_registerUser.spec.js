@@ -1,7 +1,5 @@
-import { mount, shallowMount } from "@vue/test-utils";
 import Vuex from "vuex";
 import Vue from "vue";
-import state from "@/store/modules/state.js";
 import mutations from "@/store/modules/mutations.js";
 import actions from "@/store/modules/actions.js";
 

@@ -21,6 +21,6 @@ export default {
   },
   logoutSuccess(state) {
     state.isAuthenticated = false
-  }
+  },
 
 };
