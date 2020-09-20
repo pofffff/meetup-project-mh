@@ -1,6 +1,6 @@
-const User = require('../models/user'),
-  getUser = require('./modules/getUser'),
-  bcrypt = require('bcrypt'),
+const User = require("../models/user"),
+  { getUser } = require("./modules/getUser"),
+  bcrypt = require("bcrypt"),
   BCRYPT_SALT_ROUNDS = 12;
 
 exports.registerUser = async (req, res) => {
@@ -8,7 +8,7 @@ exports.registerUser = async (req, res) => {
     email = req.headers.email,
     password = req.headers.password;
 
-  const userExists = await getUser.getUser(email);
+  const userExists = await getUser(email);
   if (userExists === false) {
     bcrypt
       .hash(password, BCRYPT_SALT_ROUNDS)
@@ -25,7 +25,7 @@ exports.registerUser = async (req, res) => {
         res.send({ success: true });
       })
       .catch((error) => {
-        console.log('Error saving user:', error);
+        console.log("Error saving user:", error);
       });
   } else {
     res.send({ emailExists: true });
