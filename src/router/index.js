@@ -51,6 +51,15 @@ const routes = [
     path: "/event",
     name: "EventDetails",
     component: EventDetails,
+    beforeEnter: (to, from, next) => {
+      store.dispatch("authenticate").then(() => {
+        if (localStorage.getItem("token")) {
+          next();
+        } else {
+          next("/");
+        }
+      });
+    },
   },
 ];
 

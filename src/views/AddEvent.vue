@@ -9,7 +9,7 @@
 
         <li><input type="text" placeholder="Country" v-model="country" /></li>
         <li><input type="text" placeholder="City" v-model="city" /></li>
-        <li><input type="date" placeholder="Date of" v-model="date" /></li>
+        <li><input type="date" v-model="date" /></li>
         <li><input type="text" placeholder="image (url-link)" /></li>
       </ul>
       <ul class="form-right__ul">
@@ -111,6 +111,10 @@ export default {
           font-size: 1em;
         }
 
+        ::-webkit-calendar-picker-indicator {
+          filter: invert(1);
+        }
+
         textarea {
           height: 185px;
           color: $white;
@@ -120,7 +124,7 @@ export default {
 
         input::placeholder,
         textarea::placeholder {
-          color: $whiteOP;
+          color: $white;
           letter-spacing: 2px;
           font-family: $font;
           font-size: 12px;
