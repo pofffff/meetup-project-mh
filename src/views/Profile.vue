@@ -1,18 +1,20 @@
 <template>
   <div class="profile__wrapper">
-    <button @click="goTo('/addevent')" class="add">Add event</button>
+    <UserDetails :user="user" />
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
+import UserDetails from "@/components/UserDetails";
 export default {
-  methods: {
-    goTo(path) {
-      if (this.$route.path !== path) {
-        this.$router.push(path);
-      }
-    },
+  components: { UserDetails },
+  computed: {
+    ...mapState({
+      user: (state) => state.user,
+    }),
   },
+  methods: {},
 };
 </script>
 
@@ -25,6 +27,7 @@ export default {
   width: 100vw;
   height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }

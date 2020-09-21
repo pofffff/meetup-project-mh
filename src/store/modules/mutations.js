@@ -1,7 +1,6 @@
-
 export default {
   registerSuccess(state) {
-      state.ifLogin = true;
+    state.ifLogin = true;
   },
   registerFailed(state) {
     state.emailExists = true;
@@ -10,17 +9,17 @@ export default {
     state.errorSavingUser = true;
   },
   authRequestError(state, error) {
-    console.log("Error: " + error);
+    console.log('Error: ' + error);
   },
-  requestUserSuccess(state, user) {
-    state.isAuthenticated = true
+  userRequestSuccess(state, user) {
+    state.isAuthenticated = true;
+    state.user = user;
     console.log(user);
   },
   requestUserError(state, error) {
-    console.log("Error: " + error);
+    console.log('Error: ' + error);
   },
   logoutSuccess(state) {
-    state.isAuthenticated = false
+    state.isAuthenticated = false;
   },
-
 };

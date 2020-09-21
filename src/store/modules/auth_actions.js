@@ -22,13 +22,14 @@ const auth = {
           throw Error('An error occurred when trying to authenticate');
         });
     },
-    userRequest() {
+    userRequest({ commit }) {
       return new Promise((resolve, reject) => {
         axios
           .get('http://localhost:8080/authenticate/userRequest')
           .then((response) => {
             if (response.data.success === true) {
               localStorage.setItem('token', response.data.token);
+              commit('userRequestSuccess', response.data.user);
               resolve();
             }
           })

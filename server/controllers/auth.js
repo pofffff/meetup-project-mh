@@ -53,6 +53,7 @@ exports.userRequest = async (req, res) => {
         user: user,
         token: token,
       });
+      console.log(user);
     })
     .catch((error) => {
       console.log(error);

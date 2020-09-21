@@ -7,21 +7,27 @@
           <input type="text" placeholder="Name of event" v-model="name" />
         </li>
 
-        <li><input type="text" placeholder="City" v-model="city" /></li>
-        <li><input type="text" placeholder="Adress" v-model="adress" /></li>
-        <li><input type="date" v-model="date" /></li>
-        <li><input type="text" placeholder="image (url-link)" v-model="image" /></li>
+        <li>
+          <input type="text" placeholder="City" v-model="city" />
+        </li>
+        <li>
+          <input type="text" placeholder="Adress" v-model="adress" />
+        </li>
+        <li>
+          <input type="date" v-model="date" />
+        </li>
+        <li>
+          <input type="text" placeholder="image (url-link)" v-model="image" />
+        </li>
       </ul>
       <ul class="form-right__ul">
         <li>
-          <textarea
-            maxlength="200"
-            placeholder="Description"
-            v-model="description"
-          ></textarea>
+          <textarea maxlength="200" placeholder="Description" v-model="description"></textarea>
         </li>
-        <div class="">
-          <li><input type="time" v-model="time" /></li>
+        <div class>
+          <li>
+            <input type="time" v-model="time" />
+          </li>
           <button @click="addEvent">Add Event</button>
         </div>
       </ul>
@@ -136,12 +142,14 @@ export default {
 
       button {
         background: $color_light;
+        color: $white;
         border: none;
         width: 100%;
         height: 2.3em;
         align-self: flex-end;
         border-radius: 10px;
         margin-top: 2em;
+        font-size: 1rem;
       }
     }
   }

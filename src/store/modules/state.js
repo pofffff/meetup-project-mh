@@ -5,4 +5,5 @@ export default {
   errorSavingUser: false,
   isAuthenticated: false,
   token: localStorage.getItem('token') || '',
+  user: {},
 };

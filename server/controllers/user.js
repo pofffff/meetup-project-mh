@@ -2,7 +2,12 @@ const User = require('../models/user'),
   getUser = require('./modules/getUser'),
   bcrypt = require('bcrypt'),
   jwt = require('jsonwebtoken'),
+  auth = require('../middleware/auth'),
+  upload = require('../middleware/upload'),
   BCRYPT_SALT_ROUNDS = 12;
+
+exports.authMiddleware = auth;
+exports.uploadMiddleware = upload;
 
 exports.registerUser = async (req, res) => {
   const name = req.headers.name,
@@ -35,4 +40,16 @@ exports.registerUser = async (req, res) => {
   } else {
     res.send({ emailExists: true });
   }
+};
+
+exports.uploadImage = async (req, res) => {
+  User.updateOne(
+    { _id: req.decoded.user._id },
+    { $set: { image: req.file.filename } },
+    (err) => {
+      if (err) console.log(err);
+    }
+  );
+
+  res.send(req.file);
 };

@@ -26,7 +26,7 @@ export default {
 }
 
 input:-webkit-autofill,
-input:-webkit-autofill:hover, 
+input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 textarea:-webkit-autofill,
 textarea:-webkit-autofill:hover,
@@ -35,7 +35,7 @@ select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
   border: none;
-  box-shadow: 0 0 0px 1000px $color_dark inset;;
+  box-shadow: 0 0 0px 1000px $color_dark inset;
   -webkit-text-fill-color: $white;
   -webkit-box-shadow: 0 0 0px 1000px $color_dark inset;
 }
@@ -47,7 +47,6 @@ html {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-
 }
 
 #app {
