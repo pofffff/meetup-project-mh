@@ -22,7 +22,7 @@ const auth = {
           throw Error('An error occurred when trying to authenticate');
         });
     },
-    userRequest({ ctx, state }) {
+    userRequest() {
       return new Promise((resolve, reject) => {
         axios
           .get('http://localhost:8080/authenticate/userRequest')
@@ -33,7 +33,7 @@ const auth = {
             }
           })
           .catch((error) => {
-            resolve();
+            throw Error('An error occurred when trying to authenticate');
           });
       });
     },
@@ -47,9 +47,7 @@ const auth = {
               resolve();
             }
           })
-          .catch((error) => {
-            resolve();
-          });
+          .catch((error) => {});
       });
     },
     // Kanske flytta till component
