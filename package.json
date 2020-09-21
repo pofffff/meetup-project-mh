@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "axios": "^0.20.0",
+    "axios-mock-adapter": "^1.18.2",
     "bcrypt": "^5.0.0",
     "core-js": "^3.6.5",
     "cors": "^2.8.5",
@@ -20,6 +21,7 @@
     "path": "^0.12.7",
     "rand-token": "^1.0.1",
     "serve-static": "^1.14.1",
+    "uuid": "^8.3.0",
     "vue": "^2.6.11",
     "vue-axios": "^2.1.5",
     "vue-router": "^3.2.0",

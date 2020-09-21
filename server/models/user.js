@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -15,9 +15,9 @@ const userSchema = new mongoose.Schema({
   attend_to: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Event",
+      ref: 'Event',
     },
   ],
 });
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model('User', userSchema);

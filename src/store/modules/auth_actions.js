@@ -1,10 +1,10 @@
-import axios from "axios";
+import axios from 'axios';
 const auth = {
   actions: {
-    async loginRequest({ ctx, dispatch }, credentials) {
+    async loginRequest({ commit, dispatch }, credentials) {
       await axios
         .post(
-          "http://localhost:8080/authenticate/loginRequest",
+          'http://localhost:8080/authenticate/loginRequest',
           {},
           {
             headers: {
@@ -14,32 +14,25 @@ const auth = {
           }
         )
         .then((response) => {
+          console.log(response);
           const token = response.data.token;
-          const email = response.data.email;
-          localStorage.setItem("token", token);
-          axios.defaults.headers.common["Authorization"] = token;
-
-          dispatch("userRequest", email);
+          localStorage.setItem('token', token);
         })
         .catch((error) => {
-          console.log(error);
+          throw Error('An error occurred when trying to authenticate');
         });
     },
     userRequest({ ctx, state }) {
       return new Promise((resolve, reject) => {
         axios
-          .get("http://localhost:8080/authenticate/userRequest")
+          .get('http://localhost:8080/authenticate/userRequest')
           .then((response) => {
             if (response.data.success === true) {
-              localStorage.setItem("token", response.data.token);
-              axios.defaults.headers.common["Authorization"] =
-                response.data.token;
+              localStorage.setItem('token', response.data.token);
               resolve();
             }
           })
           .catch((error) => {
-            delete axios.defaults.headers.common["Authorization"];
-            localStorage.removeItem("token");
             resolve();
           });
       });
@@ -47,18 +40,14 @@ const auth = {
     authenticate({ ctx, state }) {
       return new Promise((resolve, reject) => {
         axios
-          .get("http://localhost:8080/authenticate")
+          .get('http://localhost:8080/authenticate')
           .then((response) => {
             if (response.data.success === true) {
-              localStorage.setItem("token", response.data.token);
-              axios.defaults.headers.common["Authorization"] =
-                response.data.token;
+              localStorage.setItem('token', response.data.token);
               resolve();
             }
           })
           .catch((error) => {
-            delete axios.defaults.headers.common["Authorization"];
-            localStorage.removeItem("token");
             resolve();
           });
       });
@@ -66,9 +55,9 @@ const auth = {
     // Kanske flytta till component
     logoutUser(ctx) {
       return new Promise((resolve, reject) => {
-        delete axios.defaults.headers.common["Authorization"];
-        localStorage.removeItem("token");
-        ctx.commit("logoutSuccess");
+        delete axios.defaults.headers.common['Authorization'];
+        localStorage.removeItem('token');
+        ctx.commit('logoutSuccess');
         resolve();
       }).catch((error) => {
         reject(error);

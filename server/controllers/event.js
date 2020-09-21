@@ -1,12 +1,12 @@
-const User = require("../models/user"),
-  Event = require("../models/event"),
-  auth = require("../middleware/auth"),
-  { getUser } = require("./modules/getUser");
+const User = require('../models/user'),
+  Event = require('../models/event'),
+  auth = require('../middleware/auth'),
+  getUser = require('./modules/getUser');
 
 exports.authMiddleware = auth;
 exports.addEvent = async (req, res) => {
-  console.log(req.body);
-  const user = await getUser(req.decoded.email);
+  console.log(req.decoded);
+  const user = await getUser.by_id(req.decoded.user._id);
 
   try {
     let event = req.body;

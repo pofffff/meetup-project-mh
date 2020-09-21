@@ -2,11 +2,9 @@
   <div class="nav__wrapper">
     <ul>
       <li @click="goTo('/')">Home</li>
-      <li v-if="this.$store.state.isAuthenticated" @click="goTo('/profile')">
-        Profile
-      </li>
+      <li v-if="this.$store.state.isAuthenticated" @click="goTo('/profile')">Profile</li>
       <li>Events</li>
-      <li v-if="!this.$store.state.isAuthenticated" @click="goTo('/login')" >Login</li>
+      <li v-if="!this.$store.state.isAuthenticated" @click="goTo('/login')">Login</li>
       <li v-if="this.$store.state.isAuthenticated" @click="logout">Logout</li>
     </ul>
   </div>
@@ -26,7 +24,7 @@ export default {
     logout() {
       //if logout success, promise will resolve router.push
       this.$store.dispatch("logoutUser").then(() => {
-        this.$router.push("/")
+        this.goTo("/");
       });
     },
   },

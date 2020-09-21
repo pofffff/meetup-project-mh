@@ -1,6 +1,7 @@
-const User = require("../models/user"),
-  { getUser } = require("./modules/getUser"),
-  bcrypt = require("bcrypt"),
+const User = require('../models/user'),
+  getUser = require('./modules/getUser'),
+  bcrypt = require('bcrypt'),
+  jwt = require('jsonwebtoken'),
   BCRYPT_SALT_ROUNDS = 12;
 
 exports.registerUser = async (req, res) => {
@@ -8,7 +9,7 @@ exports.registerUser = async (req, res) => {
     email = req.headers.email,
     password = req.headers.password;
 
-  const userExists = await getUser(email);
+  const userExists = await getUser.byEmail(email);
   if (userExists === false) {
     bcrypt
       .hash(password, BCRYPT_SALT_ROUNDS)
@@ -22,10 +23,14 @@ exports.registerUser = async (req, res) => {
       })
       .then((user) => {
         user.save();
-        res.send({ success: true });
+        user = getUser.byEmail(user.email);
+        const token = jwt.sign({ user }, `${process.env.SECRET}`, {
+          expiresIn: '15m',
+        });
+        res.send({ success: true, token: token });
       })
       .catch((error) => {
-        console.log("Error saving user:", error);
+        console.log('Error saving user:', error);
       });
   } else {
     res.send({ emailExists: true });
