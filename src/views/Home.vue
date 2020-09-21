@@ -13,6 +13,9 @@ export default {
   name: "Home",
   components: { Main, LoginForm, NewUserForm },
   methods: {},
+  created() {
+    this.$store.dispatch("getAllEvents");
+  },
 };
 </script>
 

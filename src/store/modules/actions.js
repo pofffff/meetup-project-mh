@@ -55,4 +55,16 @@ export default {
         console.error('Error:', error);
       });
   },
+  async getAllEvents(ctx) {
+    const url = 'http://localhost:8080/event/getAll';
+
+    await axios
+      .get(url)
+      .then((response) => {
+        console.log(response.data.success);
+      })
+      .catch((error) => {
+        throw Error('Error adding event');
+      });
+  },
 };

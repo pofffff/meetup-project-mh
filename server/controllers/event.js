@@ -26,3 +26,8 @@ exports.addEvent = async (req, res) => {
     res.send({ success: false });
   }
 };
+
+exports.getAllEvents = async (req, res) => {
+  const events = await Event.find().populate('registred');
+  console.log(events);
+};
