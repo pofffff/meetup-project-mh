@@ -1,9 +1,7 @@
-import { mount, createLocalVue } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import Vuex from 'vuex';
 import Vue from 'vue';
 import EventWrapper from '@/components/EventWrapper.vue';
-import actions from '@/store/modules/actions.js';
-const localvue = createLocalVue().use(Vuex);
 Vue.use(Vuex);
 
 describe('EventWrapper', () => {
