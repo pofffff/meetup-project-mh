@@ -1,17 +1,24 @@
 <template>
   <div class="login__wrapper">
-    <LoginForm v-show="this.$store.state.ifLogin" />
-    <NewUserForm v-show="!this.$store.state.ifLogin" />
+    <LoginForm v-show="ifLogin" />
+    <NewUserForm v-show="!ifLogin" />
   </div>
 </template>
 
 <script>
 import LoginForm from "@/components/LoginForm";
 import NewUserForm from "@/components/NewUserForm";
-
+import { mapState } from "vuex";
 export default {
   name: "Login",
   components: { LoginForm, NewUserForm },
+  computed: {
+    ...mapState({
+      ifLogin: (state) => {
+        return state.ifLogin;
+      },
+    }),
+  },
   methods: {},
 };
 </script>

@@ -95,6 +95,7 @@ export default {
 
 <style scoped lang="scss">
 @import "@/assets/scss/variables";
+@import "@/assets/scss/style_mixins";
 
 .form__wrapper {
   background: $color_dark;
@@ -120,18 +121,7 @@ export default {
       margin: 1em 0;
 
       input {
-        outline: none;
-        height: 3em;
-        padding: 0 10px;
-        border: 0.5px solid $white;
-        border-radius: 4px;
-        font-weight: 500;
-        background: none;
-        color: $white;
-        font-size: 0.8em;
-        width: 100%;
-        letter-spacing: 1.5px;
-        opacity: 0.5;
+        @include input;
       }
     }
   }
@@ -153,12 +143,7 @@ export default {
     }
 
     .action__button {
-      background: $color_light;
-      color: $white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      padding: 6px 18px;
+      @include button;
     }
   }
 }

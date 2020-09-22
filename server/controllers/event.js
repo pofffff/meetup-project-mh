@@ -1,5 +1,4 @@
-const User = require('../models/user'),
-  Event = require('../models/event'),
+const Event = require('../models/event'),
   auth = require('../middleware/auth'),
   getUser = require('./modules/getUser');
 
