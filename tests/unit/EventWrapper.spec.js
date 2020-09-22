@@ -1,9 +1,9 @@
-import { mount } from '@vue/test-utils';
+import { mount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
 import Vue from 'vue';
 import EventWrapper from '@/components/EventWrapper.vue';
-import actions from '@/store/modules/actions.js';
-Vue.use(Vuex);
+import routes from '@/router/index.js';
+import VueRouter from 'vue-router';
 
 describe('EventWrapper', () => {
   let events;
@@ -53,27 +53,26 @@ describe('EventWrapper', () => {
   });
 
   it('Should call dispatch correctly', async () => {
-    const mockStore = {
+    const id = '123',
+      mockStore = {
         state: { events },
         dispatch: jest.fn(),
       },
-      id = '123';
-    const wrapper = mount(EventWrapper, {
-      mocks: { $store: mockStore },
-      computed: {
-        events: () => {
-          return events;
+      wrapper = mount(EventWrapper, {
+        mocks: { $store: mockStore },
+        computed: {
+          events: () => {
+            return events;
+          },
         },
-      },
-      stubs: { UserRegistredToEvent: true },
-    });
+        stubs: {
+          UserRegistredToEvent: true,
+        },
+      });
 
     const eventElements = wrapper.findAll('.event');
     await eventElements.at(0).trigger('click');
-    await Vue.nextTick();
     expect(mockStore.dispatch).toHaveBeenCalledWith('getAllEvents');
     expect(mockStore.dispatch).toHaveBeenCalledWith('getEvent', id);
-
-    // En del röd error på grund av promise som jag inte förstått hur jag ska lösa än
   });
 });

@@ -2,18 +2,27 @@
   <div class="nav__wrapper">
     <ul>
       <li @click="goTo('/')">Home</li>
-      <li v-if="this.$store.state.isAuthenticated" @click="goTo('/profile')">Profile</li>
+      <li v-if="isAuthenticated" @click="goTo('/profile')">Profile</li>
       <li>Events</li>
-      <li v-if="!this.$store.state.isAuthenticated" @click="goTo('/login')">Login</li>
-      <li v-if="this.$store.state.isAuthenticated" @click="logout">Logout</li>
+      <li v-if="!isAuthenticated" @click="goTo('/login')">Login</li>
+      <li v-if="isAuthenticated" @click="logout">Logout</li>
     </ul>
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   data: () => {
     return {};
+  },
+  computed: {
+    ...mapState({
+      isAuthenticated: (state) => {
+        return state.isAuthenticated;
+      },
+    }),
   },
   methods: {
     goTo(path) {

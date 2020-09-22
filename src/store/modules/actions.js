@@ -67,21 +67,16 @@ export default {
         throw Error('Error adding event');
       });
   },
-  getEvent({ commit }, id) {
-    return new Promise((resolve, reject) => {
-      const url = 'http://localhost:8080/event/getOne/' + id;
+  async getEvent({ commit }, id) {
+    const url = 'http://localhost:8080/event/getOne/' + id;
 
-      axios
-        .get(url, {}, { id: id })
-        .then((response) => {
-          commit('getEventSuccess', response.data);
-          resolve();
-        })
-        .catch((error) => {
-          reject();
-
-          throw Error('Error adding event');
-        });
-    });
+    await axios
+      .get(url, {}, { id: id })
+      .then((response) => {
+        commit('getEventSuccess', response.data);
+      })
+      .catch((error) => {
+        throw Error('Error adding event');
+      });
   },
 };

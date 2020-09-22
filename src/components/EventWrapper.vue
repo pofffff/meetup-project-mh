@@ -29,9 +29,8 @@ export default {
       this.$store.dispatch("getAllEvents");
     },
     goTo(id) {
-      this.$store.dispatch("getEvent", id).then(() => {
-        this.$router.push("/event/" + id);
-      });
+      this.$store.dispatch("getEvent", id);
+      this.$router.push("/event/" + id);
     },
   },
   created() {
