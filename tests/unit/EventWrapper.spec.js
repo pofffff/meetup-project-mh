@@ -37,7 +37,6 @@ describe('EventWrapper', () => {
       },
       getAll = jest.fn(),
       wrapper = mount(EventWrapper, {
-        //localvue,
         methods: { getAll },
         mocks: { $store: mockStore },
         computed: {
@@ -60,7 +59,6 @@ describe('EventWrapper', () => {
       },
       id = '123';
     const wrapper = mount(EventWrapper, {
-      //localvue,
       mocks: { $store: mockStore },
       computed: {
         events: () => {
