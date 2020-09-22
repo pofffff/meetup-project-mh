@@ -22,4 +22,8 @@ export default {
   logoutSuccess(state) {
     state.isAuthenticated = false;
   },
+  getAllEventsSuccess(state, response) {
+    state.events = response.data;
+    console.log(state.events);
+  },
 };

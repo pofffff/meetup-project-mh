@@ -29,5 +29,5 @@ exports.addEvent = async (req, res) => {
 
 exports.getAllEvents = async (req, res) => {
   const events = await Event.find().populate('registred');
-  console.log(events);
+  res.send(events);
 };

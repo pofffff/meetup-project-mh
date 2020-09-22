@@ -1,21 +1,18 @@
 <template>
   <div class="home__wrapper">
-    <Main />
+    <Header />
+    <EventWrapper />
   </div>
 </template>
 
 <script>
-import LoginForm from "@/components/LoginForm";
-import NewUserForm from "@/components/NewUserForm";
-import Main from "@/components/Main";
+import Header from "@/components/Header";
+import EventWrapper from "@/components/EventWrapper";
 
 export default {
   name: "Home",
-  components: { Main, LoginForm, NewUserForm },
+  components: { Header, EventWrapper },
   methods: {},
-  created() {
-    this.$store.dispatch("getAllEvents");
-  },
 };
 </script>
 
@@ -24,9 +21,8 @@ export default {
 
 .home__wrapper {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
-  height: 100vh;
+  flex-direction: column;
+
+  max-width: 100vw;
 }
 </style>

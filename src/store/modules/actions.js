@@ -29,17 +29,6 @@ export default {
         throw Error('An error occurred when trying to register user');
       });
   },
-  async addEvent(ctx, event) {
-    const url = 'http://localhost:8080/event';
-    await axios
-      .post(url, event)
-      .then((response) => {
-        console.log(response.data.success);
-      })
-      .catch((error) => {
-        throw Error('Error adding event');
-      });
-  },
   async addProfileImage(ctx, formData) {
     const url = 'http://localhost:8080/user/image';
     fetch(url, {
@@ -55,13 +44,25 @@ export default {
         console.error('Error:', error);
       });
   },
-  async getAllEvents(ctx) {
+  async addEvent(ctx, event) {
+    const url = 'http://localhost:8080/event/add';
+    await axios
+      .post(url, event)
+      .then((response) => {
+        console.log(response.data.success);
+      })
+      .catch((error) => {
+        throw Error('Error adding event');
+      });
+  },
+  async getAllEvents({ commit }) {
     const url = 'http://localhost:8080/event/getAll';
 
     await axios
       .get(url)
       .then((response) => {
-        console.log(response.data.success);
+        console.log(response);
+        commit('getAllEventsSuccess', response);
       })
       .catch((error) => {
         throw Error('Error adding event');

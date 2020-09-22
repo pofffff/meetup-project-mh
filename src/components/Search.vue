@@ -28,7 +28,7 @@
   width: auto;
   justify-content: center;
   align-items: center;
-  height: 26em;
+  height: 22em;
 
   .search-field__section {
     display: flex;

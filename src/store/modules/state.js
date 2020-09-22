@@ -6,4 +6,5 @@ export default {
   isAuthenticated: false,
   token: localStorage.getItem('token') || '',
   user: {},
+  events: [],
 };

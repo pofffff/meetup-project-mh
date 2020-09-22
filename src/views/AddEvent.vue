@@ -6,7 +6,6 @@
         <li>
           <input type="text" placeholder="Name of event" v-model="name" />
         </li>
-
         <li>
           <input type="text" placeholder="City" v-model="city" />
         </li>
