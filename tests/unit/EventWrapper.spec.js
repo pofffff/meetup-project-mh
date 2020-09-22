@@ -53,7 +53,7 @@ describe('EventWrapper', () => {
     expect(eventElements.length).toBe(events.length);
   });
 
-  it('Should call dispatch getAllEvents at render', async () => {
+  it('Should call dispatch correctly', async () => {
     const mockStore = {
         state: { events },
         dispatch: jest.fn(),
