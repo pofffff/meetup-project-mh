@@ -2,6 +2,7 @@ import { mount } from '@vue/test-utils';
 import Vuex from 'vuex';
 import Vue from 'vue';
 import EventWrapper from '@/components/EventWrapper.vue';
+import actions from '@/store/modules/actions.js';
 Vue.use(Vuex);
 
 describe('EventWrapper', () => {
@@ -9,7 +10,7 @@ describe('EventWrapper', () => {
   beforeEach(() => {
     events = [
       {
-        _id: 'abc',
+        _id: '123',
         name: 'name',
         city: 'city',
         time: 'time',
@@ -19,7 +20,7 @@ describe('EventWrapper', () => {
         registred: [{ image: 'image' }],
       },
       {
-        _id: 'def',
+        _id: '456',
         name: 'name',
         city: 'city',
         time: 'time',
@@ -69,11 +70,12 @@ describe('EventWrapper', () => {
       stubs: { UserRegistredToEvent: true },
     });
 
-    // const eventElements = wrapper.findAll('.event');
-    // await eventElements.at(1).trigger('click');
-    // expect(mockStore.dispatch).toHaveBeenCalledWith('getEvent', id);
-    // Fungerar ej pga promise och vet ej hur jag löser det.
-
+    const eventElements = wrapper.findAll('.event');
+    await eventElements.at(0).trigger('click');
+    await Vue.nextTick();
     expect(mockStore.dispatch).toHaveBeenCalledWith('getAllEvents');
+    expect(mockStore.dispatch).toHaveBeenCalledWith('getEvent', id);
+
+    // En del röd error på grund av promise som jag inte förstått hur jag ska lösa än
   });
 });
