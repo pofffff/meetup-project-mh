@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 export default {
   async registerUser({ commit }, user) {
     const url = 'http://localhost:8080/user';
@@ -62,10 +61,27 @@ export default {
       .get(url)
       .then((response) => {
         console.log(response);
-        commit('getAllEventsSuccess', response);
+        commit('getAllEventsSuccess', response.data);
       })
       .catch((error) => {
         throw Error('Error adding event');
       });
+  },
+  getEvent({ commit }, id) {
+    return new Promise((resolve, reject) => {
+      const url = 'http://localhost:8080/event/getOne/' + id;
+
+      axios
+        .get(url, {}, { id: id })
+        .then((response) => {
+          commit('getEventSuccess', response.data);
+          resolve();
+        })
+        .catch((error) => {
+          reject();
+
+          throw Error('Error adding event');
+        });
+    });
   },
 };

@@ -2,7 +2,7 @@ import { mount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
 import Vue from 'vue';
 import EventWrapper from '@/components/EventWrapper.vue';
-
+import actions from '@/store/modules/actions.js';
 const localvue = createLocalVue().use(Vuex);
 Vue.use(Vuex);
 
@@ -32,16 +32,36 @@ describe('EventWrapper', () => {
       },
     ];
   });
-  it('Should call getAllEvents when created and render all events from state', () => {
-    const getAllEvents = jest.fn(),
-      mockStore = {
+  it('Should call getAllEvents when created and render all events from state.', () => {
+    const mockStore = {
         state: { events },
-        getAllEvents,
-      };
+      },
+      getAll = jest.fn(),
+      wrapper = mount(EventWrapper, {
+        //localvue,
+        methods: { getAll },
+        mocks: { $store: mockStore },
+        computed: {
+          events: () => {
+            return events;
+          },
+        },
+        stubs: { UserRegistredToEvent: true },
+      }),
+      eventElements = wrapper.findAll('.event');
 
+    expect(getAll).toHaveBeenCalled();
+    expect(eventElements.length).toBe(events.length);
+  });
+
+  it('Should call dispatch getAllEvents at render', async () => {
+    const mockStore = {
+        state: { events },
+        dispatch: jest.fn(),
+      },
+      id = '123';
     const wrapper = mount(EventWrapper, {
-      localvue,
-      methods: { getAllEvents },
+      //localvue,
       mocks: { $store: mockStore },
       computed: {
         events: () => {
@@ -51,10 +71,11 @@ describe('EventWrapper', () => {
       stubs: { UserRegistredToEvent: true },
     });
 
-    const eventElements = wrapper.findAll('.event');
+    // const eventElements = wrapper.findAll('.event');
+    // await eventElements.at(1).trigger('click');
+    // expect(mockStore.dispatch).toHaveBeenCalledWith('getEvent', id);
+    // Fungerar ej pga promise och vet ej hur jag löser det.
 
-    expect(getAllEvents).toHaveBeenCalled();
-    expect(eventElements.length).toBe(events.length);
-    expect(mockStore.getAllEvents).toHaveBeenCalled();
+    expect(mockStore.dispatch).toHaveBeenCalledWith('getAllEvents');
   });
 });

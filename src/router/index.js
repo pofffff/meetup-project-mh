@@ -4,7 +4,7 @@ import Home from '../views/Home.vue';
 import Login from '../views/Login.vue';
 import Profile from '../views/Profile.vue';
 import AddEvent from '../views/AddEvent.vue';
-import EventDetails from '../views/EventDetails.vue';
+import Event from '../views/Event.vue';
 import store from '../store';
 import axios from 'axios';
 
@@ -66,9 +66,9 @@ const routes = [
     },
   },
   {
-    path: '/event',
-    name: 'EventDetails',
-    component: EventDetails,
+    path: '/event/:id',
+    name: 'Event',
+    component: Event,
   },
 ];
 

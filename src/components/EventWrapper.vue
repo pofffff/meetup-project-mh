@@ -25,16 +25,17 @@ export default {
     }),
   },
   methods: {
-    getAllEvents() {
+    getAll() {
       this.$store.dispatch("getAllEvents");
     },
     goTo(id) {
-      //dispatch get event and router push
-      console.log(id);
+      this.$store.dispatch("getEvent", id).then(() => {
+        this.$router.push("/event/" + id);
+      });
     },
   },
   created() {
-    this.getAllEvents();
+    this.getAll();
   },
 };
 </script>

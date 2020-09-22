@@ -14,7 +14,6 @@ export default {
   userRequestSuccess(state, user) {
     state.isAuthenticated = true;
     state.user = user;
-    console.log(user);
   },
   requestUserError(state, error) {
     console.log('Error: ' + error);
@@ -22,8 +21,10 @@ export default {
   logoutSuccess(state) {
     state.isAuthenticated = false;
   },
-  getAllEventsSuccess(state, response) {
-    state.events = response.data;
-    console.log(state.events);
+  getAllEventsSuccess(state, data) {
+    state.events = data;
+  },
+  getEventSuccess(state, data) {
+    state.event = data;
   },
 };

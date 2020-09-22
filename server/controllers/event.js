@@ -31,3 +31,12 @@ exports.getAllEvents = async (req, res) => {
   const events = await Event.find().populate('registred');
   res.send(events);
 };
+
+exports.getEvent = async (req, res) => {
+  const event = await Event.findOne({ _id: req.params.id });
+  if (event) {
+    res.send(event);
+  } else {
+    res.send({ success: false });
+  }
+};
