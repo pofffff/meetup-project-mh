@@ -1,9 +1,8 @@
-import { shallowMount, mount, createLocalVue } from '@vue/test-utils';
+import { mount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
 import Vue from 'vue';
 import EventWrapper from '@/components/EventWrapper.vue';
-import Event from '@/components/Event.vue';
-import UserRegistredToEvent from '@/components/UserRegistredToEvent.vue';
+
 const localvue = createLocalVue().use(Vuex);
 Vue.use(Vuex);
 
