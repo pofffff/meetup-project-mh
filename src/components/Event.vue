@@ -44,12 +44,16 @@ export default {
   background: $color_dark;
   color: $white;
   border-radius: 20px;
+  margin: 20px;
+  padding: 20px;
 
   .image__container {
-    width: 350px;
+    display: flex;
+    align-items: center;
+    width: 100%;
     height: 250px;
     img {
-      width: 350px;
+      width: 100%;
       height: 250px;
       border-radius: 20px 20px 0 0;
       object-fit: cover;
