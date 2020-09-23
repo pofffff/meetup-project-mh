@@ -53,12 +53,18 @@ describe('EventWrapper', () => {
   });
 
   it('Should call dispatch correctly', async () => {
+    const localVue = createLocalVue().use(VueRouter);
+    const router = new VueRouter({
+      routes: [{ path: '/fake', name: 'fake' }],
+    });
     const id = '123',
       mockStore = {
         state: { events },
         dispatch: jest.fn(),
       },
       wrapper = mount(EventWrapper, {
+        localVue,
+        router,
         mocks: { $store: mockStore },
         computed: {
           events: () => {

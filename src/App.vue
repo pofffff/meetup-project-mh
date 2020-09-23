@@ -50,6 +50,8 @@ html {
 }
 
 #app {
+  display: flex;
+  flex-direction: column;
   font-family: $font;
   color: $black;
 }
