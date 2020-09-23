@@ -1,17 +1,17 @@
 <template>
   <div class="home__wrapper">
     <Header />
-    <EventWrapper />
+    <EventsWrapper />
   </div>
 </template>
 
 <script>
 import Header from "@/components/Header";
-import EventWrapper from "@/components/EventWrapper";
+import EventsWrapper from "@/components/EventsWrapper";
 
 export default {
   name: "Home",
-  components: { Header, EventWrapper },
+  components: { Header, EventsWrapper },
   methods: {},
 };
 </script>

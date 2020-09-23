@@ -1,8 +1,5 @@
 import { mount, createLocalVue } from '@vue/test-utils';
-import Vuex from 'vuex';
-import Vue from 'vue';
-import EventWrapper from '@/components/EventWrapper.vue';
-import routes from '@/router/index.js';
+import EventsWrapper from '@/components/EventsWrapper.vue';
 import VueRouter from 'vue-router';
 
 describe('EventWrapper', () => {
@@ -36,7 +33,7 @@ describe('EventWrapper', () => {
         state: { events },
       },
       getAll = jest.fn(),
-      wrapper = mount(EventWrapper, {
+      wrapper = mount(EventsWrapper, {
         methods: { getAll },
         mocks: { $store: mockStore },
         computed: {
@@ -62,7 +59,7 @@ describe('EventWrapper', () => {
         state: { events },
         dispatch: jest.fn(),
       },
-      wrapper = mount(EventWrapper, {
+      wrapper = mount(EventsWrapper, {
         localVue,
         router,
         mocks: { $store: mockStore },
