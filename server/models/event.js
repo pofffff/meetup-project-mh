@@ -34,12 +34,28 @@ const eventSchema = new mongoose.Schema({
     ref: 'User',
     required: true,
   },
-  registered: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
-    },
-  ],
+  registered: {
+    type: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+      },
+    ],
+    default: [],
+  },
+  comments: {
+    type: [
+      {
+        written_by: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'User',
+          required: true,
+        },
+        comment: { type: String, required: true },
+      },
+    ],
+    default: [],
+  },
 });
 
 module.exports = mongoose.model('Event', eventSchema);

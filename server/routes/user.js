@@ -3,7 +3,7 @@ const { Router } = require('express'),
   userController = require('../controllers/user'),
   upload = require('../middleware/upload');
 
-router.route('/').post(userController.registerUser);
+router.route('/register').post(userController.registerUser);
 
 router
   .route('/image')

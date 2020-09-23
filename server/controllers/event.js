@@ -32,9 +32,31 @@ exports.getAllEvents = async (req, res) => {
 };
 
 exports.getEvent = async (req, res) => {
-  const event = await Event.findOne({ _id: req.params.id });
+  const event = await Event.findOne({ _id: req.params.id }).populate(
+    'comments.written_by'
+  );
   if (event) {
     res.send(event);
+  } else {
+    res.send({ success: false });
+  }
+};
+
+exports.addComment = async (req, res) => {
+  const addEvent = await Event.findOneAndUpdate(
+    { _id: req.body.event_id },
+    {
+      $push: {
+        comments: {
+          written_by: req.decoded.user._id,
+          comment: req.body.comment,
+        },
+      },
+    }
+  );
+  console.log(addEvent);
+  if (addEvent) {
+    res.send({ success: true, event_id: req.body.event_id });
   } else {
     res.send({ success: false });
   }

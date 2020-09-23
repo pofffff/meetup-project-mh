@@ -1,7 +1,7 @@
 import axios from 'axios';
 export default {
   async registerUser({ commit }, user) {
-    const url = '/user';
+    const url = '/user/register';
     await axios
       .post(
         url,
@@ -36,9 +36,7 @@ export default {
       headers: { authorization: localStorage.getItem('token') },
     })
       .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-      })
+      .then((data) => {})
       .catch((error) => {
         console.error('Error:', error);
       });
@@ -60,7 +58,6 @@ export default {
     await axios
       .get(url)
       .then((response) => {
-        console.log(response);
         commit('getAllEventsSuccess', response.data);
       })
       .catch((error) => {
@@ -77,6 +74,36 @@ export default {
       })
       .catch((error) => {
         throw Error('Error adding event');
+      });
+  },
+  async addComment({ commit, dispatch }, data) {
+    const url = '/event/addComment';
+    await axios
+      .post(url, { event_id: data.event_id, comment: data.comment })
+      .then((response) => {
+        if (response.data.success === true) {
+          dispatch('getEvent', response.data.event_id);
+        }
+      })
+      .catch((error) => {
+        console.log('Error: ' + error);
+        commit('commentError');
+        throw Error('An error occurred when trying to add comment');
+      });
+  },
+  async addUserToEvent({ commit, dispatch }, id) {
+    const url = '/event/addUser';
+    await axios
+      .post(url, { event_id: id })
+      .then((response) => {
+        if (response.data.success === true) {
+          console.log('success');
+        }
+      })
+      .catch((error) => {
+        console.log('Error: ' + error);
+        commit('addUserToEventError');
+        throw Error('An error occurred when trying to add user to event');
       });
   },
 };

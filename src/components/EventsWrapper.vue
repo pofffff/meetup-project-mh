@@ -49,6 +49,7 @@ export default {
 
 h1 {
   color: $white;
+  font-size: 32px;
 }
 
 li {
