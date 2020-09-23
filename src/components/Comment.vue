@@ -35,6 +35,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/assets/scss/variables";
+@import "@/assets/scss/style_mixins";
 
 .comment__wrapper {
   display: flex;
@@ -51,12 +52,11 @@ export default {
       width: 50px;
       height: 50px;
       margin-right: 2rem;
+      background: $white;
+      border-radius: 100%;
 
       img {
-        border-radius: 100%;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+        @include profile_image;
       }
     }
   }

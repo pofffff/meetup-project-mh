@@ -28,7 +28,7 @@ export default {
         throw Error('An error occurred when trying to register user');
       });
   },
-  async addProfileImage(ctx, formData) {
+  async addProfileImage({ dispatch }, formData) {
     const url = '/user/image';
     fetch(url, {
       method: 'POST',
@@ -36,7 +36,9 @@ export default {
       headers: { authorization: localStorage.getItem('token') },
     })
       .then((response) => response.json())
-      .then((data) => {})
+      .then((data) => {
+        dispatch('userRequest');
+      })
       .catch((error) => {
         console.error('Error:', error);
       });
@@ -97,7 +99,7 @@ export default {
       .post(url, { event_id: id })
       .then((response) => {
         if (response.data.success === true) {
-          console.log('success');
+          dispatch('getEvent', response.data.event_id);
         }
       })
       .catch((error) => {

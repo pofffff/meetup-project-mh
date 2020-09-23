@@ -74,6 +74,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/assets/scss/variables";
+@import "@/assets/scss/style_mixins";
 
 .user-details__wrapper {
   width: 60%;
@@ -102,10 +103,7 @@ export default {
       }
 
       img {
-        width: 100%;
-        height: 100%;
-        border-radius: 100%;
-        object-fit: cover;
+        @include profile_image;
       }
     }
 

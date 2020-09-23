@@ -1,4 +1,5 @@
 const Event = require('../models/event'),
+  User = require('../models/user'),
   auth = require('../middleware/auth'),
   getUser = require('./modules/getUser');
 
@@ -56,6 +57,30 @@ exports.addComment = async (req, res) => {
   );
   console.log(addEvent);
   if (addEvent) {
+    res.send({ success: true, event_id: req.body.event_id });
+  } else {
+    res.send({ success: false });
+  }
+};
+
+exports.addUserToEvent = async (req, res) => {
+  const addUser = await Event.findOneAndUpdate(
+    { _id: req.body.event_id },
+    {
+      $addToSet: {
+        registered: req.decoded.user._id,
+      },
+    }
+  );
+  const updateUser = await User.findOneAndUpdate(
+    { _id: req.decoded.user._id },
+    {
+      $addToSet: {
+        attend_to: req.body.event_id,
+      },
+    }
+  );
+  if (addUser && updateUser) {
     res.send({ success: true, event_id: req.body.event_id });
   } else {
     res.send({ success: false });

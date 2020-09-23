@@ -18,9 +18,11 @@
         <i class="fas fa-info"></i>
         <p>{{event.description}}</p>
       </li>
-      <li v-for="(user, index) in event.registered" :key="index">
-        <UserRegisteredToEvent :user="user" />
-      </li>
+      <div class="registered-users__container">
+        <li v-for="(user, index) in event.registered" :key="index">
+          <UserRegisteredToEvent :user="user" />
+        </li>
+      </div>
     </section>
   </div>
 </template>
@@ -73,6 +75,15 @@ export default {
 
       p {
         max-height: 75px;
+        overflow: hidden;
+      }
+    }
+
+    .registered-users__container {
+      display: flex;
+      margin-top: 10px;
+      li {
+        margin-right: -15px;
         overflow: hidden;
       }
     }
