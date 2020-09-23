@@ -8,7 +8,7 @@ exports.addEvent = async (req, res) => {
   console.log(req.decoded);
   const user = await getUser.by_id(req.decoded.user._id);
 
-  try {
+  if (user) {
     let event = req.body;
     event = new Event({
       name: event.name,
@@ -22,7 +22,7 @@ exports.addEvent = async (req, res) => {
     });
     event.save();
     res.send({ success: true });
-  } catch (error) {
+  } else {
     res.send({ success: false });
   }
 };

@@ -34,7 +34,7 @@ describe('store - auth', () => {
 
     await auth.actions.loginRequest({ commit, dispatch }, headers);
 
-    expect(url).toBe('http://localhost:8080/authenticate/loginRequest');
+    expect(url).toBe('/authenticate/loginRequest');
     expect(headers).toEqual({ email, password });
   });
 

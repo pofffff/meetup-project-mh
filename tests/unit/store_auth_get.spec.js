@@ -9,8 +9,13 @@ let url = '',
 
 jest.mock('axios', () => ({
   get: (_url) => {
-    const response = { data: { success: true, token: 'token' } };
-
+    let response = {
+      data: {
+        success: true,
+        token: 'token',
+        user: { name: 'name', email: 'email' },
+      },
+    };
     return new Promise((resolve) => {
       if (mockError) throw Error('Mock error');
 
@@ -22,8 +27,27 @@ jest.mock('axios', () => ({
 
 describe('store - auth', () => {
   it('Should run userRequest with correct params', async () => {
-    await auth.actions.userRequest();
+    const commit = jest.fn();
+    await auth.actions.userRequest({ commit });
 
-    expect(url).toBe('http://localhost:8080/authenticate/userRequest');
+    expect(url).toBe('/authenticate/userRequest');
+  });
+
+  it('Should commit userRequestSuccess if request is ok', async () => {
+    const commit = jest.fn(),
+      user = { name: 'name', email: 'email' };
+
+    await auth.actions.userRequest({ commit });
+
+    expect(commit).toHaveBeenCalledWith('userRequestSuccess', user);
+  });
+
+  it('should throw error if request fails', async () => {
+    mockError = true;
+    const commit = jest.fn();
+
+    await auth.actions.userRequest({ commit });
+
+    expect(commit).toHaveBeenCalledWith('userRequestError');
   });
 });

@@ -15,11 +15,11 @@ const auth = {
         )
         .then((response) => {
           console.log(response);
-          const token = response.data.token;
-          localStorage.setItem('token', token);
+          commit('authenticationSuccess', response.data.token);
         })
         .catch((error) => {
-          throw Error('An error occurred when trying to authenticate');
+          console.log(error);
+          commit('wrongCredentials');
         });
     },
     userRequest({ commit }) {
@@ -28,39 +28,18 @@ const auth = {
           .get('/authenticate/userRequest')
           .then((response) => {
             if (response.data.success === true) {
-              localStorage.setItem('token', response.data.token);
+              commit('authenticationSuccess', response.data.token);
               commit('userRequestSuccess', response.data.user);
-              resolve();
             }
           })
           .catch((error) => {
-            throw Error('An error occurred when trying to authenticate');
+            commit('authenticationError');
           });
-      });
-    },
-    authenticate({ ctx, state }) {
-      return new Promise((resolve, reject) => {
-        axios
-          .get('/authenticate')
-          .then((response) => {
-            if (response.data.success === true) {
-              localStorage.setItem('token', response.data.token);
-              resolve();
-            }
-          })
-          .catch((error) => {});
-      });
-    },
-    // Kanske flytta till component
-    logoutUser(ctx) {
-      return new Promise((resolve, reject) => {
-        delete axios.defaults.headers.common['Authorization'];
-        localStorage.removeItem('token');
-        ctx.commit('logoutSuccess');
         resolve();
-      }).catch((error) => {
-        reject(error);
       });
+    },
+    async logoutUser(ctx) {
+      await ctx.commit('logoutSuccess');
     },
   },
 };

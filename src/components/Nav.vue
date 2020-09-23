@@ -31,10 +31,8 @@ export default {
       }
     },
     logout() {
-      //if logout success, promise will resolve router.push
-      this.$store.dispatch("logoutUser").then(() => {
-        this.goTo("/");
-      });
+      this.$store.dispatch("logoutUser");
+      this.goTo("/");
     },
   },
 };
@@ -42,6 +40,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/assets/scss/variables";
+@import "@/assets/scss/style_mixins";
 
 .nav__wrapper {
   position: fixed;
@@ -62,10 +61,7 @@ export default {
 
     li:hover {
       color: $color_light;
-      animation-name: pop;
-      transform: perspective(1px) translateZ(0);
-      animation-iteration-count: 1;
-      animation-duration: 0.2s;
+      @include pop;
     }
   }
 }

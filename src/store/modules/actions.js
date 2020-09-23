@@ -40,17 +40,21 @@ export default {
         dispatch('userRequest');
       })
       .catch((error) => {
+        localStorage.removeItem('token');
+        commit('authenticationError');
         console.error('Error:', error);
       });
   },
-  async addEvent(ctx, event) {
+  async addEvent({ commit }, event) {
     const url = '/event/add';
     await axios
       .post(url, event)
       .then((response) => {
-        console.log(response.data.success);
+        console.log(response);
+        commit('addEventResponse', response.data.success);
       })
       .catch((error) => {
+        commit('authenticationError');
         throw Error('Error adding event');
       });
   },
@@ -75,7 +79,7 @@ export default {
         commit('getEventSuccess', response.data);
       })
       .catch((error) => {
-        throw Error('Error adding event');
+        throw Error('Error getting event');
       });
   },
   async addComment({ commit, dispatch }, data) {
@@ -88,8 +92,7 @@ export default {
         }
       })
       .catch((error) => {
-        console.log('Error: ' + error);
-        commit('commentError');
+        commit('authenticationError');
         throw Error('An error occurred when trying to add comment');
       });
   },
@@ -103,8 +106,7 @@ export default {
         }
       })
       .catch((error) => {
-        console.log('Error: ' + error);
-        commit('addUserToEventError');
+        commit('authenticationError');
         throw Error('An error occurred when trying to add user to event');
       });
   },

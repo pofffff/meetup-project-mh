@@ -1,6 +1,6 @@
 <template>
   <div class="event__wrapper">
-    <h1>{{event.name}}</h1>
+    <h1>{{ event.name }}</h1>
     <section class="event__container">
       <div class="image__container">
         <img :src="event.image" alt />
@@ -8,25 +8,30 @@
       <ul class="event-details__list">
         <li>
           <i class="fas fa-map-marker-alt"></i>
-          <p class="bold">{{event.city}}</p>
+          <div class="location__container">
+            <p>{{ event.adress }}</p>
+            <p>{{ event.city }}</p>
+          </div>
         </li>
-        <li>
+        <!--         <li>
           <i class="fas fa-map-marked-alt"></i>
-          <p>{{event.adress}}</p>
-        </li>
+          
+        </li> -->
         <li>
           <i class="far fa-calendar-alt"></i>
-          <p>{{event.date}} - {{event.time}}</p>
+          <p>{{ event.date }} - {{ event.time }}</p>
         </li>
         <li>
           <i class="fas fa-info"></i>
-          <p>{{event.description}}</p>
+          <p>{{ event.description }}</p>
         </li>
         <li>
           <i class="fas fa-child"></i>
           <div>
-            <p>{{event.registered.length}} registered</p>
-            <button @click="addComing(event._id)" class="coming__action">I'm coming</button>
+            <p>{{ event.registered.length }} registered</p>
+            <button @click="addComing(event._id)" class="coming__action">
+              I'm coming
+            </button>
           </div>
         </li>
       </ul>
@@ -40,7 +45,9 @@
       </ul>
       <section class="add-comment__container">
         <input v-model="add_comment" type="textarea" maxlength="150" />
-        <button @click="addComment(event._id)" class="add-comment__action">Add comment</button>
+        <button @click="addComment(event._id)" class="add-comment__action">
+          Add comment
+        </button>
       </section>
     </section>
   </div>
@@ -126,7 +133,7 @@ export default {
       li {
         display: grid;
         grid-template-areas: "left-column right-column";
-        grid-template-columns: 50px 470px;
+        grid-template-columns: 50px 100%;
         font-size: 1.2rem;
         margin: 4px 0;
 
@@ -141,9 +148,15 @@ export default {
           grid-area: right-column;
         }
 
-        .bold {
+        .location__container {
+          grid-area: right-column;
+          display: flex;
+          align-items: center;
           font-weight: 700;
           font-size: 1.5rem;
+          p {
+            margin-right: 0.5rem;
+          }
         }
       }
 

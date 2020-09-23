@@ -20,12 +20,14 @@
       </div>
     </section>
     <section class="right">
-      <h4>{{user.name}}</h4>
+      <h4>{{ user.name }}</h4>
       <section class="user-stats__section">
-        <p>{{user.attend_to.length}} events attended</p>
-        <p>{{user.comments_written}} comments written</p>
+        <p>{{ user.attend_to.length }} events attended</p>
+        <p>{{ user.comments_written }} comments written</p>
       </section>
-      <button class="add-event__button" @click="goTo('/addevent')">Add event</button>
+      <button class="add-event__button" @click="goTo('/addevent')">
+        Add event
+      </button>
     </section>
   </div>
 </template>
@@ -95,11 +97,16 @@ export default {
 
       .fa-cog {
         z-index: 1;
-        position: absolute;
+        position: fixed;
         color: $white;
         cursor: pointer;
-        font-size: 15px;
+        font-size: 30px;
         margin: 10px;
+        color: $color_light;
+      }
+
+      .fa-cog:hover {
+        @include pop;
       }
 
       img {
@@ -152,6 +159,12 @@ export default {
       text-transform: uppercase;
       cursor: pointer;
     }
+  }
+}
+
+@keyframes pop {
+  50% {
+    transform: scale(1.1);
   }
 }
 </style>

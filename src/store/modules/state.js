@@ -4,7 +4,7 @@ export default {
   emailExists: false,
   errorSavingUser: false,
   isAuthenticated: false,
-  token: localStorage.getItem('token') || '',
+  wrongCredentials: false,
   user: {},
   events: [],
   event: {},

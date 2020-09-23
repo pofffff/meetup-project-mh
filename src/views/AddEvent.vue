@@ -21,7 +21,11 @@
       </ul>
       <ul class="form-right__ul">
         <li>
-          <textarea maxlength="200" placeholder="Description" v-model="description"></textarea>
+          <textarea
+            maxlength="200"
+            placeholder="Description"
+            v-model="description"
+          ></textarea>
         </li>
         <div class>
           <li>
@@ -35,6 +39,8 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   data: () => {
     return {
@@ -46,6 +52,13 @@ export default {
       description: "",
       time: "",
     };
+  },
+  computed: {
+    ...mapState({
+      isAuthenticated: (state) => {
+        return state.isAuthenticated;
+      },
+    }),
   },
   methods: {
     addEvent() {
@@ -61,6 +74,11 @@ export default {
 
       if (Object.keys(event).some((key) => event[key] === "") === false) {
         this.$store.dispatch("addEvent", event);
+        if (this.isAuthenticated === true) {
+          this.$router.push("/profile");
+        } else {
+          this.$router.push("/login");
+        }
       }
     },
   },

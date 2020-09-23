@@ -4,10 +4,10 @@
       <div class="img__container">
         <img :src="require(`../../server/uploads/${profileImage}`)" alt />
       </div>
-      <h4>{{comment.written_by.name}}</h4>
+      <h4>{{ comment.written_by.name }}</h4>
     </div>
     <div class="bottom">
-      <p>{{comment.comment}}</p>
+      <p>{{ comment.comment }}</p>
     </div>
   </div>
 </template>
@@ -23,7 +23,6 @@ export default {
   computed: {
     profileImage() {
       if (this.comment.written_by.image) {
-        console.log("here");
         return this.comment.written_by.image;
       } else {
         return this.defaultImage;

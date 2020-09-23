@@ -22,22 +22,26 @@ exports.loginRequest = async (req, res) => {
 
   await getUser
     .byEmail(email)
-    .then((user) => {
-      const samePwd = bcrypt.compare(password, user.password);
-      if (!samePwd) {
-        res.status(403);
+    .then(async (user) => {
+      if (user) {
+        const samePwd = await bcrypt.compare(password, user.password);
+        if (!samePwd) {
+          res.status(403);
+        } else {
+          const token = jwt.sign({ user }, `${process.env.SECRET}`, {
+            expiresIn: '15m',
+          });
+          res.json({
+            success: true,
+            token: token,
+          });
+        }
       } else {
-        const token = jwt.sign({ user }, `${process.env.SECRET}`, {
-          expiresIn: '15m',
-        });
-        res.json({
-          success: true,
-          token: token,
-        });
+        res.status(403);
       }
     })
     .catch((err) => {
-      console.log('Error authenticating user: ', err);
+      res.status(403);
     });
 };
 
@@ -53,10 +57,9 @@ exports.userRequest = async (req, res) => {
         user: user,
         token: token,
       });
-      console.log(user);
     })
     .catch((error) => {
       console.log(error);
-      res.send(error);
+      res.send({ success: false, error: error });
     });
 };
