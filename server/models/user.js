@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -9,13 +8,26 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  festivals: {
-    type: String,
-    required: true,
-  },
   password: {
     type: String,
     required: true,
+  },
+  image: {
+    type: String,
+    ref: 'GridFs',
+    required: false,
+  },
+  attend_to: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Event',
+      default: 0,
+    },
+  ],
+  comments_written: {
+    type: Number,
+    required: false,
+    default: 0,
   },
 });
 

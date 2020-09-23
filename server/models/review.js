@@ -1,19 +1,20 @@
 const mongoose = require('mongoose'),
-  Timestamps = require('mongoose-timestamp'),
-  festivalSchema = new mongoose.Schema({
+  commentSchema = new mongoose.Schema({
     author: {
+      type: mongoose.Types.Schema.ObjectId,
+      ref: "User",
+      required: true
+    },
+    event: {
+      type: mongoose.Types.Schema.ObjectId,
+      ref: "Event",
+      required: true
+    },
+    comment: {
       type: String,
       required: true,
-    },
-    description: {
-      type: String,
-      required: true,
-    },
-    date: {
-      type: Date,
-      default: Date.now,
     },
     Timestamps: true,
   });
 
-module.exports = mongoose.model('Festival', festivalSchema);
+module.exports = mongoose.model('Comment', commentSchema);

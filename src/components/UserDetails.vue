@@ -1,0 +1,159 @@
+<template>
+  <div class="user-details__wrapper">
+    <section class="left">
+      <div class="img__container">
+        <i @click="showFileUpload" class="fas fa-cog"></i>
+        <img :src="require(`../../server/uploads/${profileImage}`)" alt />
+      </div>
+      <div class="upload-file__container">
+        <input
+          v-if="ifFileUpload"
+          @change="imagePicker"
+          ref="file"
+          type="file"
+          name="file"
+          id="input-files"
+          class="new-image__input"
+          single
+        />
+        <button v-if="ifFileUpload" @click="uploadFile">Upload</button>
+      </div>
+    </section>
+    <section class="right">
+      <h4>{{user.name}}</h4>
+      <section class="user-stats__section">
+        <p>{{user.attend_to.length}} events attended</p>
+        <p>{{user.comments_written}} comments written</p>
+      </section>
+      <button class="add-event__button" @click="goTo('/addevent')">Add event</button>
+    </section>
+  </div>
+</template>
+
+<script>
+export default {
+  props: { user: Object },
+  data: () => {
+    return {
+      ifFileUpload: false,
+      defaultImage: "default_img.png",
+    };
+  },
+  computed: {
+    profileImage() {
+      if (this.user.image) {
+        return this.user.image;
+      } else {
+        return this.defaultImage;
+      }
+    },
+  },
+
+  methods: {
+    showFileUpload() {
+      this.ifFileUpload = !this.ifFileUpload;
+    },
+    imagePicker() {
+      this.file = this.$refs.file.files[0];
+      console.log(this.file);
+    },
+    uploadFile() {
+      let formData = new FormData();
+      formData.append("profile-image", this.file);
+      console.log(formData);
+      this.$store.dispatch("addProfileImage", formData);
+    },
+    goTo(path) {
+      if (this.$route.path !== path) {
+        this.$router.push(path);
+      }
+    },
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+@import "@/assets/scss/variables";
+
+.user-details__wrapper {
+  width: 60%;
+  height: 300px;
+  border-radius: 20px;
+  padding: 3rem;
+  display: flex;
+  align-items: center;
+  background: $color_dark;
+
+  .left {
+    width: 350px;
+    .img__container {
+      align-self: center;
+      width: 200px;
+      height: 200px;
+      border-radius: 100%;
+
+      .fa-cog {
+        z-index: 1;
+        position: absolute;
+        color: $white;
+        cursor: pointer;
+        font-size: 15px;
+        margin: 10px;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        border-radius: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .upload-file__container {
+      display: flex;
+      margin-left: auto;
+      align-items: center;
+
+      button {
+        align-self: flex-start;
+        background: $color_light;
+        color: $white;
+        border: none;
+        border-radius: 6px;
+        padding: 6px 16px;
+        margin-left: 1rem;
+        text-transform: uppercase;
+      }
+    }
+  }
+
+  .right {
+    width: 100%;
+    height: 100%;
+    text-align: right;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    h4 {
+      font-size: 2rem;
+    }
+
+    .user-stats__section {
+      p {
+        font-size: 1rem;
+      }
+    }
+
+    .add-event__button {
+      align-self: flex-end;
+      background: $color_light;
+      color: $white;
+      border: none;
+      border-radius: 6px;
+      padding: 6px 16px;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+  }
+}
+</style>
