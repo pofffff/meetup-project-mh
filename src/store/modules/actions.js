@@ -1,7 +1,7 @@
 import axios from 'axios';
 export default {
   async registerUser({ commit }, user) {
-    const url = 'http://localhost:8080/user';
+    const url = '/user';
     await axios
       .post(
         url,
@@ -29,7 +29,7 @@ export default {
       });
   },
   async addProfileImage(ctx, formData) {
-    const url = 'http://localhost:8080/user/image';
+    const url = '/user/image';
     fetch(url, {
       method: 'POST',
       body: formData,
@@ -44,7 +44,7 @@ export default {
       });
   },
   async addEvent(ctx, event) {
-    const url = 'http://localhost:8080/event/add';
+    const url = '/event/add';
     await axios
       .post(url, event)
       .then((response) => {
@@ -55,7 +55,7 @@ export default {
       });
   },
   async getAllEvents({ commit }) {
-    const url = 'http://localhost:8080/event/getAll';
+    const url = '/event/getAll';
 
     await axios
       .get(url)
@@ -68,7 +68,7 @@ export default {
       });
   },
   async getEvent({ commit }, id) {
-    const url = 'http://localhost:8080/event/getOne/' + id;
+    const url = '/event/getOne/' + id;
 
     await axios
       .get(url, {}, { id: id })

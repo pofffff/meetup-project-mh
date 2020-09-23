@@ -4,7 +4,7 @@ const auth = {
     async loginRequest({ commit, dispatch }, credentials) {
       await axios
         .post(
-          'http://localhost:8080/authenticate/loginRequest',
+          '/authenticate/loginRequest',
           {},
           {
             headers: {
@@ -25,7 +25,7 @@ const auth = {
     userRequest({ commit }) {
       return new Promise((resolve, reject) => {
         axios
-          .get('http://localhost:8080/authenticate/userRequest')
+          .get('/authenticate/userRequest')
           .then((response) => {
             if (response.data.success === true) {
               localStorage.setItem('token', response.data.token);
@@ -41,7 +41,7 @@ const auth = {
     authenticate({ ctx, state }) {
       return new Promise((resolve, reject) => {
         axios
-          .get('http://localhost:8080/authenticate')
+          .get('/authenticate')
           .then((response) => {
             if (response.data.success === true) {
               localStorage.setItem('token', response.data.token);
