@@ -41,8 +41,7 @@ select:-webkit-autofill:focus {
 }
 
 html {
-  background: url("./assets/img/jellyfish.background.jpg") no-repeat center
-    center fixed;
+  background: url("./assets/img/background.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;

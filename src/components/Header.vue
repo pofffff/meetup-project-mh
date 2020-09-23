@@ -30,17 +30,17 @@ export default {
     display: flex;
     flex-direction: column;
     color: $white;
-    align-self: flex-end;
-    margin-right: 8rem;
-    margin-top: 6rem;
+    align-self: flex-start;
+    margin-left: 8rem;
+    margin-top: 8rem;
 
     h1 {
-      font-size: 8em;
+      font-size: 6em;
       line-height: 1;
     }
 
     p:nth-of-type(2) {
-      font-size: 3.5em;
+      font-size: 3em;
       font-weight: 900;
       line-height: 1;
     }

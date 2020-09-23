@@ -6,28 +6,29 @@
     <section class="event-details__container">
       <h3>{{event.name}}</h3>
       <li>
-        <i class="far fa-calendar-alt"></i>
-        <p>{{event.date}} - {{event.time}}</p>
-      </li>
-      <li>
         <i class="fas fa-map-marker-alt"></i>
         <p>{{event.city}}</p>
       </li>
       <li>
+        <i class="far fa-calendar-alt"></i>
+        <p>{{event.date}} - {{event.time}}</p>
+      </li>
+
+      <li>
         <i class="fas fa-info"></i>
         <p>{{event.description}}</p>
       </li>
-      <li v-for="(user, index) in event.registred" :key="index">
-        <UserRegistredToEvent :user="user" />
+      <li v-for="(user, index) in event.registered" :key="index">
+        <UserRegisteredToEvent :user="user" />
       </li>
     </section>
   </div>
 </template>
 
 <script>
-import UserRegistredToEvent from "@/components/UserRegistredToEvent";
+import UserRegisteredToEvent from "@/components/UserRegisteredToEvent";
 export default {
-  components: { UserRegistredToEvent },
+  components: { UserRegisteredToEvent },
   props: { event: Object },
   data: () => {
     return {};

@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const eventSchema = new mongoose.Schema({
   name: {
@@ -31,15 +31,15 @@ const eventSchema = new mongoose.Schema({
   },
   added_by: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    ref: 'User',
     required: true,
   },
-  registred: [
+  registered: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      ref: 'User',
     },
   ],
 });
 
-module.exports = mongoose.model("Event", eventSchema);
+module.exports = mongoose.model('Event', eventSchema);

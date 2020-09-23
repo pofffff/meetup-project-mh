@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: "UserRegistredToEvent",
+  name: "UserRegisteredToEvent",
   props: { user: Object },
   data: () => {
     return {
