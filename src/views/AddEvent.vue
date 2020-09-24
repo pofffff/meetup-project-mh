@@ -4,7 +4,12 @@
     <section class="form__wrapper">
       <ul class="form-left__ul">
         <li>
-          <input type="text" placeholder="Name of event" v-model="name" />
+          <input
+            type="text"
+            placeholder="Name of event"
+            maxlength="25"
+            v-model="name"
+          />
         </li>
         <li>
           <input type="text" placeholder="City" v-model="city" />
@@ -107,6 +112,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/assets/scss/variables";
+@import "@/assets/scss/style_mixins";
 
 .add-event__wrapper {
   display: flex;
@@ -182,15 +188,11 @@ export default {
       }
 
       button {
-        background: $color_light;
-        color: $white;
-        border: none;
+        @include button;
         width: 100%;
-        height: 2.3em;
-        align-self: flex-end;
         border-radius: 10px;
-        margin-top: 2em;
-        font-size: 1rem;
+        margin-bottom: auto;
+        margin-top: 3.5rem;
       }
     }
   }
