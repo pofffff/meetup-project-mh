@@ -39,7 +39,6 @@ export default {
         dispatch('userRequest');
       })
       .catch((error) => {
-        console.log(error);
         commit('authenticationError');
       });
   },
@@ -51,7 +50,6 @@ export default {
         commit('addEventResponse', response.data.success);
       })
       .catch((error) => {
-        console.log(error);
         commit('authenticationError');
       });
   },
@@ -89,7 +87,6 @@ export default {
         }
       })
       .catch((error) => {
-        console.log(error);
         commit('authenticationError');
       });
   },
@@ -103,7 +100,6 @@ export default {
         }
       })
       .catch((error) => {
-        console.log(error);
         commit('authenticationError');
       });
   },

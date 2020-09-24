@@ -54,8 +54,8 @@ describe('store - addEvent', () => {
     const commit = jest.fn();
     mockError = true;
 
-    await expect(actions.addEvent({ commit }, {})).rejects.toThrow(
-      'Error adding event'
-    );
+    await actions.addEvent({ commit }, {});
+
+    expect(commit).toHaveBeenCalledWith('authenticationError');
   });
 });
