@@ -95,7 +95,7 @@ export default {
       display: flex;
       margin-top: 15px;
       li {
-        margin-right: -15px;
+        margin-right: 0;
       }
     }
   }
