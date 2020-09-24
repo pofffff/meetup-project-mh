@@ -40,8 +40,8 @@ exports.loginRequest = async (req, res) => {
         res.status(403);
       }
     })
-    .catch((error) => {
-      res.send(error);
+    .catch((err) => {
+      res.send(err);
     });
 };
 
@@ -61,8 +61,8 @@ exports.userRequest = async (req, res) => {
         token: token,
       });
     })
-    .catch((error) => {
-      console.log(error);
-      res.send(error);
+    .catch((err) => {
+      console.log(err);
+      res.send(err);
     });
 };

@@ -1,30 +1,22 @@
 const Event = require('../models/event'),
   User = require('../models/user'),
-  auth = require('../middleware/auth'),
-  getUser = require('./modules/getUser');
+  auth = require('../middleware/auth');
 
 exports.authMiddleware = auth;
-exports.addEvent = async (req, res) => {
-  console.log(req.decoded);
-  const user = await getUser.by_id(req.decoded.user._id);
-
-  if (user) {
-    let event = req.body;
-    event = new Event({
-      name: event.name,
-      city: event.city,
-      adress: event.adress,
-      date: event.date,
-      time: event.time,
-      description: event.description,
-      image: event.image,
-      added_by: user._id,
-    });
-    event.save();
-    res.send({ success: true });
-  } else {
-    res.send({ success: false });
-  }
+exports.addEvent = async (req, res, err) => {
+  let event = req.body;
+  event = new Event({
+    name: event.name,
+    city: event.city,
+    adress: event.adress,
+    date: event.date,
+    time: event.time,
+    description: event.description,
+    image: event.image,
+    added_by: req.decoded.user._id,
+  });
+  event.save();
+  res.send({ success: true });
 };
 
 exports.getAllEvents = async (req, res) => {
@@ -43,7 +35,7 @@ exports.getEvent = async (req, res) => {
   }
 };
 
-exports.addComment = async (req, res, error) => {
+exports.addComment = async (req, res, err) => {
   const addEvent = await Event.findOneAndUpdate(
     { _id: req.body.event_id },
     {
@@ -59,11 +51,11 @@ exports.addComment = async (req, res, error) => {
   if (addEvent) {
     res.send({ success: true, event_id: req.body.event_id });
   } else {
-    res.send(error);
+    res.send(err);
   }
 };
 
-exports.addUserToEvent = async (req, res, error) => {
+exports.addUserToEvent = async (req, res, err) => {
   const addUser = await Event.findOneAndUpdate(
     { _id: req.body.event_id },
     {
@@ -84,6 +76,6 @@ exports.addUserToEvent = async (req, res, error) => {
   if (addUser && updateUser) {
     res.send({ success: true, event_id: req.body.event_id });
   } else {
-    res.send(error);
+    res.send(err);
   }
 };

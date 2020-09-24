@@ -1,5 +1,6 @@
 const User = require('../models/user'),
   getUser = require('./modules/getUser'),
+  validate = require('./modules/validation'),
   bcrypt = require('bcrypt'),
   jwt = require('jsonwebtoken'),
   auth = require('../middleware/auth'),
@@ -10,18 +11,22 @@ exports.authMiddleware = auth;
 exports.uploadMiddleware = upload;
 
 exports.registerUser = async (req, res) => {
-  const name = req.headers.name,
-    email = req.headers.email,
-    password = req.headers.password;
+  const inputs = {
+    name: req.headers.name,
+    email: req.headers.email,
+    password: req.headers.password,
+  };
 
-  const userExists = await getUser.byEmail(email);
-  if (userExists === false) {
+  const validation = await validate.registerUser(inputs);
+  const userExists = await getUser.byEmail(inputs.email);
+
+  if (userExists === false && validation === true) {
     bcrypt
-      .hash(password, BCRYPT_SALT_ROUNDS)
+      .hash(inputs.password, BCRYPT_SALT_ROUNDS)
       .then((hashedPassword) => {
         const user = new User({
-          name: name,
-          email: email,
+          name: inputs.name,
+          email: inputs.email,
           password: hashedPassword,
         });
         return user;
@@ -34,8 +39,8 @@ exports.registerUser = async (req, res) => {
         });
         res.send({ success: true, token: token });
       })
-      .catch((error) => {
-        console.log('Error saving user:', error);
+      .catch((err) => {
+        console.log('Error saving user:', err);
       });
   } else {
     res.send({ emailExists: true });
