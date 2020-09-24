@@ -3,17 +3,13 @@
     <section class="search-field__section">
       <ul>
         <li>
-          <input type="text" placeholder="Name" />
+          <input type="text" placeholder="Category" />
         </li>
         <span class="divider"></span>
         <li>
           <input type="text" placeholder="City" />
         </li>
         <span class="divider"></span>
-
-        <li>
-          <input type="text" placeholder="Country" />
-        </li>
       </ul>
       <button>GO</button>
     </section>
