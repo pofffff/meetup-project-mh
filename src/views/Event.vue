@@ -48,7 +48,12 @@
         </li>
       </ul>
       <section class="add-comment__container">
-        <input v-model="add_comment" type="textarea" maxlength="150" />
+        <input
+          v-model="add_comment"
+          type="textarea"
+          maxlength="150"
+          placeholder="Leave a comment"
+        />
         <button @click="addComment(event._id)" class="add-comment__action">
           Add comment
         </button>
@@ -219,29 +224,36 @@ export default {
         flex-direction: column;
         margin: 0.3rem;
       }
+    }
+    .add-comment__container {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 2rem;
+      width: 380px;
+      height: 200px;
+      border-radius: 20px;
+      background: $color_dark;
 
-      .add-comment__container {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        padding: 20px;
-        input {
-          height: 200px;
-          width: 100%;
-          outline: none;
-          border: 0.5px solid $white;
-          border-radius: 4px;
-          font-weight: 500;
-          background: none;
-          color: $white;
-          font-size: 0.8em;
-          letter-spacing: 1.5px;
-          opacity: 0.5;
-        }
+      input {
+        @include input;
+        height: 100%;
+        width: 100%;
+        border: none;
+        opacity: 1;
+      }
 
-        .add-comment__action {
-          @include button;
-        }
+      input[type="textarea"]::placeholder {
+        color: $white;
+        letter-spacing: 2px;
+        font-family: $font;
+        font-size: 0.9rem;
+      }
+
+      .add-comment__action {
+        @include button;
+        margin-top: 0.5rem;
+        font-size: 0.8rem;
       }
     }
   }

@@ -66,6 +66,10 @@ export default {
 
   .event-details__container {
     padding: 1.5rem;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+
     h3 {
       word-wrap: break-word;
       margin-bottom: 0.5rem;
@@ -93,9 +97,13 @@ export default {
 
     .registered-users__container {
       display: flex;
-      margin-top: 15px;
+      justify-content: flex-end;
+
+      margin-top: auto;
+      flex-grow: 1;
+
       li {
-        margin-right: 0;
+        align-self: flex-end;
       }
     }
   }
