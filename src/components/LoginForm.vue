@@ -1,6 +1,7 @@
 <template>
   <div class="form__wrapper">
     <h4>Login</h4>
+    <aside v-if="wrongCredentials">incorrect email or password</aside>
     <ul>
       <li>
         <input placeholder="email" type="email" v-model="email" />
@@ -21,12 +22,21 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   data: () => {
     return {
       email: "",
       password: "",
     };
+  },
+  computed: {
+    ...mapState({
+      wrongCredentials: (state) => {
+        return state.wrongCredentials;
+      },
+    }),
   },
   methods: {
     login() {
@@ -38,6 +48,7 @@ export default {
     },
     switchComponent() {
       this.$store.state.ifLogin = !this.$store.state.ifLogin;
+      this.$store.state.authenticationMessage = false;
     },
   },
 };
@@ -107,5 +118,6 @@ aside {
   color: $white;
   font-family: $font;
   line-height: 1;
+  align-self: flex-start;
 }
 </style>

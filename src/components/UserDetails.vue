@@ -20,12 +20,14 @@
       </div>
     </section>
     <section class="right">
-      <h4>{{user.name}}</h4>
+      <h4>{{ user.name }}</h4>
       <section class="user-stats__section">
-        <p>{{user.attend_to.length}} events attended</p>
-        <p>{{user.comments_written}} comments written</p>
+        <p>{{ attendTo }} events attended</p>
+        <p>{{ user.comments_written }} comments written</p>
       </section>
-      <button class="add-event__button" @click="goTo('/addevent')">Add event</button>
+      <button class="add-event__button" @click="goTo('/addevent')">
+        Add event
+      </button>
     </section>
   </div>
 </template>
@@ -41,26 +43,22 @@ export default {
   },
   computed: {
     profileImage() {
-      if (this.user.image) {
-        return this.user.image;
-      } else {
-        return this.defaultImage;
-      }
+      return this.user.image || this.defaultImage;
+    },
+    attendTo() {
+      return this.user.attend_to.length || [];
     },
   },
-
   methods: {
     showFileUpload() {
       this.ifFileUpload = !this.ifFileUpload;
     },
     imagePicker() {
       this.file = this.$refs.file.files[0];
-      console.log(this.file);
     },
     uploadFile() {
       let formData = new FormData();
       formData.append("profile-image", this.file);
-      console.log(formData);
       this.$store.dispatch("addProfileImage", formData);
     },
     goTo(path) {
@@ -74,6 +72,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/assets/scss/variables";
+@import "@/assets/scss/style_mixins";
 
 .user-details__wrapper {
   width: 60%;
@@ -94,18 +93,20 @@ export default {
 
       .fa-cog {
         z-index: 1;
-        position: absolute;
+        position: fixed;
         color: $white;
         cursor: pointer;
-        font-size: 15px;
+        font-size: 30px;
         margin: 10px;
+        color: $color_light;
+      }
+
+      .fa-cog:hover {
+        @include pop;
       }
 
       img {
-        width: 100%;
-        height: 100%;
-        border-radius: 100%;
-        object-fit: cover;
+        @include profile_image;
       }
     }
 
@@ -113,16 +114,11 @@ export default {
       display: flex;
       margin-left: auto;
       align-items: center;
+      margin-top: 10px;
 
       button {
-        align-self: flex-start;
-        background: $color_light;
-        color: $white;
-        border: none;
-        border-radius: 6px;
-        padding: 6px 16px;
-        margin-left: 1rem;
-        text-transform: uppercase;
+        @include button;
+        font-size: 0.8rem;
       }
     }
   }
@@ -145,15 +141,15 @@ export default {
     }
 
     .add-event__button {
+      @include button;
       align-self: flex-end;
-      background: $color_light;
-      color: $white;
-      border: none;
-      border-radius: 6px;
-      padding: 6px 16px;
-      text-transform: uppercase;
-      cursor: pointer;
     }
+  }
+}
+
+@keyframes pop {
+  50% {
+    transform: scale(1.1);
   }
 }
 </style>

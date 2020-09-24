@@ -1,5 +1,6 @@
 <template>
   <div class="login__wrapper">
+    <aside v-if="authenticationMessage">You need to login!</aside>
     <LoginForm v-show="ifLogin" />
     <NewUserForm v-show="!ifLogin" />
   </div>
@@ -17,6 +18,9 @@ export default {
       ifLogin: (state) => {
         return state.ifLogin;
       },
+      authenticationMessage: (state) => {
+        return state.authenticationMessage;
+      },
     }),
   },
   methods: {},
@@ -28,9 +32,17 @@ export default {
 
 .login__wrapper {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100vw;
   height: 100vh;
+
+  aside {
+    color: $white;
+    position: absolute;
+    margin: 1rem;
+    margin-top: -25rem;
+  }
 }
 </style>

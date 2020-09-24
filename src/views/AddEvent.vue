@@ -12,6 +12,14 @@
         <li>
           <input type="text" placeholder="Adress" v-model="adress" />
         </li>
+        <Multiselect
+          v-model="categories"
+          :options="options"
+          :multiple="true"
+          placeholder="Select categories"
+          :close-on-select="false"
+          class="multiselect"
+        ></Multiselect>
         <li>
           <input type="date" v-model="date" />
         </li>
@@ -21,7 +29,11 @@
       </ul>
       <ul class="form-right__ul">
         <li>
-          <textarea maxlength="200" placeholder="Description" v-model="description"></textarea>
+          <textarea
+            maxlength="200"
+            placeholder="Description"
+            v-model="description"
+          ></textarea>
         </li>
         <div class>
           <li>
@@ -35,7 +47,11 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+import Multiselect from "@/components/multiselect";
+
 export default {
+  components: { Multiselect },
   data: () => {
     return {
       name: "",
@@ -45,7 +61,27 @@ export default {
       image: "",
       description: "",
       time: "",
+      categories: [],
+      options: [
+        "food",
+        "party",
+        "costume",
+        " masquerade",
+        "contest",
+        "museum",
+        "art",
+        "lecture",
+        "education",
+        "other",
+      ],
     };
+  },
+  computed: {
+    ...mapState({
+      isAuthenticated: (state) => {
+        return state.isAuthenticated;
+      },
+    }),
   },
   methods: {
     addEvent() {
@@ -56,11 +92,13 @@ export default {
         date: this.date,
         image: this.image,
         description: this.description,
+        categories: this.categories,
         time: this.time,
       };
 
       if (Object.keys(event).some((key) => event[key] === "") === false) {
         this.$store.dispatch("addEvent", event);
+        this.$router.push("/profile");
       }
     },
   },
@@ -97,6 +135,10 @@ export default {
 
     ul {
       width: 100%;
+
+      .multiselect {
+        cursor: pointer;
+      }
       li {
         list-style: none;
         background: none;

@@ -7,11 +7,20 @@
 
 <script>
 import Nav from "@/components/Nav";
+import { mapState } from "vuex";
 export default {
   components: {
     Nav,
   },
-  methods: {},
+  computed: {
+    ...mapState({
+      isAuthenticated: (state) => {
+        if (state.isAuthenticated === false) {
+          this.$router.push("/login");
+        }
+      },
+    }),
+  },
 };
 </script>
 

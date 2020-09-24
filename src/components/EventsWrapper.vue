@@ -1,9 +1,16 @@
 <template>
-  <div class="event__wrapper">
+  <div class="events__wrapper">
     <h1>Recently added events</h1>
-    <li class="event" @click="goTo(event._id)" v-for="event in events" :key="event._id">
-      <Event :event="event" />
-    </li>
+    <ul>
+      <li
+        class="event"
+        @click="goTo(event._id)"
+        v-for="event in events"
+        :key="event._id"
+      >
+        <Event :event="event" />
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -20,7 +27,11 @@ export default {
   computed: {
     ...mapState({
       events: (state) => {
-        return state.events;
+        if (state.filtered.length !== 0) {
+          return state.filtered;
+        } else {
+          return state.events;
+        }
       },
     }),
   },
@@ -42,16 +53,19 @@ export default {
 <style lang="scss" scoped>
 @import "@/assets/scss/variables";
 
-.event__wrapper {
-  display: flex;
-  flex-wrap: wrap;
-}
+.events__wrapper {
+  padding: 0 10%;
+  h1 {
+    color: $white;
+    font-size: 32px;
+  }
+  ul {
+    display: flex;
+    flex-wrap: wrap;
 
-h1 {
-  color: $white;
-}
-
-li {
-  cursor: pointer;
+    li {
+      cursor: pointer;
+    }
+  }
 }
 </style>

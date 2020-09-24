@@ -1,4 +1,4 @@
-import { mount, createLocalVue, shallowMount } from '@vue/test-utils';
+import { mount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
 import Vue from 'vue';
 import UserDetails from '@/components/UserDetails.vue';
@@ -14,20 +14,20 @@ describe('UserDetails', () => {
       name: 'name',
       comments_written: 0,
       attend_to: 0,
-      image: 'image',
     };
   });
 
   it('Should render all user elements with props', () => {
-    /* jest.mock('../../server/uploads/default_img.png', () => {
-      return '../assets/logo.png';
-    }); */
-    // FUUUCK?
     const wrapper = mount(UserDetails, {
       localvue,
       propsData: { user },
+      computed: {
+        profileImage: () => {
+          return 'default_img.png';
+        },
+      },
     });
 
-    expect(wrapper.props()).toBe('user');
+    expect(wrapper.props()).toStrictEqual({ user });
   });
 });

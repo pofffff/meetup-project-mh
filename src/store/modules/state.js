@@ -4,8 +4,11 @@ export default {
   emailExists: false,
   errorSavingUser: false,
   isAuthenticated: false,
-  token: localStorage.getItem('token') || '',
+  authenticationMessage: false,
+  wrongCredentials: false,
   user: {},
   events: [],
+  filtered: [],
+  hasFilter: false,
   event: {},
 };

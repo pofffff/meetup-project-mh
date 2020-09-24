@@ -1,12 +1,14 @@
 @mixin button {
+  outline: none;
   background: $color_light;
-  color: $white;
+  color: $color_dark;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   letter-spacing: 1.5px;
-  font-weight: 700;
+  font-weight: 900;
   padding: 8px 18px;
+  font-size: 1rem;
 }
 
 @mixin input {
@@ -22,4 +24,18 @@
   width: 100%;
   letter-spacing: 1.5px;
   opacity: 0.5;
+}
+
+@mixin profile_image {
+  border-radius: 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@mixin pop {
+  animation-name: pop;
+  transform: perspective(1px) translateZ(0);
+  animation-iteration-count: 1;
+  animation-duration: 0.2s;
 }

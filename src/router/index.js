@@ -6,7 +6,6 @@ import Profile from '../views/Profile.vue';
 import AddEvent from '../views/AddEvent.vue';
 import Event from '../views/Event.vue';
 import store from '../store';
-import axios from 'axios';
 
 Vue.use(VueRouter);
 
@@ -26,21 +25,8 @@ const routes = [
     name: 'Profile',
     component: Profile,
     beforeEnter: (to, from, next) => {
-      const token = localStorage.getItem('token');
-      if (token) {
-        axios.defaults.headers.common['Authorization'] = token;
-        store.dispatch('userRequest').then(() => {
-          if (localStorage.getItem('token')) {
-            next();
-          } else {
-            delete axios.defaults.headers.common['Authorization'];
-            localStorage.removeItem('token');
-            next('/login');
-          }
-        });
-      } else {
-        next('/login');
-      }
+      store.dispatch('userRequest');
+      next();
     },
   },
   {
@@ -48,20 +34,11 @@ const routes = [
     name: 'AddEvent',
     component: AddEvent,
     beforeEnter: (to, from, next) => {
-      const token = localStorage.getItem('token');
-      if (token) {
-        axios.defaults.headers.common['Authorization'] = token;
-        store.dispatch('authenticate').then(() => {
-          if (localStorage.getItem('token')) {
-            next();
-          } else {
-            delete axios.defaults.headers.common['Authorization'];
-            localStorage.removeItem('token');
-            next('/login');
-          }
-        });
+      store.dispatch('userRequest');
+      if (localStorage.getItem('token')) {
+        next();
       } else {
-        next('/login');
+        next({ name: 'Login' });
       }
     },
   },

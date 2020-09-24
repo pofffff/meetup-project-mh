@@ -1,7 +1,7 @@
 import axios from 'axios';
 export default {
   async registerUser({ commit }, user) {
-    const url = '/user';
+    const url = '/user/register';
     await axios
       .post(
         url,
@@ -23,35 +23,32 @@ export default {
         }
       })
       .catch((error) => {
-        console.log('Error: ' + error);
         commit('registerError');
-        throw Error('An error occurred when trying to register user');
       });
   },
-  async addProfileImage(ctx, formData) {
+  async addProfileImage({ dispatch, commit }, formData) {
+    console.log('HERE');
+
     const url = '/user/image';
     fetch(url, {
       method: 'POST',
       body: formData,
       headers: { authorization: localStorage.getItem('token') },
     })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
+      .then((response) => {
+        dispatch('userRequest');
       })
       .catch((error) => {
-        console.error('Error:', error);
+        commit('authenticationError');
       });
   },
-  async addEvent(ctx, event) {
+  async addEvent({ commit }, event) {
     const url = '/event/add';
     await axios
       .post(url, event)
-      .then((response) => {
-        console.log(response.data.success);
-      })
+      .then((response) => {})
       .catch((error) => {
-        throw Error('Error adding event');
+        commit('authenticationError');
       });
   },
   async getAllEvents({ commit }) {
@@ -60,11 +57,10 @@ export default {
     await axios
       .get(url)
       .then((response) => {
-        console.log(response);
         commit('getAllEventsSuccess', response.data);
       })
       .catch((error) => {
-        throw Error('Error adding event');
+        console.error(error);
       });
   },
   async getEvent({ commit }, id) {
@@ -76,7 +72,33 @@ export default {
         commit('getEventSuccess', response.data);
       })
       .catch((error) => {
-        throw Error('Error adding event');
+        console.error(error);
+      });
+  },
+  async addComment({ commit, dispatch }, data) {
+    const url = '/event/addComment';
+    await axios
+      .post(url, { event_id: data.event_id, comment: data.comment })
+      .then((response) => {
+        if (response.data.success === true) {
+          dispatch('getEvent', response.data.event_id);
+        }
+      })
+      .catch((error) => {
+        commit('authenticationError');
+      });
+  },
+  async addUserToEvent({ commit, dispatch }, id) {
+    const url = '/event/addUser';
+    await axios
+      .post(url, { event_id: id })
+      .then((response) => {
+        if (response.data.success === true) {
+          dispatch('getEvent', response.data.event_id);
+        }
+      })
+      .catch((error) => {
+        commit('authenticationError');
       });
   },
 };

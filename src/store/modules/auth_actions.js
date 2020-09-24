@@ -1,7 +1,7 @@
 import axios from 'axios';
 const auth = {
   actions: {
-    async loginRequest({ commit, dispatch }, credentials) {
+    async loginRequest({ commit }, credentials) {
       await axios
         .post(
           '/authenticate/loginRequest',
@@ -14,53 +14,27 @@ const auth = {
           }
         )
         .then((response) => {
-          console.log(response);
-          const token = response.data.token;
-          localStorage.setItem('token', token);
+          commit('authenticationSuccess', response.data.token);
         })
         .catch((error) => {
-          throw Error('An error occurred when trying to authenticate');
+          commit('wrongCredentials');
         });
     },
-    userRequest({ commit }) {
-      return new Promise((resolve, reject) => {
-        axios
-          .get('/authenticate/userRequest')
-          .then((response) => {
-            if (response.data.success === true) {
-              localStorage.setItem('token', response.data.token);
-              commit('userRequestSuccess', response.data.user);
-              resolve();
-            }
-          })
-          .catch((error) => {
-            throw Error('An error occurred when trying to authenticate');
-          });
-      });
+    async userRequest({ commit }) {
+      await axios
+        .get('/authenticate/userRequest')
+        .then((response) => {
+          if (response.data.success === true) {
+            commit('authenticationSuccess', response.data.token);
+            commit('userRequestSuccess', response.data.user);
+          }
+        })
+        .catch((error) => {
+          commit('authenticationError');
+        });
     },
-    authenticate({ ctx, state }) {
-      return new Promise((resolve, reject) => {
-        axios
-          .get('/authenticate')
-          .then((response) => {
-            if (response.data.success === true) {
-              localStorage.setItem('token', response.data.token);
-              resolve();
-            }
-          })
-          .catch((error) => {});
-      });
-    },
-    // Kanske flytta till component
-    logoutUser(ctx) {
-      return new Promise((resolve, reject) => {
-        delete axios.defaults.headers.common['Authorization'];
-        localStorage.removeItem('token');
-        ctx.commit('logoutSuccess');
-        resolve();
-      }).catch((error) => {
-        reject(error);
-      });
+    async logoutUser({ commit }) {
+      await commit('logoutSuccess');
     },
   },
 };
