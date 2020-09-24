@@ -33,8 +33,8 @@ const auth = {
           commit('authenticationError');
         });
     },
-    async logoutUser(ctx) {
-      await ctx.commit('logoutSuccess');
+    async logoutUser({ commit }) {
+      await commit('logoutSuccess');
     },
   },
 };

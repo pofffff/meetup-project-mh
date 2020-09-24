@@ -67,6 +67,9 @@ export default {
       event: (state) => {
         return state.event;
       },
+      isAuthenticated: (state) => {
+        return state.isAuthenticated;
+      },
     }),
   },
   methods: {

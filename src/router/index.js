@@ -39,13 +39,12 @@ const routes = [
     name: 'AddEvent',
     component: AddEvent,
     beforeEnter: (to, from, next) => {
-      store.dispatch('userRequest').then(() => {
-        if (localStorage.getItem('token')) {
-          next();
-        } else {
-          next({ name: 'Login' });
-        }
-      });
+      store.dispatch('userRequest');
+      if (localStorage.getItem('token')) {
+        next();
+      } else {
+        next({ name: 'Login' });
+      }
     },
   },
   {

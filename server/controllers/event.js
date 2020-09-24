@@ -63,7 +63,7 @@ exports.addComment = async (req, res) => {
   }
 };
 
-exports.addUserToEvent = async (req, res) => {
+exports.addUserToEvent = async (req, res, error) => {
   const addUser = await Event.findOneAndUpdate(
     { _id: req.body.event_id },
     {
@@ -82,7 +82,10 @@ exports.addUserToEvent = async (req, res) => {
   );
   if (addUser && updateUser) {
     res.send({ success: true, event_id: req.body.event_id });
-  } else {
-    res.send({ success: false });
+  }
+
+  if (error) {
+    console.log('here');
+    res.status(401);
   }
 };

@@ -26,7 +26,7 @@ export default {
         commit('registerError');
       });
   },
-  async addProfileImage({ dispatch }, formData) {
+  async addProfileImage({ dispatch, commit }, formData) {
     console.log('HERE');
     const url = '/user/image';
     fetch(url, {
@@ -41,7 +41,7 @@ export default {
       .catch((error) => {
         localStorage.removeItem('token');
         commit('authenticationError');
-        console.error('Error:', error);
+        console.error(error);
       });
   },
   async addEvent({ commit }, event) {
@@ -53,8 +53,8 @@ export default {
         commit('addEventResponse', response.data.success);
       })
       .catch((error) => {
+        console.error(error);
         commit('authenticationError');
-        throw Error('Error adding event');
       });
   },
   async getAllEvents({ commit }) {
@@ -66,7 +66,7 @@ export default {
         commit('getAllEventsSuccess', response.data);
       })
       .catch((error) => {
-        throw Error('Error adding event');
+        console.error(error);
       });
   },
   async getEvent({ commit }, id) {
@@ -78,7 +78,7 @@ export default {
         commit('getEventSuccess', response.data);
       })
       .catch((error) => {
-        throw Error('Error getting event');
+        console.error(error);
       });
   },
   async addComment({ commit, dispatch }, data) {
@@ -91,8 +91,8 @@ export default {
         }
       })
       .catch((error) => {
+        console.error(error);
         commit('authenticationError');
-        throw Error('An error occurred when trying to add comment');
       });
   },
   async addUserToEvent({ commit, dispatch }, id) {
@@ -105,8 +105,8 @@ export default {
         }
       })
       .catch((error) => {
+        console.error(error);
         commit('authenticationError');
-        throw Error('An error occurred when trying to add user to event');
       });
   },
 };
