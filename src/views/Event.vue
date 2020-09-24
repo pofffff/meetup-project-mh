@@ -13,10 +13,6 @@
             <p>{{ event.city }}</p>
           </div>
         </li>
-        <!--         <li>
-          <i class="fas fa-map-marked-alt"></i>
-          
-        </li> -->
         <li>
           <i class="far fa-calendar-alt"></i>
           <p>{{ event.date }} - {{ event.time }}</p>
@@ -24,6 +20,14 @@
         <li>
           <i class="fas fa-info"></i>
           <p>{{ event.description }}</p>
+        </li>
+        <li>
+          <i class="fas fa-shapes"></i>
+          <div class="categories">
+            <p v-for="category in event.categories" :key="category">
+              {{ category }},
+            </p>
+          </div>
         </li>
         <li>
           <i class="fas fa-child"></i>
@@ -101,6 +105,7 @@ export default {
     color: $white;
     width: 85%;
     font-size: 32px;
+    margin: 1rem 0;
   }
 
   .event__container {
@@ -149,6 +154,15 @@ export default {
 
         p {
           grid-area: right-column;
+        }
+
+        .categories {
+          display: flex;
+
+          p {
+            margin-right: 10px;
+            text-transform: capitalize;
+          }
         }
 
         .location__container {

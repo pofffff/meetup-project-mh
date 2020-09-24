@@ -27,7 +27,11 @@ export default {
   computed: {
     ...mapState({
       events: (state) => {
-        return state.events;
+        if (state.filtered.length !== 0) {
+          return state.filtered;
+        } else {
+          return state.events;
+        }
       },
     }),
   },

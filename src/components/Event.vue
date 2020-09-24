@@ -18,6 +18,7 @@
         <i class="fas fa-info"></i>
         <p>{{ event.description }}</p>
       </li>
+
       <div class="registered-users__container">
         <li v-for="(user, index) in event.registered" :key="index">
           <UserRegisteredToEvent :user="user" />
@@ -43,7 +44,7 @@ export default {
 
 .event__wrapper {
   width: 350px;
-  height: 540px;
+  height: 570px;
   background: $color_dark;
   color: $white;
   border-radius: 20px;

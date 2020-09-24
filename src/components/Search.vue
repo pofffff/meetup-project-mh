@@ -2,22 +2,80 @@
   <div class="search__wrapper">
     <section class="search-field__section">
       <ul>
-        <li>
-          <input type="text" placeholder="Category" />
-        </li>
+        <CategoryAutocomplete :categories="categories" @input="inputCategory" />
         <span class="divider"></span>
-        <li>
-          <input type="text" placeholder="City" />
-        </li>
-        <span class="divider"></span>
+        <CityAutocomplete @input="inputCity" :cities="cities" />
       </ul>
-      <button>GO</button>
+      <button @click="filter">Filter</button>
     </section>
   </div>
 </template>
 
+<script>
+import { mapState } from "vuex";
+import CategoryAutocomplete from "@/components/search/CategoryAutocomplete";
+import CityAutocomplete from "@/components/search/CityAutocomplete";
+
+export default {
+  components: { CategoryAutocomplete, CityAutocomplete },
+  data: () => {
+    return {
+      categories: [
+        "food",
+        "party",
+        "costume",
+        " masquerade",
+        "contest",
+        "museum",
+        "art",
+        "lecture",
+        "education",
+        "other",
+      ],
+      selectedCategory: "",
+      selectedCity: "",
+    };
+  },
+  computed: {
+    ...mapState({
+      cities: (state) => {
+        let cities = state.events.map((event) => event.city);
+        console.log(cities);
+        return cities;
+      },
+      events: (state) => {
+        return state.events;
+      },
+    }),
+  },
+  methods: {
+    inputCity(city) {
+      this.selectedCity = city;
+    },
+    inputCategory(category) {
+      this.selectedCategory = category;
+    },
+    filter() {
+      let events = this.events;
+      let filtered = events.filter((event) => {
+        console.log(event);
+        if (
+          event.categories.includes(this.selectedCategory) &&
+          event.city.includes(this.selectedCity)
+        )
+          return event;
+      });
+      this.$store.state.filtered = filtered;
+      this.$store.state.hasFilter = true;
+      console.log(filtered);
+    },
+  },
+};
+</script>
+
 <style lang="scss" scoped>
 @import "@/assets/scss/variables";
+@import "@/assets/scss/style_mixins";
 
 .search__wrapper {
   display: flex;
@@ -28,8 +86,10 @@
 
   .search-field__section {
     display: flex;
+
     ul {
       width: auto;
+      height: 3rem;
       display: flex;
       background: $color_dark;
       padding: 0.2em;
@@ -41,45 +101,14 @@
         margin: 0 10px;
         align-self: center;
       }
-
-      li {
-        list-style: none;
-        padding-right: 0.2em;
-        outline: none;
-
-        input {
-          outline: none;
-          height: 50px;
-          padding: 0 10px;
-          border-radius: 4px;
-          border: none;
-          font-weight: 500;
-          background: none;
-          color: $white;
-          font-size: 20px;
-          width: 15em;
-          letter-spacing: 1.5px;
-        }
-
-        input::placeholder {
-          color: $white;
-          letter-spacing: 2px;
-          font-family: $font;
-          font-size: 16px;
-        }
-      }
     }
+
     button {
+      @include button;
       align-self: center;
-      border: none;
-      background: $color_light;
-      color: #0000009b;
-      color: $color_dark;
       padding: 0 30px;
       margin: 0 5px;
-      height: 55px;
-      border-radius: 4px;
-      font-weight: 900;
+      height: 46px;
       font-size: 1.2em;
     }
   }

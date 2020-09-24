@@ -25,13 +25,8 @@ const routes = [
     name: 'Profile',
     component: Profile,
     beforeEnter: (to, from, next) => {
-      store.dispatch('userRequest').then(() => {
-        if (localStorage.getItem('token')) {
-          next();
-        } else {
-          next({ name: 'Login' });
-        }
-      });
+      store.dispatch('userRequest');
+      next();
     },
   },
   {

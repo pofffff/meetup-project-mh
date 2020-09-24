@@ -15,11 +15,7 @@ export default {
   },
   computed: {
     profileImage() {
-      if (this.user.image) {
-        return this.user.image;
-      } else {
-        return this.defaultImage;
-      }
+      return this.user.image || this.defaultImage;
     },
   },
 };

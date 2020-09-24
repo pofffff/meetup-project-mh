@@ -12,6 +12,7 @@ exports.addEvent = async (req, res, err) => {
     date: event.date,
     time: event.time,
     description: event.description,
+    categories: event.categories,
     image: event.image,
     added_by: req.decoded.user._id,
   });

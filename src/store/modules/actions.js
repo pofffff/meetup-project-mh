@@ -46,9 +46,7 @@ export default {
     const url = '/event/add';
     await axios
       .post(url, event)
-      .then((response) => {
-        commit('addEventResponse', response.data.success);
-      })
+      .then((response) => {})
       .catch((error) => {
         commit('authenticationError');
       });

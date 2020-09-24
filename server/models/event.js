@@ -25,6 +25,7 @@ const eventSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  categories: { type: Array, default: [] },
   image: {
     type: String,
     required: true,

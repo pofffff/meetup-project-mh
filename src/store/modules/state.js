@@ -8,5 +8,7 @@ export default {
   wrongCredentials: false,
   user: {},
   events: [],
+  filtered: [],
+  hasFilter: false,
   event: {},
 };

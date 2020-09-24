@@ -22,7 +22,7 @@
     <section class="right">
       <h4>{{ user.name }}</h4>
       <section class="user-stats__section">
-        <p>{{ user.attend_to.length }} events attended</p>
+        <p>{{ attendTo }} events attended</p>
         <p>{{ user.comments_written }} comments written</p>
       </section>
       <button class="add-event__button" @click="goTo('/addevent')">
@@ -43,14 +43,12 @@ export default {
   },
   computed: {
     profileImage() {
-      if (this.user.image) {
-        return this.user.image;
-      } else {
-        return this.defaultImage;
-      }
+      return this.user.image || this.defaultImage;
+    },
+    attendTo() {
+      return this.user.attend_to.length || [];
     },
   },
-
   methods: {
     showFileUpload() {
       this.ifFileUpload = !this.ifFileUpload;
@@ -61,7 +59,6 @@ export default {
     uploadFile() {
       let formData = new FormData();
       formData.append("profile-image", this.file);
-      console.log(formData);
       this.$store.dispatch("addProfileImage", formData);
     },
     goTo(path) {
@@ -117,16 +114,11 @@ export default {
       display: flex;
       margin-left: auto;
       align-items: center;
+      margin-top: 10px;
 
       button {
-        align-self: flex-start;
-        background: $color_light;
-        color: $white;
-        border: none;
-        border-radius: 6px;
-        padding: 6px 16px;
-        margin-left: 1rem;
-        text-transform: uppercase;
+        @include button;
+        font-size: 0.8rem;
       }
     }
   }
@@ -149,14 +141,8 @@ export default {
     }
 
     .add-event__button {
+      @include button;
       align-self: flex-end;
-      background: $color_light;
-      color: $white;
-      border: none;
-      border-radius: 6px;
-      padding: 6px 16px;
-      text-transform: uppercase;
-      cursor: pointer;
     }
   }
 }
