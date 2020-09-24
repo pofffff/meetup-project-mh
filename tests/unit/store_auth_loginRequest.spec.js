@@ -29,22 +29,20 @@ describe('store - auth', () => {
     const email = 'fakeemail@email.com',
       password = 'fakepassword',
       headers = { email: 'fakeemail@email.com', password: 'fakepassword' },
-      commit = jest.fn(),
-      dispatch = jest.fn();
+      commit = jest.fn();
 
-    await auth.actions.loginRequest({ commit, dispatch }, headers);
+    await auth.actions.loginRequest({ commit }, headers);
 
     expect(url).toBe('/authenticate/loginRequest');
     expect(headers).toEqual({ email, password });
   });
 
-  it('Should throw error if there is an error during loginRequest', async () => {
-    const commit = jest.fn(),
-      dispatch = jest.fn();
+  it('Should call wrongCredentials if there is an error during login', async () => {
+    const commit = jest.fn();
     mockError = true;
 
-    await expect(
-      auth.actions.loginRequest({ commit, dispatch }, {})
-    ).rejects.toThrow('An error occurred when trying to authenticate');
+    await auth.actions.loginRequest({ commit }, {});
+
+    expect(commit).toHaveBeenCalledWith('wrongCredentials');
   });
 });

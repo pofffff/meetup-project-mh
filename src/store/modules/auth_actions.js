@@ -1,7 +1,7 @@
 import axios from 'axios';
 const auth = {
   actions: {
-    async loginRequest({ commit, dispatch }, credentials) {
+    async loginRequest({ commit }, credentials) {
       await axios
         .post(
           '/authenticate/loginRequest',
@@ -14,29 +14,24 @@ const auth = {
           }
         )
         .then((response) => {
-          console.log(response);
           commit('authenticationSuccess', response.data.token);
         })
         .catch((error) => {
-          console.log(error);
           commit('wrongCredentials');
         });
     },
-    userRequest({ commit }) {
-      return new Promise((resolve, reject) => {
-        axios
-          .get('/authenticate/userRequest')
-          .then((response) => {
-            if (response.data.success === true) {
-              commit('authenticationSuccess', response.data.token);
-              commit('userRequestSuccess', response.data.user);
-            }
-          })
-          .catch((error) => {
-            commit('authenticationError');
-          });
-        resolve();
-      });
+    async userRequest({ commit }) {
+      await axios
+        .get('/authenticate/userRequest')
+        .then((response) => {
+          if (response.data.success === true) {
+            commit('authenticationSuccess', response.data.token);
+            commit('userRequestSuccess', response.data.user);
+          }
+        })
+        .catch((error) => {
+          commit('authenticationError');
+        });
     },
     async logoutUser(ctx) {
       await ctx.commit('logoutSuccess');

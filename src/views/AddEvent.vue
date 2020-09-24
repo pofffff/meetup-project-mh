@@ -74,11 +74,7 @@ export default {
 
       if (Object.keys(event).some((key) => event[key] === "") === false) {
         this.$store.dispatch("addEvent", event);
-        if (this.isAuthenticated === true) {
-          this.$router.push("/profile");
-        } else {
-          this.$router.push("/login");
-        }
+        this.$router.push("/profile");
       }
     },
   },

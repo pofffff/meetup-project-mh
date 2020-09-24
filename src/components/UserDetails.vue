@@ -57,7 +57,6 @@ export default {
     },
     imagePicker() {
       this.file = this.$refs.file.files[0];
-      console.log(this.file);
     },
     uploadFile() {
       let formData = new FormData();

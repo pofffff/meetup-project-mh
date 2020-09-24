@@ -23,12 +23,11 @@ export default {
         }
       })
       .catch((error) => {
-        console.log('Error: ' + error);
         commit('registerError');
-        throw Error('An error occurred when trying to register user');
       });
   },
   async addProfileImage({ dispatch }, formData) {
+    console.log('HERE');
     const url = '/user/image';
     fetch(url, {
       method: 'POST',

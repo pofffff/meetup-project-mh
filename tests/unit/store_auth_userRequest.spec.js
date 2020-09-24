@@ -28,26 +28,29 @@ jest.mock('axios', () => ({
 describe('store - auth', () => {
   it('Should run userRequest with correct params', async () => {
     const commit = jest.fn();
+
     await auth.actions.userRequest({ commit });
 
     expect(url).toBe('/authenticate/userRequest');
   });
 
-  it('Should commit userRequestSuccess if request is ok', async () => {
+  it('Should commit userRequestSuccess and authenticationSuccess if request is ok', async () => {
     const commit = jest.fn(),
-      user = { name: 'name', email: 'email' };
+      user = { name: 'name', email: 'email' },
+      token = 'token';
 
     await auth.actions.userRequest({ commit });
 
+    expect(commit).toHaveBeenCalledWith('authenticationSuccess', token);
     expect(commit).toHaveBeenCalledWith('userRequestSuccess', user);
   });
 
-  it('should throw error if request fails', async () => {
+  it('Should commit authenticationError if there is an error', async () => {
     mockError = true;
     const commit = jest.fn();
 
     await auth.actions.userRequest({ commit });
 
-    expect(commit).toHaveBeenCalledWith('userRequestError');
+    expect(commit).toHaveBeenCalledWith('authenticationError');
   });
 });

@@ -47,15 +47,16 @@ describe('actions - registerUser', () => {
     expect(state.ifLogin).toBe(true);
   });
 
-  it('Should throw error, commit and change state if error during registerUser', async () => {
+  it('Should commit registerError and change state if there is an error', async () => {
     const commit = jest.fn(),
-      state = { errorSavingUser: false };
+      state = { errorSavingUser: false },
+      name = 'förnamn efternamn',
+      email = 'testemail@mail.com',
+      password = '123456';
     mockError = true;
 
+    await actions.registerUser({ commit }, { name, email, password });
     await mutations.registerError(state);
-    await expect(actions.registerUser({ commit }, {})).rejects.toThrow(
-      'An error occurred when trying to register user'
-    );
 
     expect(commit).toHaveBeenCalledWith('registerError');
     expect(state.errorSavingUser).toBe(true);
