@@ -39,11 +39,11 @@ exports.getEvent = async (req, res) => {
   if (event) {
     res.send(event);
   } else {
-    res.send({ success: false });
+    res.send(error);
   }
 };
 
-exports.addComment = async (req, res) => {
+exports.addComment = async (req, res, error) => {
   const addEvent = await Event.findOneAndUpdate(
     { _id: req.body.event_id },
     {
@@ -55,11 +55,11 @@ exports.addComment = async (req, res) => {
       },
     }
   );
-  console.log(addEvent);
+
   if (addEvent) {
     res.send({ success: true, event_id: req.body.event_id });
   } else {
-    res.send({ success: false });
+    res.send(error);
   }
 };
 
@@ -80,12 +80,10 @@ exports.addUserToEvent = async (req, res, error) => {
       },
     }
   );
+
   if (addUser && updateUser) {
     res.send({ success: true, event_id: req.body.event_id });
-  }
-
-  if (error) {
-    console.log('here');
-    res.status(401);
+  } else {
+    res.send(error);
   }
 };

@@ -28,20 +28,19 @@ export default {
   },
   async addProfileImage({ dispatch, commit }, formData) {
     console.log('HERE');
+
     const url = '/user/image';
     fetch(url, {
       method: 'POST',
       body: formData,
       headers: { authorization: localStorage.getItem('token') },
     })
-      .then((response) => response.json())
-      .then((data) => {
+      .then((response) => {
         dispatch('userRequest');
       })
       .catch((error) => {
-        localStorage.removeItem('token');
+        console.log(error);
         commit('authenticationError');
-        console.error(error);
       });
   },
   async addEvent({ commit }, event) {
@@ -49,11 +48,10 @@ export default {
     await axios
       .post(url, event)
       .then((response) => {
-        console.log(response);
         commit('addEventResponse', response.data.success);
       })
       .catch((error) => {
-        console.error(error);
+        console.log(error);
         commit('authenticationError');
       });
   },
@@ -91,7 +89,7 @@ export default {
         }
       })
       .catch((error) => {
-        console.error(error);
+        console.log(error);
         commit('authenticationError');
       });
   },
@@ -105,7 +103,7 @@ export default {
         }
       })
       .catch((error) => {
-        console.error(error);
+        console.log(error);
         commit('authenticationError');
       });
   },

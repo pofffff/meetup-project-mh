@@ -40,8 +40,8 @@ exports.loginRequest = async (req, res) => {
         res.status(403);
       }
     })
-    .catch((err) => {
-      res.status(403);
+    .catch((error) => {
+      res.send(error);
     });
 };
 
@@ -49,6 +49,9 @@ exports.userRequest = async (req, res) => {
   await getUser
     .by_id(req.decoded.user._id)
     .then((user) => {
+      if (!user) {
+        res.status(403);
+      }
       const token = jwt.sign({ user }, `${process.env.SECRET}`, {
         expiresIn: '15m',
       });
@@ -60,6 +63,6 @@ exports.userRequest = async (req, res) => {
     })
     .catch((error) => {
       console.log(error);
-      res.send({ success: false, error: error });
+      res.send(error);
     });
 };

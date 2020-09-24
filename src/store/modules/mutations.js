@@ -1,4 +1,5 @@
 import axios from 'axios';
+import router from '@/router/index.js';
 
 export default {
   registerSuccess(state) {
@@ -14,6 +15,8 @@ export default {
     state.isAuthenticated = false;
     delete axios.defaults.headers.common['Authorization'];
     localStorage.removeItem('token');
+    state.authenticationMessage = true;
+    router.push('/login', () => {});
   },
   wrongCredentials(state) {
     state.wrongCredentials = true;
@@ -22,6 +25,7 @@ export default {
     state.isAuthenticated = true;
     axios.defaults.headers.common['Authorization'] = token;
     localStorage.setItem('token', token);
+    state.authenticationMessage = false;
   },
   userRequestSuccess(state, user) {
     state.isAuthenticated = true;

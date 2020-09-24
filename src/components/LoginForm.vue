@@ -48,6 +48,7 @@ export default {
     },
     switchComponent() {
       this.$store.state.ifLogin = !this.$store.state.ifLogin;
+      this.$store.state.authenticationMessage = false;
     },
   },
 };
