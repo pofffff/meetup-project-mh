@@ -17,13 +17,15 @@ const userSchema = new mongoose.Schema({
     ref: 'GridFs',
     required: false,
   },
-  attend_to: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Event',
-      default: 0,
-    },
-  ],
+  attend_to: {
+    type: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'event',
+      },
+    ],
+    default: [],
+  },
   comments_written: {
     type: Number,
     required: false,

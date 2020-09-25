@@ -27,8 +27,6 @@ export default {
       });
   },
   async addProfileImage({ dispatch, commit }, formData) {
-    console.log('HERE');
-
     const url = '/user/image';
     fetch(url, {
       method: 'POST',

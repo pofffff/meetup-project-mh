@@ -46,7 +46,7 @@ export default {
       return this.user.image || this.defaultImage;
     },
     attendTo() {
-      return this.user.attend_to.length || [];
+      return this.user.attend_to.length || 0;
     },
   },
   methods: {
