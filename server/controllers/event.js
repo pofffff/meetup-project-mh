@@ -1,6 +1,7 @@
-const Event = require('../models/event'),
-  User = require('../models/user'),
-  auth = require('../middleware/auth');
+const Event = require("../models/event"),
+  User = require("../models/user"),
+  auth = require("../middleware/auth"),
+  { addComment } = require("./modules/validation");
 
 exports.authMiddleware = auth;
 exports.addEvent = async (req, res, err) => {
@@ -21,13 +22,13 @@ exports.addEvent = async (req, res, err) => {
 };
 
 exports.getAllEvents = async (req, res) => {
-  const events = await Event.find().populate('registered');
+  const events = await Event.find().populate("registered");
   res.send(events);
 };
 
 exports.getEvent = async (req, res) => {
   const event = await Event.findOne({ _id: req.params.id }).populate(
-    'comments.written_by'
+    "comments.written_by"
   );
   if (event) {
     res.send(event);
@@ -37,20 +38,23 @@ exports.getEvent = async (req, res) => {
 };
 
 exports.addComment = async (req, res, err) => {
-  const addEvent = await Event.findOneAndUpdate(
-    { _id: req.body.event_id },
-    {
-      $push: {
-        comments: {
-          written_by: req.decoded.user._id,
-          comment: req.body.comment,
-        },
-      },
-    }
-  );
+  const validateComment = addComment(req.body.comment);
 
-  if (addEvent) {
-    res.send({ success: true, event_id: req.body.event_id });
+  if (validateComment === true) {
+    const addEvent = await Event.findOneAndUpdate(
+      { _id: req.body.event_id },
+      {
+        $push: {
+          comments: {
+            written_by: req.decoded.user._id,
+            comment: req.body.comment,
+          },
+        },
+      }
+    );
+    if (addEvent) {
+      res.send({ success: true, event_id: req.body.event_id });
+    }
   } else {
     res.send(err);
   }

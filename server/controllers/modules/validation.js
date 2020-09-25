@@ -15,3 +15,11 @@ module.exports.registerUser = (inputs) => {
     return false;
   }
 };
+
+module.exports.addComment = (input) => {
+  if (input.length > 10) {
+    return true;
+  } else {
+    return false;
+  }
+};
