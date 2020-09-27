@@ -65,7 +65,7 @@ export default {
     const url = '/event/getOne/' + id;
 
     await axios
-      .get(url, {}, { id: id })
+      .get(url)
       .then((response) => {
         commit('getEventSuccess', response.data);
       })

@@ -22,11 +22,7 @@ export default {
   },
   computed: {
     profileImage() {
-      if (this.comment.written_by.image) {
-        return this.comment.written_by.image;
-      } else {
-        return this.defaultImage;
-      }
+      return this.comment.written_by.image || this.defaultImage;
     },
   },
 };

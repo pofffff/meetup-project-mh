@@ -33,8 +33,10 @@ export default {
   },
   methods: {
     addComment(id) {
-      const data = { event_id: id, comment: this.add_comment };
-      this.$store.dispatch("addComment", data);
+      if (this.add_comment !== "") {
+        const data = { event_id: id, comment: this.add_comment };
+        this.$store.dispatch("addComment", data);
+      }
     },
   },
 };

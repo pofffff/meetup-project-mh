@@ -107,7 +107,7 @@ describe('App', () => {
     });
     router.push('/AddEvent');
     const next = jest.fn();
-    wrapper.beforeEnter.call(wrapper.vm, undefined, undefined, next);
+    router.beforeEnter(undefined, undefined, next);
 
     await wrapper.vm.$nextTick();
 
