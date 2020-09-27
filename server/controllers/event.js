@@ -1,34 +1,42 @@
-const Event = require("../models/event"),
-  User = require("../models/user"),
-  auth = require("../middleware/auth"),
-  { addComment } = require("./modules/validation");
+const Event = require('../models/event'),
+  User = require('../models/user'),
+  auth = require('../middleware/auth'),
+  { addComment } = require('./modules/validation'),
+  { addEvent } = require('./modules/validation');
 
 exports.authMiddleware = auth;
 exports.addEvent = async (req, res, err) => {
   let event = req.body;
-  event = new Event({
-    name: event.name,
-    city: event.city,
-    adress: event.adress,
-    date: event.date,
-    time: event.time,
-    description: event.description,
-    categories: event.categories,
-    image: event.image,
-    added_by: req.decoded.user._id,
-  });
-  event.save();
-  res.send({ success: true });
+
+  const validation = await addEvent(event);
+
+  if (validation === true) {
+    event = new Event({
+      name: event.name,
+      city: event.city,
+      adress: event.adress,
+      date: event.date,
+      time: event.time,
+      description: event.description,
+      categories: event.categories,
+      image: event.image,
+      added_by: req.decoded.user._id,
+    });
+    event.save();
+    res.send({ success: true, validation: true });
+  } else {
+    res.send({ success: false, validation: false });
+  }
 };
 
 exports.getAllEvents = async (req, res) => {
-  const events = await Event.find().populate("registered");
+  const events = await Event.find().populate('registered');
   res.send(events);
 };
 
 exports.getEvent = async (req, res) => {
   const event = await Event.findOne({ _id: req.params.id }).populate(
-    "comments.written_by"
+    'comments.written_by'
   );
   if (event) {
     res.send(event);

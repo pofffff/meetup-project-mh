@@ -101,7 +101,10 @@ export default {
         time: this.time,
       };
 
-      if (Object.keys(event).some((key) => event[key] === "") === false) {
+      if (
+        Object.keys(event).some((key) => event[key] === "") === false &&
+        this.categories.length !== 0
+      ) {
         this.$store.dispatch("addEvent", event);
         this.$router.push("/profile");
       }
