@@ -57,9 +57,7 @@ export default {
       .then((response) => {
         commit('getAllEventsSuccess', response.data);
       })
-      .catch((error) => {
-        console.error(error);
-      });
+      .catch((error) => {});
   },
   async getEvent({ commit }, id) {
     const url = '/event/getOne/' + id;
@@ -69,9 +67,7 @@ export default {
       .then((response) => {
         commit('getEventSuccess', response.data);
       })
-      .catch((error) => {
-        console.error(error);
-      });
+      .catch((error) => {});
   },
   async addComment({ commit, dispatch }, data) {
     const url = '/event/addComment';

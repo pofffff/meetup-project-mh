@@ -56,6 +56,6 @@ describe('NewUserForm input validation', () => {
     password.setValue(inputs.password);
     await button.trigger('click');
 
-    expect(mockStore.dispatch).not.toHaveBeenCalledWith('registerUser', inputs);
+    expect(mockStore.dispatch).not.toHaveBeenCalled();
   });
 });

@@ -40,7 +40,6 @@ export default {
     state.events = data;
   },
   getEventSuccess(state, data) {
-    console.log(data);
     state.event = data;
   },
 };

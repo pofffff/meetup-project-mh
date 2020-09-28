@@ -10,14 +10,12 @@ let url = '',
 
 jest.mock('axios', () => ({
   post: (_url, _body) => {
-    const response = { data: { success: true } };
-
     return new Promise((resolve) => {
       if (mockError) throw Error('Mock error');
 
       url = _url;
       body = _body;
-      resolve(response);
+      resolve();
     });
   },
 }));
