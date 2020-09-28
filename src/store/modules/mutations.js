@@ -26,9 +26,9 @@ export default {
     localStorage.setItem('token', token);
     state.isAuthenticated = true;
     state.authenticationMessage = false;
+    router.push('/profile', () => {});
   },
   userRequestSuccess(state, user) {
-    state.isAuthenticated = true;
     state.user = user;
   },
   logoutSuccess(state) {

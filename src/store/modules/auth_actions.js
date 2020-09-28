@@ -25,8 +25,8 @@ const auth = {
         .get('/authenticate/userRequest')
         .then((response) => {
           if (response.data.success === true) {
-            commit('authenticationSuccess', response.data.token);
             commit('userRequestSuccess', response.data.user);
+            commit('authenticationSuccess', response.data.token);
           }
         })
         .catch((error) => {

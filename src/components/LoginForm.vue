@@ -41,10 +41,7 @@ export default {
   methods: {
     login() {
       const credentials = { email: this.email, password: this.password };
-      this.$store.dispatch("loginRequest", credentials).then(() => {
-        this.$store.state.isAuthenticated = true;
-        this.$router.push("/profile");
-      });
+      this.$store.dispatch("loginRequest", credentials);
     },
     switchComponent() {
       this.$store.state.ifLogin = !this.$store.state.ifLogin;

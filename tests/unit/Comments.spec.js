@@ -25,7 +25,6 @@ describe('Comments', () => {
   });
 
   it('Should not dispatch addComment if input is empty', async () => {
-    const data = { event_id: '123', comment: '' };
     await wrapper.find('.add-comment__action').trigger('click');
 
     expect(mockStore.dispatch).not.toHaveBeenCalled();
