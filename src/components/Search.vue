@@ -6,7 +6,8 @@
         <span class="divider"></span>
         <CityAutocomplete @input="inputCity" :cities="cities" />
       </ul>
-      <button @click="filter">Filter</button>
+      <button class="filter" @click="filter">Filter</button>
+      <button class="reset" @click="resetFilter">Reset</button>
     </section>
   </div>
 </template>
@@ -40,7 +41,7 @@ export default {
     ...mapState({
       cities: (state) => {
         let cities = state.events.map((event) => event.city);
-        console.log(cities);
+        cities = [...new Set(cities)];
         return cities;
       },
       events: (state) => {
@@ -58,16 +59,29 @@ export default {
     filter() {
       let events = this.events;
       let filtered = events.filter((event) => {
-        console.log(event);
-        if (
-          event.categories.includes(this.selectedCategory) &&
-          event.city.includes(this.selectedCity)
-        )
-          return event;
+        if (this.selectedCity === "") {
+          return event.categories.includes(this.selectedCategory);
+        }
+
+        if (this.selectedCategory === "") {
+          return event.city.includes(this.selectedCity);
+        }
+
+        if (this.selectedCategory !== "" && this.selectedCity !== "") {
+          if (
+            event.city.includes(this.selectedCity) &&
+            event.categories.includes(this.selectedCategory)
+          ) {
+            return event;
+          }
+        }
       });
       this.$store.state.filtered = filtered;
-      this.$store.state.hasFilter = true;
-      console.log(filtered);
+    },
+    resetFilter() {
+      this.selectedCategory = "";
+      this.selectedCity = "";
+      this.filter();
     },
   },
 };

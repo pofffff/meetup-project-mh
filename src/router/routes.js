@@ -22,7 +22,7 @@ export default [
     component: Profile,
     beforeEnter: (to, from, next) => {
       store.dispatch('userRequest');
-      if (localStorage.getItem('token')) {
+      if (store.state.user !== {}) {
         next();
       } else {
         next({ name: 'Login' });

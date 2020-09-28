@@ -26,9 +26,7 @@ export default {
   },
   methods: {
     goTo(path) {
-      if (this.$route.path !== path) {
-        this.$router.push(path);
-      }
+      this.$router.push(path, () => {});
     },
     logout() {
       this.$store.dispatch("logoutUser");

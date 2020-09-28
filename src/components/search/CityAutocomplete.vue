@@ -7,6 +7,7 @@
       @keydown.down="onArrowDown"
       @keydown.up="onArrowUp"
       @keydown.enter="onEnter"
+      @click="onChange"
       placeholder="City"
     />
     <ul

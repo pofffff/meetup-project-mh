@@ -1,8 +1,11 @@
 import { mount, createLocalVue } from '@vue/test-utils';
 import EventsWrapper from '@/components/EventsWrapper.vue';
 import VueRouter from 'vue-router';
+import routes from '@/router/routes.js';
 
 describe('EventWrapper', () => {
+  const localVue = createLocalVue().use(VueRouter);
+  const router = new VueRouter({ routes });
   let events;
   beforeEach(() => {
     events = [
@@ -31,10 +34,10 @@ describe('EventWrapper', () => {
   it('Should call getAllEvents when created and render all events from state.', () => {
     const mockStore = {
         state: { events },
+        dispatch: jest.fn(),
       },
-      getAll = jest.fn(),
       wrapper = mount(EventsWrapper, {
-        methods: { getAll },
+        localVue,
         mocks: { $store: mockStore },
         computed: {
           events: () => {
@@ -45,16 +48,14 @@ describe('EventWrapper', () => {
       }),
       eventElements = wrapper.findAll('.event');
 
-    expect(getAll).toHaveBeenCalled();
+    expect(mockStore.dispatch).toHaveBeenCalledWith('getAllEvents');
     expect(eventElements.length).toBe(events.length);
   });
 
   it('Should call dispatch correctly', async () => {
-    const localVue = createLocalVue().use(VueRouter);
-    const router = new VueRouter({
-      routes: [{ path: '/fake', name: 'fake' }],
-    });
     const id = '123',
+      spy = jest.spyOn(router, 'push'),
+      route = '/event/' + id,
       mockStore = {
         state: { events },
         dispatch: jest.fn(),
@@ -75,7 +76,10 @@ describe('EventWrapper', () => {
 
     const eventElements = wrapper.findAll('.event');
     await eventElements.at(0).trigger('click');
+    await wrapper.vm.$nextTick();
+
     expect(mockStore.dispatch).toHaveBeenCalledWith('getAllEvents');
     expect(mockStore.dispatch).toHaveBeenCalledWith('getEvent', id);
+    expect(spy).toHaveBeenCalledWith(route);
   });
 });

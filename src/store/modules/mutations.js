@@ -12,9 +12,9 @@ export default {
     state.errorSavingUser = true;
   },
   authenticationError(state) {
-    state.isAuthenticated = false;
     delete axios.defaults.headers.common['Authorization'];
     localStorage.removeItem('token');
+    state.isAuthenticated = false;
     state.authenticationMessage = true;
     router.push('/login', () => {});
   },
@@ -22,13 +22,13 @@ export default {
     state.wrongCredentials = true;
   },
   authenticationSuccess(state, token) {
-    state.isAuthenticated = true;
     axios.defaults.headers.common['Authorization'] = token;
     localStorage.setItem('token', token);
+    state.isAuthenticated = true;
     state.authenticationMessage = false;
+    router.push('/profile', () => {});
   },
   userRequestSuccess(state, user) {
-    state.isAuthenticated = true;
     state.user = user;
   },
   logoutSuccess(state) {
@@ -40,7 +40,6 @@ export default {
     state.events = data;
   },
   getEventSuccess(state, data) {
-    console.log(data);
     state.event = data;
   },
 };

@@ -1,23 +1,32 @@
 const Event = require('../models/event'),
   User = require('../models/user'),
-  auth = require('../middleware/auth');
+  auth = require('../middleware/auth'),
+  { addComment } = require('./modules/validation'),
+  { addEvent } = require('./modules/validation');
 
 exports.authMiddleware = auth;
 exports.addEvent = async (req, res, err) => {
   let event = req.body;
-  event = new Event({
-    name: event.name,
-    city: event.city,
-    adress: event.adress,
-    date: event.date,
-    time: event.time,
-    description: event.description,
-    categories: event.categories,
-    image: event.image,
-    added_by: req.decoded.user._id,
-  });
-  event.save();
-  res.send({ success: true });
+
+  const validation = await addEvent(event);
+
+  if (validation === true) {
+    event = new Event({
+      name: event.name,
+      city: event.city,
+      adress: event.adress,
+      date: event.date,
+      time: event.time,
+      description: event.description,
+      categories: event.categories,
+      image: event.image,
+      added_by: req.decoded.user._id,
+    });
+    event.save();
+    res.send({ success: true, validation: true });
+  } else {
+    res.send({ success: false, validation: false });
+  }
 };
 
 exports.getAllEvents = async (req, res) => {
@@ -37,20 +46,23 @@ exports.getEvent = async (req, res) => {
 };
 
 exports.addComment = async (req, res, err) => {
-  const addEvent = await Event.findOneAndUpdate(
-    { _id: req.body.event_id },
-    {
-      $push: {
-        comments: {
-          written_by: req.decoded.user._id,
-          comment: req.body.comment,
-        },
-      },
-    }
-  );
+  const validateComment = addComment(req.body.comment);
 
-  if (addEvent) {
-    res.send({ success: true, event_id: req.body.event_id });
+  if (validateComment === true) {
+    const addEvent = await Event.findOneAndUpdate(
+      { _id: req.body.event_id },
+      {
+        $push: {
+          comments: {
+            written_by: req.decoded.user._id,
+            comment: req.body.comment,
+          },
+        },
+      }
+    );
+    if (addEvent) {
+      res.send({ success: true, event_id: req.body.event_id });
+    }
   } else {
     res.send(err);
   }

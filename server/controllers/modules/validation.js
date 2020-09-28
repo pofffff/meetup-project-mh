@@ -15,3 +15,22 @@ module.exports.registerUser = (inputs) => {
     return false;
   }
 };
+
+module.exports.addComment = (comment) => {
+  if (comment.length > 10) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+module.exports.addEvent = (event) => {
+  if (
+    Object.keys(event).some((key) => event[key] === '') === false &&
+    event.categories.length !== 0
+  ) {
+    return true;
+  } else {
+    return false;
+  }
+};

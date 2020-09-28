@@ -22,11 +22,7 @@ export default {
   },
   computed: {
     profileImage() {
-      if (this.comment.written_by.image) {
-        return this.comment.written_by.image;
-      } else {
-        return this.defaultImage;
-      }
+      return this.comment.written_by.image || this.defaultImage;
     },
   },
 };
@@ -63,6 +59,7 @@ export default {
   .bottom {
     padding: 1rem 2rem;
     font-size: 0.9rem;
+    word-break: break-all;
   }
 }
 </style>

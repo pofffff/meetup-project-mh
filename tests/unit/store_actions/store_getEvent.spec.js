@@ -30,7 +30,6 @@ describe('store action - getEvent', () => {
     await actions.getEvent({ commit }, id);
 
     expect(url).toBe('/event/getOne/' + id);
-    expect(headers).toEqual({ id });
     expect(commit).toHaveBeenCalledWith('getEventSuccess', data);
   });
 });

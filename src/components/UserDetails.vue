@@ -22,7 +22,7 @@
     <section class="right">
       <h4>{{ user.name }}</h4>
       <section class="user-stats__section">
-        <p>{{ attendTo }} events attended</p>
+        <p>{{ attend_to }} events attended</p>
         <p>{{ user.comments_written }} comments written</p>
       </section>
       <button class="add-event__button" @click="goTo('/addevent')">
@@ -45,8 +45,12 @@ export default {
     profileImage() {
       return this.user.image || this.defaultImage;
     },
-    attendTo() {
-      return this.user.attend_to.length || 0;
+    attend_to() {
+      if (!this.user.attend_to) {
+        return 0;
+      } else {
+        return this.user.attend_to.length;
+      }
     },
   },
   methods: {
