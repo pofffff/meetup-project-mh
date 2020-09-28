@@ -1,0 +1,23 @@
+name: CI
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the develop branch
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Jest Annotations & Coverage
+        uses: mattallty/jest-github-action@v1.0.3
+      - name: Install modules
+        run: npm install
+      - name: Run test
+        run: npm run test:unit
+
+
