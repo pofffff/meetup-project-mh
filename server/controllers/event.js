@@ -39,6 +39,7 @@ exports.getEvent = async (req, res) => {
     'comments.written_by'
   );
   if (event) {
+    console.log(event)
     res.send(event);
   } else {
     res.send(error);
