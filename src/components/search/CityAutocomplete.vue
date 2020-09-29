@@ -165,5 +165,15 @@ export default {
       color: $color_light;
     }
   }
+
+  .results__autocomplete::-webkit-scrollbar {
+    background: $color_dark;
+    border-radius: 6px;
+    width: 6px;
+  }
+  .results__autocomplete::-webkit-scrollbar-thumb {
+    background: $color_light;
+    border-radius: 6px;
+  }
 }
 </style>

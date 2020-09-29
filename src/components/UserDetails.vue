@@ -101,7 +101,7 @@ export default {
 
       .fa-cog {
         z-index: 1;
-        position: fixed;
+        position: absolute;
         color: $white;
         cursor: pointer;
         font-size: 30px;

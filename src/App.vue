@@ -57,10 +57,21 @@ html {
   background-size: cover;
 }
 
+html::-webkit-scrollbar {
+  background: $color_dark;
+  border-radius: 6px;
+  width: 6px;
+}
+html::-webkit-scrollbar-thumb {
+  background: $color_light;
+  border-radius: 6px;
+}
+
 #app {
   display: flex;
   flex-direction: column;
   font-family: $font;
   color: $black;
+  padding-bottom: 5rem;
 }
 </style>
