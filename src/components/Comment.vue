@@ -59,7 +59,6 @@ export default {
   .bottom {
     padding: 1rem 2rem;
     font-size: 0.9rem;
-    word-break: break-all;
   }
 }
 </style>

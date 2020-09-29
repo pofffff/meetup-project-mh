@@ -58,6 +58,7 @@ export default {
     font-size: 32px;
     align-self: flex-start;
   }
+
   .event-comments__container {
     display: flex;
     flex-wrap: wrap;
@@ -74,6 +75,7 @@ export default {
       margin: 0.3rem;
     }
   }
+
   .add-comment__container {
     display: flex;
     flex-direction: column;
@@ -89,7 +91,6 @@ export default {
       width: 100%;
       border: none;
       opacity: 1;
-      word-wrap: break-word;
     }
 
     input[type="textarea"]::placeholder {

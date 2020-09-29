@@ -109,6 +109,7 @@ export default {
     .image__container {
       width: 500px;
       height: 100%;
+      margin-right: 2rem;
 
       img {
         width: 100%;

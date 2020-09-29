@@ -6,6 +6,7 @@ module.exports.by_id = async (_id) => {
   const user = await mongoose
     .model('User', userSchema)
     .findOne({ _id: _id })
+    .populate('attend_to')
     .exec();
   if (user) return user;
   if (!user) return false;

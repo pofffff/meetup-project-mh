@@ -1,6 +1,6 @@
 <template>
   <div class="events__wrapper">
-    <h1>Recently added events</h1>
+    <h1>Events</h1>
     <ul>
       <li
         class="event"

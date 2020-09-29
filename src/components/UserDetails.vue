@@ -43,6 +43,7 @@ export default {
   },
   computed: {
     profileImage() {
+      console.log(this.user);
       return this.user.image || this.defaultImage;
     },
     attend_to() {
