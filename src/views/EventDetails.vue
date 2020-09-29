@@ -66,6 +66,12 @@ export default {
     addComing(id) {
       this.$store.dispatch("addUserToEvent", id);
     },
+    getEvent() {
+      this.$store.dispatch("getEvent", this.$route.params.id);
+    },
+  },
+  created() {
+    this.getEvent();
   },
 };
 </script>

@@ -20,20 +20,39 @@ describe('EventDetails', () => {
 
   it('Should call dispatch with addUserToEvent when clicking button', async () => {
     const mockStore = {
-      dispatch: jest.fn(),
-    };
-    const wrapper = shallowMount(EventDetails, {
-      computed: {
-        event: () => {
-          return event;
-        },
+        dispatch: jest.fn(),
       },
-      mocks: { $store: mockStore },
-    });
+      id = '123',
+      wrapper = shallowMount(EventDetails, {
+        computed: {
+          event: () => {
+            return event;
+          },
+        },
+        mocks: { $store: mockStore, $route: { params: { id } } },
+      });
+
     await wrapper.find('.coming__action').trigger('click');
     expect(mockStore.dispatch).toHaveBeenCalledWith(
       'addUserToEvent',
       event._id
     );
+  });
+
+  it('Should call dispatch with correct params when created', async () => {
+    const mockStore = {
+        dispatch: jest.fn(),
+      },
+      id = '123';
+    shallowMount(EventDetails, {
+      computed: {
+        event: () => {
+          return event;
+        },
+      },
+      mocks: { $store: mockStore, $route: { params: { id } } },
+    });
+
+    expect(mockStore.dispatch).toHaveBeenCalledWith('getEvent', id);
   });
 });
