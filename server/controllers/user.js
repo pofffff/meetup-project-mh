@@ -47,6 +47,13 @@ exports.registerUser = async (req, res) => {
   }
 };
 
+exports.getOneUser = async (req, res, error) => {
+  const user = await getUser.by_id(req.params.id);
+  if (user) {
+    res.send({ success: true, user: user });
+  }
+};
+
 exports.uploadImage = async (req, res) => {
   User.updateOne(
     { _id: req.decoded.user._id },

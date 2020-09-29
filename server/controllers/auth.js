@@ -34,6 +34,7 @@ exports.loginRequest = async (req, res) => {
           res.json({
             success: true,
             token: token,
+            user: user,
           });
         }
       } else {

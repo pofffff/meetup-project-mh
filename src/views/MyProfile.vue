@@ -19,8 +19,8 @@ export default {
   },
   data: () => {
     return {
-      showAddEvent: false,
-      headline: "Events Attended",
+      showAddEvent: true,
+      headline: "My Events",
     };
   },
 };

@@ -67,6 +67,15 @@ export default {
       })
       .catch((error) => {});
   },
+  async getUser({ commit }, id) {
+    const url = '/user/getOne/' + id.id;
+    await axios
+      .get(url)
+      .then((response) => {
+        commit('userRequestSuccess', response.data.user);
+      })
+      .catch((error) => {});
+  },
   async addComment({ commit, dispatch }, data) {
     const url = '/event/addComment';
     await axios

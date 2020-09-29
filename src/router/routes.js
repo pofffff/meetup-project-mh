@@ -1,6 +1,7 @@
 import Home from '../views/Home.vue';
 import Login from '../views/Login.vue';
 import Profile from '../views/Profile.vue';
+import MyProfile from '../views/MyProfile.vue';
 import AddEvent from '../views/AddEvent.vue';
 import EventDetails from '../views/EventDetails.vue';
 import store from '../store';
@@ -17,9 +18,18 @@ export default [
     component: Login,
   },
   {
-    path: '/profile',
+    path: '/profile/:id',
     name: 'Profile',
     component: Profile,
+    beforeEnter: (to, from, next) => {
+      store.dispatch('getUser', to.params);
+      next();
+    },
+  },
+  {
+    path: '/myprofile/:id',
+    name: 'MyProfile',
+    component: MyProfile,
     beforeEnter: (to, from, next) => {
       store.dispatch('userRequest');
       if (store.state.user !== {}) {

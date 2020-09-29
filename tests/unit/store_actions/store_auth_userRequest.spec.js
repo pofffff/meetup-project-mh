@@ -36,13 +36,16 @@ describe('store - auth', () => {
 
   it('Should commit userRequestSuccess and authenticationSuccess if request is ok', async () => {
     const commit = jest.fn(),
-      user = { name: 'name', email: 'email' },
-      token = 'token';
+      data = {
+        success: true,
+        user: { name: 'name', email: 'email' },
+        token: 'token',
+      };
 
     await auth.actions.userRequest({ commit });
 
-    expect(commit).toHaveBeenCalledWith('authenticationSuccess', token);
-    expect(commit).toHaveBeenCalledWith('userRequestSuccess', user);
+    expect(commit).toHaveBeenCalledWith('authenticationSuccess', data);
+    expect(commit).toHaveBeenCalledWith('userRequestSuccess', data.user);
   });
 
   it('Should commit authenticationError if there is an error', async () => {

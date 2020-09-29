@@ -40,21 +40,24 @@
         </li>
       </ul>
     </section>
+    <Attendees :attendees="event.registered" />
     <Comments :event="event" />
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
+import Attendees from "@/components/Attendees";
 import Comments from "@/components/Comments";
 export default {
-  components: { Comments },
+  components: { Attendees, Comments },
   data: () => {
     return {};
   },
   computed: {
     ...mapState({
       event: (state) => {
+        console.log(state.event);
         return state.event;
       },
       registered: (state) => {

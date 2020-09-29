@@ -28,6 +28,9 @@ describe('EventDetails', () => {
           event: () => {
             return event;
           },
+          registered: () => {
+            return event;
+          },
         },
         mocks: { $store: mockStore, $route: { params: { id } } },
       });
@@ -47,6 +50,9 @@ describe('EventDetails', () => {
     shallowMount(EventDetails, {
       computed: {
         event: () => {
+          return event;
+        },
+        registered: () => {
           return event;
         },
       },

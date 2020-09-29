@@ -1,6 +1,6 @@
 <template>
   <div class="my-events__wrapper">
-    <h3>My Events</h3>
+    <h3>{{ headline }}</h3>
     <ul>
       <li
         class="event"
@@ -15,7 +15,6 @@
           <h4>{{ event.name }}</h4>
           <p>{{ event.city }}</p>
           <p>{{ event.date }} - {{ event.time }}</p>
-          <p>{{ event.registered.length }}</p>
         </section>
       </li>
     </ul>
@@ -26,12 +25,7 @@
 import Event from "@/components/Event";
 
 export default {
-  props: { events: Array },
-  computed: {
-    registered() {
-      return this.event.registered.length || 0;
-    },
-  },
+  props: { events: Array, headline: String },
   methods: {
     goTo(id) {
       this.$router.push("/event/" + id);

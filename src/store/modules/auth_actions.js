@@ -14,7 +14,7 @@ const auth = {
           }
         )
         .then((response) => {
-          commit('authenticationSuccess', response.data.token);
+          commit('authenticationSuccess', response.data);
         })
         .catch((error) => {
           commit('wrongCredentials');
@@ -26,7 +26,7 @@ const auth = {
         .then((response) => {
           if (response.data.success === true) {
             commit('userRequestSuccess', response.data.user);
-            commit('authenticationSuccess', response.data.token);
+            commit('authenticationSuccess', response.data);
           }
         })
         .catch((error) => {

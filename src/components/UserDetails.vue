@@ -25,7 +25,11 @@
         <p>{{ attend_to }} events attended</p>
         <p>{{ user.comments_written }} comments written</p>
       </section>
-      <button class="add-event__button" @click="goTo('/addevent')">
+      <button
+        v-if="showAddEvent"
+        class="add-event__button"
+        @click="goTo('/addevent')"
+      >
         Add event
       </button>
     </section>
@@ -34,7 +38,7 @@
 
 <script>
 export default {
-  props: { user: Object },
+  props: { user: Object, showAddEvent: Boolean },
   data: () => {
     return {
       ifFileUpload: false,
@@ -43,7 +47,6 @@ export default {
   },
   computed: {
     profileImage() {
-      console.log(this.user);
       return this.user.image || this.defaultImage;
     },
     attend_to() {
@@ -68,7 +71,7 @@ export default {
     },
     goTo(path) {
       if (this.$route.path !== path) {
-        this.$router.push("/addevent");
+        this.$router.push(path);
       }
     },
   },
