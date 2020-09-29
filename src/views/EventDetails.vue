@@ -57,7 +57,6 @@ export default {
   computed: {
     ...mapState({
       event: (state) => {
-        console.log(state.event);
         return state.event;
       },
       registered: (state) => {
