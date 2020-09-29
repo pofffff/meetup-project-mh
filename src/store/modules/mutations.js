@@ -21,12 +21,12 @@ export default {
   wrongCredentials(state) {
     state.wrongCredentials = true;
   },
-  authenticationSuccess(state, token) {
-    axios.defaults.headers.common['Authorization'] = token;
-    localStorage.setItem('token', token);
+  authenticationSuccess(state, data) {
+    axios.defaults.headers.common['Authorization'] = data.token;
+    localStorage.setItem('token', data.token);
     state.isAuthenticated = true;
     state.authenticationMessage = false;
-    router.push('/profile', () => {});
+    router.push('/myprofile/' + data.user._id, () => {});
   },
   userRequestSuccess(state, user) {
     state.user = user;

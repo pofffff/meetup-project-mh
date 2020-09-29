@@ -8,7 +8,7 @@ let url = '';
 
 jest.mock('axios', () => ({
   get: (_url) => {
-    const response = { data: { success: true, event: 'event' } };
+    const response = { data: { success: true, user: 'user' } };
 
     return new Promise((resolve) => {
       url = _url;
@@ -20,12 +20,12 @@ jest.mock('axios', () => ({
 describe('store action - getEvent', () => {
   it('Should run getEvent with correct params', async () => {
     const id = '123',
-      data = { success: true, event: 'event' },
+      data = { success: true, user: 'user' },
       commit = jest.fn();
 
-    await actions.getEvent({ commit }, id);
+    await actions.getUser({ commit }, id);
 
-    expect(url).toBe('/event/getOne/' + id);
-    expect(commit).toHaveBeenCalledWith('getEventSuccess', data);
+    expect(url).toBe('/user/getOne/' + id);
+    expect(commit).toHaveBeenCalledWith('userRequestSuccess', data.user);
   });
 });

@@ -35,11 +35,10 @@ exports.getAllEvents = async (req, res) => {
 };
 
 exports.getEvent = async (req, res) => {
-  const event = await Event.findOne({ _id: req.params.id }).populate(
-    'comments.written_by'
-  );
+  const event = await Event.findOne({ _id: req.params.id })
+    .populate('comments.written_by')
+    .populate('registered');
   if (event) {
-    console.log(event)
     res.send(event);
   } else {
     res.send(error);

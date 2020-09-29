@@ -32,7 +32,7 @@
         <li>
           <i class="fas fa-child"></i>
           <div>
-            <p>{{ event.registered.length }} registered</p>
+            <p>{{ registered }} registered</p>
             <button @click="addComing(event._id)" class="coming__action">
               I'm coming
             </button>
@@ -40,22 +40,32 @@
         </li>
       </ul>
     </section>
+    <Attendees :attendees="event.registered" />
     <Comments :event="event" />
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
+import Attendees from "@/components/Attendees";
 import Comments from "@/components/Comments";
 export default {
-  components: { Comments },
+  components: { Attendees, Comments },
   data: () => {
     return {};
   },
   computed: {
     ...mapState({
       event: (state) => {
+        console.log(state.event);
         return state.event;
+      },
+      registered: (state) => {
+        if (state.event.registered) {
+          return state.event.registered.length;
+        } else {
+          return 0;
+        }
       },
       isAuthenticated: (state) => {
         return state.isAuthenticated;

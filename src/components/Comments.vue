@@ -52,7 +52,7 @@ export default {
   flex-direction: column;
   width: 85%;
   align-self: center;
-  margin: 5rem 0;
+  margin: 2rem 0;
 
   h3 {
     font-size: 32px;

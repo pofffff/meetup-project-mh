@@ -4,6 +4,7 @@ const { Router } = require('express'),
   upload = require('../middleware/upload');
 
 router.route('/register').post(userController.registerUser);
+router.route('/getOne/:id').get(userController.getOneUser);
 
 router
   .route('/image')
