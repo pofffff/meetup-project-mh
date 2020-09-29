@@ -6,22 +6,35 @@
         @click="switchComponent"
         v-if="this.$store.state.emailExists"
         id="email_exists"
-      >Email already exists... Login</aside>
-      <aside
-        @click="support"
-        v-if="this.$store.state.errorSavingUser"
-      >Error register user. Contact support here</aside>
-      <label v-show="!isValid.name" for="name">Must be a valid name</label>
+      >
+        Email already exists... Login
+      </aside>
+      <aside @click="support" v-if="this.$store.state.errorSavingUser">
+        Error register user. Contact support here
+      </aside>
       <li>
-        <input id="name" type="text" v-model="name" placeholder="firstname lastname" />
+        <label v-show="!isValid.name" for="name">Must be a valid name</label>
+        <input
+          id="name"
+          type="text"
+          v-model="name"
+          placeholder="firstname lastname"
+        />
       </li>
-      <label v-show="!isValid.email" for="email">Must be a valid email</label>
       <li>
+        <label v-show="!isValid.email" for="email">Must be a valid email</label>
         <input id="email" type="email" v-model="email" placeholder="email" />
       </li>
-      <label v-show="!isValid.password" for="password">Must be at least 6 characters</label>
       <li>
-        <input id="password" type="password" v-model="password" placeholder="password" />
+        <label v-show="!isValid.password" for="password"
+          >Must be at least 6 characters</label
+        >
+        <input
+          id="password"
+          type="password"
+          v-model="password"
+          placeholder="password"
+        />
       </li>
     </ul>
     <section class="buttons__wrapper">
@@ -119,7 +132,9 @@ export default {
     li {
       list-style: none;
       margin: 1em 0;
-
+      label {
+        color: $whiteOP;
+      }
       input {
         @include input;
       }
