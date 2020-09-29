@@ -22,7 +22,7 @@ export default [
     name: 'Profile',
     component: Profile,
     beforeEnter: (to, from, next) => {
-      store.dispatch('getUser', to.params);
+      store.dispatch('getUser', to.params.id);
       next();
     },
   },

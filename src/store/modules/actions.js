@@ -68,7 +68,7 @@ export default {
       .catch((error) => {});
   },
   async getUser({ commit }, id) {
-    const url = '/user/getOne/' + id.id;
+    const url = '/user/getOne/' + id;
     await axios
       .get(url)
       .then((response) => {
