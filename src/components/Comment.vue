@@ -22,6 +22,7 @@ export default {
   },
   computed: {
     profileImage() {
+      console.log(this.comment)
       return this.comment.written_by.image || this.defaultImage;
     },
   },
