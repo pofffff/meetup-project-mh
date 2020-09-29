@@ -32,7 +32,7 @@
         <li>
           <i class="fas fa-child"></i>
           <div>
-            <p>{{ event.registered.length }} registered</p>
+            <p>{{ registered }} registered</p>
             <button @click="addComing(event._id)" class="coming__action">
               I'm coming
             </button>
@@ -56,6 +56,13 @@ export default {
     ...mapState({
       event: (state) => {
         return state.event;
+      },
+      registered: (state) => {
+        if (state.event.registered) {
+          return state.event.registered.length;
+        } else {
+          return 0;
+        }
       },
       isAuthenticated: (state) => {
         return state.isAuthenticated;
