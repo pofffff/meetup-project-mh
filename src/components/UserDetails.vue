@@ -43,6 +43,7 @@ export default {
   },
   computed: {
     profileImage() {
+      console.log(this.user);
       return this.user.image || this.defaultImage;
     },
     attend_to() {
@@ -67,7 +68,7 @@ export default {
     },
     goTo(path) {
       if (this.$route.path !== path) {
-        this.$router.push(path);
+        this.$router.push("/addevent");
       }
     },
   },

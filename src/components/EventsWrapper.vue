@@ -1,6 +1,6 @@
 <template>
   <div class="events__wrapper">
-    <h1>Recently added events</h1>
+    <h1>Events</h1>
     <ul>
       <li
         class="event"
@@ -40,7 +40,6 @@ export default {
       this.$store.dispatch("getAllEvents");
     },
     goTo(id) {
-      this.$store.dispatch("getEvent", id);
       this.$router.push("/event/" + id);
     },
   },

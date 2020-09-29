@@ -66,6 +66,12 @@ export default {
     addComing(id) {
       this.$store.dispatch("addUserToEvent", id);
     },
+    getEvent() {
+      this.$store.dispatch("getEvent", this.$route.params.id);
+    },
+  },
+  created() {
+    this.getEvent();
   },
 };
 </script>
@@ -103,6 +109,7 @@ export default {
     .image__container {
       width: 500px;
       height: 100%;
+      margin-right: 2rem;
 
       img {
         width: 100%;

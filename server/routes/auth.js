@@ -1,18 +1,18 @@
-const { Router } = require("express");
+const { Router } = require('express');
 const router = new Router();
 
-const authenticateController = require("../controllers/auth");
-router.route("/loginRequest").post(authenticateController.loginRequest);
+const authenticateController = require('../controllers/auth');
+router.route('/loginRequest').post(authenticateController.loginRequest);
 
 router
-  .route("/userRequest")
+  .route('/userRequest')
   .get(
     authenticateController.authMiddleware,
     authenticateController.userRequest
   );
 
-  router
-  .route("/")
+router
+  .route('/authenticate')
   .get(
     authenticateController.authMiddleware,
     authenticateController.authenticate

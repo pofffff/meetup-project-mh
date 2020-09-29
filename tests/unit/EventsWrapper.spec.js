@@ -52,7 +52,7 @@ describe('EventWrapper', () => {
     expect(eventElements.length).toBe(events.length);
   });
 
-  it('Should call dispatch correctly', async () => {
+  it('Should call router.push with correct params', async () => {
     const id = '123',
       spy = jest.spyOn(router, 'push'),
       route = '/event/' + id,
@@ -78,8 +78,6 @@ describe('EventWrapper', () => {
     await eventElements.at(0).trigger('click');
     await wrapper.vm.$nextTick();
 
-    expect(mockStore.dispatch).toHaveBeenCalledWith('getAllEvents');
-    expect(mockStore.dispatch).toHaveBeenCalledWith('getEvent', id);
     expect(spy).toHaveBeenCalledWith(route);
   });
 });
