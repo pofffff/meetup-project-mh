@@ -34,7 +34,7 @@ export default [
     name: 'AddEvent',
     component: AddEvent,
     beforeEnter: (to, from, next) => {
-      store.dispatch('userRequest');
+      store.dispatch('simpleAuth');
       if (localStorage.getItem('token')) {
         next();
       } else {

@@ -33,6 +33,18 @@ const auth = {
           commit('authenticationError');
         });
     },
+    async simpleAuth({ commit }) {
+      await axios
+        .get('/authenticate/authenticate')
+        .then((response) => {
+          if (response.data.success === true) {
+            localStorage.setItem('token', response.data.token);
+          }
+        })
+        .catch((error) => {
+          commit('authenticationError');
+        });
+    },
     async logoutUser({ commit }) {
       await commit('logoutSuccess');
     },

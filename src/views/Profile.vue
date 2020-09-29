@@ -14,7 +14,6 @@ export default {
       user: (state) => state.user,
     }),
   },
-  methods: {},
 };
 </script>
 

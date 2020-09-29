@@ -51,7 +51,6 @@ export default {
   },
   async getAllEvents({ commit }) {
     const url = '/event/getAll';
-
     await axios
       .get(url)
       .then((response) => {
@@ -61,7 +60,6 @@ export default {
   },
   async getEvent({ commit }, id) {
     const url = '/event/getOne/' + id;
-
     await axios
       .get(url)
       .then((response) => {

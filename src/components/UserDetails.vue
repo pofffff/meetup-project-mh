@@ -67,7 +67,7 @@ export default {
     },
     goTo(path) {
       if (this.$route.path !== path) {
-        this.$router.push(path);
+        this.$router.push("/addevent");
       }
     },
   },
