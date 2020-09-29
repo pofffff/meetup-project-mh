@@ -34,7 +34,6 @@ export default {
   },
   methods: {
     goTo(id) {
-      console.log(id);
       this.$router.push("/profile/" + id);
     },
   },
