@@ -1,6 +1,6 @@
 <template>
   <div class="image__wrapper">
-    <img :src="require(`../../server/uploads/${profileImage}`)" alt="user" />
+    <img :src="user.image" alt="user" />
   </div>
 </template>
 
@@ -8,16 +8,6 @@
 export default {
   name: "UserRegisteredToEvent",
   props: { user: Object },
-  data: () => {
-    return {
-      defaultImage: "default_img.png",
-    };
-  },
-  computed: {
-    profileImage() {
-      return this.user.image || this.defaultImage;
-    },
-  },
 };
 </script>
 

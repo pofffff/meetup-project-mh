@@ -16,6 +16,8 @@ const userSchema = new mongoose.Schema({
     type: String,
     ref: 'GridFs',
     required: false,
+    default:
+      'https://meetupprojectuploads.s3.eu-north-1.amazonaws.com/2020-09-30T13%3A31%3A57.137Z-default_img.png',
   },
   attend_to: {
     type: [
@@ -26,10 +28,18 @@ const userSchema = new mongoose.Schema({
     ],
     default: [],
   },
-  comments_written: {
-    type: Number,
-    required: false,
-    default: 0,
+  comments: {
+    type: [
+      {
+        event: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'Event',
+          required: true,
+        },
+        comment: { type: String, required: true },
+      },
+    ],
+    default: [],
   },
 });
 

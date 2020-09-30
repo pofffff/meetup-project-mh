@@ -2,7 +2,7 @@
   <div class="comment__wrapper">
     <div class="top">
       <div class="img__container">
-        <img :src="require(`../../server/uploads/${profileImage}`)" alt />
+        <img :src="comment.written_by.image" alt />
       </div>
       <h4>{{ comment.written_by.name }}</h4>
     </div>
@@ -15,16 +15,6 @@
 <script>
 export default {
   props: { comment: Object },
-  data: () => {
-    return {
-      defaultImage: "default_img.png",
-    };
-  },
-  computed: {
-    profileImage() {
-      return this.comment.written_by.image || this.defaultImage;
-    },
-  },
 };
 </script>
 
