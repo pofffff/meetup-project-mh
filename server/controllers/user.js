@@ -57,11 +57,10 @@ exports.getOneUser = async (req, res, error) => {
 exports.uploadImage = async (req, res) => {
   User.updateOne(
     { _id: req.decoded.user._id },
-    { $set: { image: req.file.filename } },
+    { $set: { image: req.file.location } },
     (err) => {
       if (err) console.log(err);
     }
   );
-
-  res.send(req.file);
+  res.send({ success: true });
 };

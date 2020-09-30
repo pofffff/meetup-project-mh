@@ -12,7 +12,7 @@ describe('UserDetails', () => {
     user = {
       _id: 'abc',
       name: 'name',
-      comments_written: 0,
+      comments: [],
       attend_to: 0,
     };
     showAddEvent = false;

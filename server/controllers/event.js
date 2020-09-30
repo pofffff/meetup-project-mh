@@ -7,9 +7,7 @@ const Event = require('../models/event'),
 exports.authMiddleware = auth;
 exports.addEvent = async (req, res, err) => {
   let event = req.body;
-
   const validation = await addEvent(event);
-
   if (validation === true) {
     event = new Event({
       name: event.name,
@@ -47,9 +45,8 @@ exports.getEvent = async (req, res) => {
 
 exports.addComment = async (req, res, err) => {
   const validateComment = addComment(req.body.comment);
-
   if (validateComment === true) {
-    const addEvent = await Event.findOneAndUpdate(
+    const addToEvent = await Event.findOneAndUpdate(
       { _id: req.body.event_id },
       {
         $push: {
@@ -60,11 +57,26 @@ exports.addComment = async (req, res, err) => {
         },
       }
     );
-    if (addEvent) {
-      res.send({ success: true, event_id: req.body.event_id });
+    if (addToEvent) {
+      const addToUser = await User.findOneAndUpdate(
+        { _id: req.decoded.user._id },
+        {
+          $push: {
+            comments: {
+              event: addToEvent._id,
+              comment: req.body.comment,
+            },
+          },
+        }
+      );
+      if (addToUser) {
+        res.send({ success: true, event_id: req.body.event_id });
+      } else {
+        res.send({ success: false, error: err });
+      }
     }
   } else {
-    res.send(err);
+    res.send({ success: false, error: err });
   }
 };
 
@@ -85,7 +97,6 @@ exports.addUserToEvent = async (req, res, err) => {
       },
     }
   );
-
   if (addUser && updateUser) {
     res.send({ success: true, event_id: req.body.event_id });
   } else {

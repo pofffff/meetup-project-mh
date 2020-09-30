@@ -3,7 +3,7 @@
     <section class="left">
       <div class="img__container">
         <i @click="showFileUpload" class="fas fa-cog"></i>
-        <img :src="require(`../../server/uploads/${profileImage}`)" alt />
+        <img :src="user.image" alt />
       </div>
       <div class="upload-file__container">
         <input
@@ -23,7 +23,7 @@
       <h4>{{ user.name }}</h4>
       <section class="user-stats__section">
         <p>{{ attend_to }} events attended</p>
-        <p>{{ user.comments_written }} comments written</p>
+        <p>{{ user.comments.length }} comments written</p>
       </section>
       <button
         v-if="showAddEvent"
@@ -42,14 +42,11 @@ export default {
   data: () => {
     return {
       ifFileUpload: false,
-      defaultImage: "default_img.png",
     };
   },
   computed: {
-    profileImage() {
-      return this.user.image || this.defaultImage;
-    },
     attend_to() {
+      console.log(this.user);
       if (!this.user.attend_to) {
         return 0;
       } else {
@@ -101,7 +98,7 @@ export default {
 
       .fa-cog {
         z-index: 1;
-        position: fixed;
+        position: absolute;
         color: $white;
         cursor: pointer;
         font-size: 30px;
