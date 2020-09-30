@@ -185,6 +185,11 @@ export default {
           font-size: 12px;
         }
 
+        input:focus::placeholder,
+        textarea:focus::placeholder {
+          color: transparent;
+        }
+
         textarea::placeholder {
           padding-top: 155px;
         }
