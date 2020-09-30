@@ -7,7 +7,7 @@ const localvue = createLocalVue().use(Vuex);
 Vue.use(Vuex);
 
 describe('UserDetails', () => {
-  let user, showAddEvent;
+  let user, showAddEvent, showChangePhoto;
   beforeEach(() => {
     user = {
       _id: 'abc',
@@ -16,19 +16,19 @@ describe('UserDetails', () => {
       attend_to: 0,
     };
     showAddEvent = false;
+    showChangePhoto = false;
   });
 
   it('Should render all user elements with props', () => {
     const wrapper = mount(UserDetails, {
       localvue,
-      propsData: { user, showAddEvent },
-      computed: {
-        profileImage: () => {
-          return 'default_img.png';
-        },
-      },
+      propsData: { user, showAddEvent, showChangePhoto },
     });
 
-    expect(wrapper.props()).toStrictEqual({ user, showAddEvent });
+    expect(wrapper.props()).toStrictEqual({
+      user,
+      showAddEvent,
+      showChangePhoto,
+    });
   });
 });

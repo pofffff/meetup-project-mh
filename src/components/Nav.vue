@@ -2,7 +2,7 @@
   <div class="nav__wrapper">
     <ul>
       <li @click="goTo('/')">Home</li>
-      <li v-if="isAuthenticated" @click="goTo('/profile')">Profile</li>
+      <li v-if="isAuthenticated" @click="profile">Profile</li>
       <li>Events</li>
       <li v-if="!isAuthenticated" @click="goTo('/login')">Login</li>
       <li v-if="isAuthenticated" @click="logout">Logout</li>
@@ -15,7 +15,9 @@ import { mapState } from "vuex";
 
 export default {
   data: () => {
-    return {};
+    return {
+      user_id: localStorage.getItem("user_id"),
+    };
   },
   computed: {
     ...mapState({
@@ -26,11 +28,19 @@ export default {
   },
   methods: {
     goTo(path) {
+      console.log(path);
       this.$router.push(path, () => {});
     },
     logout() {
       this.$store.dispatch("logoutUser");
       this.goTo("/");
+    },
+    profile() {
+      console.log(this.user_id);
+      this.$router.push(
+        "/myprofile/" + localStorage.getItem("user_id"),
+        () => {}
+      );
     },
   },
 };

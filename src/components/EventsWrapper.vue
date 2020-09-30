@@ -40,7 +40,7 @@ export default {
       this.$store.dispatch("getAllEvents");
     },
     goTo(id) {
-      this.$router.push("/event/" + id);
+      this.$router.push("/event/" + id).then(() => window.scrollTo(0, 0));
     },
   },
   created() {

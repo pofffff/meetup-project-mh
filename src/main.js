@@ -7,6 +7,7 @@ import axios from 'axios';
 const token = localStorage.getItem('token');
 if (token) {
   axios.defaults.headers.common['Authorization'] = token;
+  store.state.isAuthenticated = true;
 }
 
 Vue.config.productionTip = false;

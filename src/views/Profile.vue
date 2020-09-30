@@ -1,6 +1,10 @@
 <template>
   <div class="profile__wrapper">
-    <UserDetails :user="user" :showAddEvent="showAddEvent" />
+    <UserDetails
+      :user="user"
+      :showAddEvent="showAddEvent"
+      :showChangePhoto="showChangePhoto"
+    />
     <MyEvents :events="user.attend_to" :headline="headline" />
   </div>
 </template>
@@ -21,6 +25,7 @@ export default {
     return {
       showAddEvent: false,
       headline: "Events Attended",
+      showChangePhoto: false,
     };
   },
 };
