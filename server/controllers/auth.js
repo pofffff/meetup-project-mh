@@ -46,24 +46,20 @@ exports.loginRequest = async (req, res) => {
     });
 };
 
-exports.userRequest = async (req, res) => {
-  await getUser
-    .by_id(req.decoded.user._id)
-    .then((user) => {
-      if (!user) {
-        res.status(403);
-      }
-      const token = jwt.sign({ user }, `${process.env.SECRET}`, {
-        expiresIn: '15m',
-      });
+exports.userRequest = async (req, res, err) => {
+  await getUser.by_id(req.decoded.user._id).then((user) => {
+    if (!user) {
+      res.status(403).send(err);
+    }
+    const token = jwt.sign({ user }, `${process.env.SECRET}`, {
+      expiresIn: '15m',
+    });
+    if (user) {
       res.json({
         success: true,
         user: user,
         token: token,
       });
-    })
-    .catch((err) => {
-      console.log(err);
-      res.send(err);
-    });
+    }
+  });
 };
