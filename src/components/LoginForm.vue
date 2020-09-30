@@ -7,7 +7,12 @@
         <input placeholder="email" type="email" v-model="email" />
       </li>
       <li>
-        <input placeholder="password" type="password" v-model="password" />
+        <input
+          @keydown.enter="login"
+          placeholder="password"
+          type="password"
+          v-model="password"
+        />
       </li>
       <aside>Forgot password?</aside>
     </ul>

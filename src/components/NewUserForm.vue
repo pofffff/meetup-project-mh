@@ -34,6 +34,7 @@
           type="password"
           v-model="password"
           placeholder="password"
+          @keydown.enter="validate"
         />
       </li>
     </ul>

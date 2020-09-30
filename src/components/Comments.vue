@@ -8,6 +8,7 @@
     </ul>
     <section class="add-comment__container">
       <input
+        @keydown.enter="addComment(event._id)"
         v-model="add_comment"
         type="textarea"
         maxlength="150"
@@ -98,6 +99,10 @@ export default {
       letter-spacing: 2px;
       font-family: $font;
       font-size: 0.9rem;
+    }
+
+    input:focus::placeholder {
+      color: transparent;
     }
 
     .add-comment__action {

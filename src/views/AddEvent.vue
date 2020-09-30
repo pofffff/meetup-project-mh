@@ -106,7 +106,7 @@ export default {
         this.categories.length !== 0
       ) {
         this.$store.dispatch("addEvent", event);
-        this.$router.push("/profile");
+        this.$router.push("/profile/" + localStorage.getItem("user_id"));
       }
     },
   },
@@ -183,6 +183,11 @@ export default {
           letter-spacing: 2px;
           font-family: $font;
           font-size: 12px;
+        }
+
+        input:focus::placeholder,
+        textarea:focus::placeholder {
+          color: transparent;
         }
 
         textarea::placeholder {
