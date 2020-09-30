@@ -24,6 +24,7 @@ export default {
   authenticationSuccess(state, data) {
     axios.defaults.headers.common['Authorization'] = data.token;
     localStorage.setItem('token', data.token);
+    localStorage.setItem('user', data.user._id);
     state.isAuthenticated = true;
     state.authenticationMessage = false;
     router.push('/myprofile/' + data.user._id, () => {});

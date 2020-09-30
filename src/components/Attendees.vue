@@ -34,7 +34,7 @@ export default {
   },
   methods: {
     goTo(id) {
-      this.$router.push("/profile/" + id);
+      this.$router.push("/profile/" + id).then(() => window.scrollTo(0, 0));
     },
   },
 };

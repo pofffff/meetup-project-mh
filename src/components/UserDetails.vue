@@ -2,7 +2,11 @@
   <div class="user-details__wrapper">
     <section class="left">
       <div class="img__container">
-        <i @click="showFileUpload" class="fas fa-cog"></i>
+        <i
+          v-if="showChangePhoto"
+          @click="showFileUpload"
+          class="fas fa-cog"
+        ></i>
         <img :src="user.image" alt />
       </div>
       <div class="upload-file__container">
@@ -38,7 +42,7 @@
 
 <script>
 export default {
-  props: { user: Object, showAddEvent: Boolean },
+  props: { user: Object, showAddEvent: Boolean, showChangePhoto: Boolean },
   data: () => {
     return {
       ifFileUpload: false,
@@ -46,7 +50,6 @@ export default {
   },
   computed: {
     attend_to() {
-      console.log(this.user);
       if (!this.user.attend_to) {
         return 0;
       } else {
