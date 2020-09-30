@@ -28,7 +28,6 @@ export default {
   },
   methods: {
     goTo(path) {
-      console.log(path);
       this.$router.push(path, () => {});
     },
     logout() {
@@ -36,7 +35,6 @@ export default {
       this.goTo("/");
     },
     profile() {
-      console.log(this.user_id);
       this.$router.push(
         "/myprofile/" + localStorage.getItem("user_id"),
         () => {}
