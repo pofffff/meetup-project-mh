@@ -106,7 +106,7 @@ export default {
         this.categories.length !== 0
       ) {
         this.$store.dispatch("addEvent", event);
-        this.$router.push("/profile");
+        this.$router.push("/profile/" + localStorage.getItem("user_id"));
       }
     },
   },
