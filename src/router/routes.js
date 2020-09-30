@@ -22,8 +22,11 @@ export default [
     name: 'Profile',
     component: Profile,
     beforeEnter: (to, from, next) => {
+      if(to === from) {
+        location.reload()
+      }
       store.dispatch('getUser', to.params.id);
-      next();
+     next();
     },
   },
   {
@@ -31,9 +34,10 @@ export default [
     name: 'MyProfile',
     component: MyProfile,
     beforeEnter: (to, from, next) => {
+      const id = localStorage.getItem("user_id")
       store.dispatch('userRequest');
       if (store.state.user !== {}) {
-        next();
+        next()
       } else {
         next({ name: 'Login' });
       }
