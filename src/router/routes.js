@@ -40,6 +40,7 @@ export default [
         next()
       } else {
         next({ name: 'Login' });
+        return
       }
     },
   },
@@ -53,6 +54,7 @@ export default [
         next();
       } else {
         next({ name: 'Login' });
+        return
       }
     },
   },
