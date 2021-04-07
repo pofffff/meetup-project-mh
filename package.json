@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "aws-sdk": "2.x",
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
     "axios-mock-adapter": "^1.18.2",
     "bcrypt": "^5.0.0",
     "core-js": "^3.6.5",
