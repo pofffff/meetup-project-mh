@@ -53,7 +53,8 @@ export default [
       if (localStorage.getItem('token')) {
         next();
       } else {
-        next({ name: 'Login' });
+        router.push({ name: 'Login' })
+        //next({ name: 'Login' });
         return
       }
     },
